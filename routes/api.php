@@ -23,5 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/login', LoginController::class);
 
 Route::group(['middleware' => 'auth:api'], function(){
-
+    Route::get('/dashboard', function (Request $request){
+       return $request->user();
+    });
 });
