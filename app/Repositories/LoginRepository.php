@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use App\Enums\ApiOutputStatus;
 use App\Enums\ApiOutputStatusCode;
+use App\Http\Controllers\Helpers\DB\MySqlProcedure;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;

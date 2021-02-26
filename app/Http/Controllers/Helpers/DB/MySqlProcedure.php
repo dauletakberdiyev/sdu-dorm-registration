@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Helpers\DB;
 
+use Illuminate\Support\Facades\DB;
+
 class MySqlProcedure implements MySqlInterface
 {
     private $name = '';
@@ -11,14 +13,14 @@ class MySqlProcedure implements MySqlInterface
         $this->name = $name;
     }
 
-    public function input()
+    public function input($input = null)
     {
-        // TODO: Implement input() method.
+        $this->input = $input;
     }
 
-    public function output()
+    public function output($output = null)
     {
-        // TODO: Implement output() method.
+        $this->output = $output;
     }
 
     public function params()
@@ -28,6 +30,7 @@ class MySqlProcedure implements MySqlInterface
 
     public function execute()
     {
-
+        $statement = 'call '.$this->name.'(';
+        return 'call '.$this->name.'()';
     }
 }
