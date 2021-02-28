@@ -43,7 +43,7 @@ class LoginRepository
                 'status_code' => ApiOutputStatusCode::ERROR,
                 'message' => __('auth.failed'),
                 'data' => []
-            ], 200);
+            ], 406);
         }
     }
 }
