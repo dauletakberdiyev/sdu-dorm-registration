@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\SignUpController;
-
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,6 +24,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/login', LoginController::class);
 Route::post('/signup', SignUpController::class);
+
+Route::post('/forgot-password', ForgotPasswordController::class);
+
+Route::post('/reset-password', ResetPasswordController::class);
 
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/dashboard', function (Request $request){

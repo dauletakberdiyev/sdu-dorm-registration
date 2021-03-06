@@ -17,7 +17,7 @@ class SignUpRepository
 
         $existUser = User::where('applicant_email',$email)->first();
 
-        if($existUser != null){
+        if(!is_null($existUser)){
             return response()->json([
                 'status' => ApiOutputStatus::ERROR,
                 'status_code' => ApiOutputStatusCode::ERROR,

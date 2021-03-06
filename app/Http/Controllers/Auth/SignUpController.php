@@ -14,8 +14,8 @@ class SignUpController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(SignUpRequest $request, SignUpRepository $auth)
+    public function __invoke(SignUpRequest $request, SignUpRepository $signUp)
     {
-        return $auth->manage($request);
+        return $signUp->manage($request);
     }
 }
