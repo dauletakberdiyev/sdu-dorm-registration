@@ -7,6 +7,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\SignUpController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\RegistrationDashboard\RegistrationDashboardController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,10 +20,6 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::post('/login', LoginController::class);
 Route::post('/signup', SignUpController::class);
 
@@ -30,7 +28,5 @@ Route::post('/forgot-password', ForgotPasswordController::class);
 Route::post('/reset-password', ResetPasswordController::class);
 
 Route::group(['middleware' => 'auth:api'], function(){
-    Route::get('/dashboard', function (Request $request){
-       return $request->user();
-    });
+    Route::post('/dashboard', RegistrationDashboardController::class)->name('dashboard');
 });

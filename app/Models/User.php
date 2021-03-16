@@ -16,5 +16,11 @@ class User extends Authenticatable
 
     protected $primaryKey = 'applicant_id';
 
-
+    protected $hidden = [
+        'password',
+        'status',
+        'check_path',
+        'registration_year',
+        'registration_term'
+    ];
 }
