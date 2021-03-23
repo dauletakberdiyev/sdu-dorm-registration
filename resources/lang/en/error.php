@@ -9,5 +9,6 @@ return [
     //database errors
     'reset_database_error' => '#SYSDB001; Reset password can not be handled.',
     'signup_database_error' => 'Sign up can not be handled',
-    'already_exist_user' => 'This user already exist'
+    'already_exist_user' => 'This user already exist',
+    'insert_database_error' => 'Cannot insert this data to database'
 ];

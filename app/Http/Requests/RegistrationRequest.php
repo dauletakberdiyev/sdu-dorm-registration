@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Auth;
 
 class RegistrationRequest extends FormRequest
 {
@@ -26,26 +27,27 @@ class RegistrationRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name'    => 'required',
-            'last_name' => 'required',
+            'firstName'    => 'required',
+            'lastName' => 'required',
             'father' => 'string',
-            'birth_date' => 'date',
+            'birthDate' => 'date',
             'city' => 'required',
-            'type_of_study' => 'required',
-            'faculty_code' => 'required',
-            'program_code' => 'required',
+            'typeOfStudy' => 'required',
+            'facultyCode' => 'required',
+            'programCode' => 'required',
             'course' => 'required|integer',
             'school' => 'required',
             'address' => 'required',
-            'father_number' => 'string',
-            'mother_number' => 'string',
-            'self_number' => 'string',
-            //'check' => 'required|image|mimes:jpeg,jpg,png'
+            'fatherNumber' => 'string',
+            'motherNumber' => 'string',
+            'selfNumber' => 'string',
+            'checkPhoto' => 'required|image|mimes:jpeg,jpg,png'
         ];
     }
 
     protected function failedValidation(Validator $validator)
     {
+
         $data = [
             'status' => 'error',
             'message' => $validator->errors()->first(),

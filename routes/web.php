@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['prefix' => ''], static function () {
+    Route::get('{any}', static function () {
+        return view('home');
+    })->where('any', '.*')->name('user');
 });
+
