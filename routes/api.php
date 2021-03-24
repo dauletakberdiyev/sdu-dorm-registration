@@ -28,5 +28,10 @@ Route::post('/forgot-password', ForgotPasswordController::class);
 Route::post('/reset-password', ResetPasswordController::class);
 
 Route::group(['middleware' => 'auth:api'], function(){
+    Route::group(['middleware' => ['role:admin']], function () {
+        Route::post('/test', function (){
+            return "sesegesg";
+        });
+    });
     Route::post('/dashboard', RegistrationDashboardController::class)->name('dashboard');
 });
