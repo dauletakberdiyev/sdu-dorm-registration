@@ -1867,6 +1867,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -1886,8 +1899,16 @@ __webpack_require__.r(__webpack_exports__);
         motherNumber: '',
         selfNumber: '',
         checkPhoto: null
+      },
+      values: {
+        typeOfStudies: [],
+        facultyCodes: [],
+        programCodes: []
       }
     };
+  },
+  mounted: function mounted() {
+    this.getTypeOfStudies(), this.getFacultyTitle();
   },
   methods: {
     onFileChange: function onFileChange(e) {
@@ -1902,6 +1923,29 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$http.post('api/dashboard', formData).then(function (response) {
         console.log(response);
+      });
+    },
+    getTypeOfStudies: function getTypeOfStudies() {
+      var _this = this;
+
+      this.$http.post('api/getTypeOfStudy').then(function (response) {
+        _this.values.typeOfStudies = response.data.data;
+      });
+    },
+    getFacultyTitle: function getFacultyTitle() {
+      var _this2 = this;
+
+      this.$http.post('api/getFacultyTitle').then(function (response) {
+        _this2.values.facultyCodes = response.data.data;
+      });
+    },
+    getProgramTitle: function getProgramTitle() {
+      var _this3 = this;
+
+      this.$http.post('api/getProgramTitle', {
+        faculty_code: this.request.facultyCode
+      }).then(function (response) {
+        _this3.values.programCodes = response.data.data;
       });
     }
   }
@@ -2725,68 +2769,133 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.request.typeOfStudy,
-              expression: "request.typeOfStudy"
-            }
-          ],
-          attrs: { type: "text", id: "typeOfStudy" },
-          domProps: { value: _vm.request.typeOfStudy },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.request.typeOfStudy,
+                expression: "request.typeOfStudy"
               }
-              _vm.$set(_vm.request, "typeOfStudy", $event.target.value)
+            ],
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.request,
+                  "typeOfStudy",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
+              }
             }
-          }
-        }),
+          },
+          _vm._l(_vm.values.typeOfStudies, function(typeOfStudy) {
+            return _c("option", { domProps: { value: typeOfStudy.id } }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(typeOfStudy.title) +
+                  "\n                "
+              )
+            ])
+          }),
+          0
+        ),
         _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.request.facultyCode,
-              expression: "request.facultyCode"
-            }
-          ],
-          attrs: { type: "text", id: "facultyCode" },
-          domProps: { value: _vm.request.facultyCode },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.request.facultyCode,
+                expression: "request.facultyCode"
               }
-              _vm.$set(_vm.request, "facultyCode", $event.target.value)
+            ],
+            on: {
+              change: [
+                function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.request,
+                    "facultyCode",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                },
+                function($event) {
+                  return _vm.getProgramTitle()
+                }
+              ]
             }
-          }
-        }),
+          },
+          _vm._l(_vm.values.facultyCodes, function(facultyCode) {
+            return _c("option", { domProps: { value: facultyCode.id } }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(facultyCode.title) +
+                  "\n                "
+              )
+            ])
+          }),
+          0
+        ),
         _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.request.programCode,
-              expression: "request.programCode"
-            }
-          ],
-          attrs: { type: "text", id: "programCode" },
-          domProps: { value: _vm.request.programCode },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.request.programCode,
+                expression: "request.programCode"
               }
-              _vm.$set(_vm.request, "programCode", $event.target.value)
+            ],
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.request,
+                  "programCode",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
+              }
             }
-          }
-        }),
+          },
+          _vm._l(_vm.values.programCodes, function(programCode) {
+            return _c("option", { domProps: { value: programCode.id } }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(programCode.title) +
+                  "\n                "
+              )
+            ])
+          }),
+          0
+        ),
         _vm._v(" "),
         _c("input", {
           directives: [

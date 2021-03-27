@@ -8,7 +8,8 @@ use App\Http\Controllers\Auth\SignUpController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\RegistrationDashboard\RegistrationDashboardController;
-
+use App\Http\Controllers\Auth\GetTypeOfStudyController;
+use App\Http\Controllers\Auth\FacultyCodeController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,4 +35,8 @@ Route::group(['middleware' => 'auth:api'], function(){
         });
     });
     Route::post('/dashboard', RegistrationDashboardController::class)->name('dashboard');
+
+    Route::post('/getTypeOfStudy', GetTypeOfStudyController::class)->name('getTypeOfStudy');
+    Route::post('/getFacultyTitle', FacultyCodeController::class)->name('getFacultyTitle');
+    Route::post('/getProgramTitle', [FacultyCodeController::class, 'getProgramCode'])->name('getProgramTitle');
 });
