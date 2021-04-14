@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Laravel</title>
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
         <!-- Styles -->
         <link rel="stylesheet" href="css/lib/bootstrap-grid.css">
         <link rel="stylesheet" href="css/lib/icons.css">
@@ -25,6 +26,8 @@
         </div>
     </body>
     <script src="{{ mix('js/app.js') }}"></script>
+
+
     <script src="js/lib/jquery-3.3.1.min.js"></script>
     <script src="js/lib/jquery-migrate-3.0.0.min.js"></script>
     <script src="js/lib/mmenu.min.js"></script>
@@ -38,4 +41,6 @@
     <script src="js/lib/magnific-popup.min.js"></script>
     <script src="js/lib/slick.min.js"></script>
     <script src="js/lib/custom_jquery.js"></script>
+
+
 </html>

@@ -12,3 +12,12 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js').vue();
+
+const WebpackShellPluginNext = require('webpack-shell-plugin-next');
+
+mix.webpackConfig({
+    plugins:
+        [
+            new WebpackShellPluginNext({onBuildStart:['php artisan lang:js resources/js/vue-translations.js --no-lib --quiet'], onBuildEnd:[]})
+        ]
+});

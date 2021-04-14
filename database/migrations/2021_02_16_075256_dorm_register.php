@@ -13,12 +13,10 @@ class DormRegister extends Migration
      */
     public function up()
     {
-        //
         Schema::create('dorm_register', function (Blueprint $table){
            $table->increments('applicant_id');
            $table->string('applicant_email');
            $table->string('password');
-           $table->string('check_path');
            $table->string('status');
            $table->integer('registration_year');
            $table->integer('registration_term');

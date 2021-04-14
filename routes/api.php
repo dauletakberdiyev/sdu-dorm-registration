@@ -8,8 +8,9 @@ use App\Http\Controllers\Auth\SignUpController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\RegistrationDashboard\RegistrationDashboardController;
-use App\Http\Controllers\Auth\GetTypeOfStudyController;
 use App\Http\Controllers\Auth\FacultyCodeController;
+use App\Http\Controllers\RegistrationDashboard\GenderController;
+use App\Http\Controllers\AdminPage\AccountingPage\StudentListController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,14 +30,13 @@ Route::post('/forgot-password', ForgotPasswordController::class);
 Route::post('/reset-password', ResetPasswordController::class);
 
 Route::group(['middleware' => 'auth:api'], function(){
+
     Route::group(['middleware' => ['role:admin']], function () {
-        Route::post('/test', function (){
-            return "sesegesg";
-        });
+        Route::post('/accounting/student-list', StudentListController::class)->name('studentsList');
     });
     Route::post('/dashboard', RegistrationDashboardController::class)->name('dashboard');
 
-    Route::post('/getTypeOfStudy', GetTypeOfStudyController::class)->name('getTypeOfStudy');
+    Route::post('/getGenderTitle', GenderController::class)->name('getGenderTitle');
     Route::post('/getFacultyTitle', FacultyCodeController::class)->name('getFacultyTitle');
     Route::post('/getProgramTitle', [FacultyCodeController::class, 'getProgramCode'])->name('getProgramTitle');
 });

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Repositories;
-
 
 use App\Enums\ApiOutputStatus;
 use App\Enums\ApiOutputStatusCode;

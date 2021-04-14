@@ -13,11 +13,11 @@ class StudyTypeTitle extends Migration
      */
     public function up()
     {
-        Schema::create('study_type_title', function (Blueprint $table){
+        Schema::create('gender_title', function (Blueprint $table){
             $table->unsignedInteger('id')->primary();
-            $table->string('study_title_en');
-            $table->string('study_title_kz');
-            $table->string('study_title_ru');
+            $table->string('gender_title_en');
+            $table->string('gender_title_kz');
+            $table->string('gender_title_ru');
         });
     }
 

@@ -18,23 +18,6 @@
     </div>
     <!-- Loader end -->
 
-    <!-- Wrapper -->
-    <div id="wrapper">
-        <!-- Header Container -->
-        <header id="utf-header-container-block">
-            <div id="header">
-                <div class="utf-right-side">
-                    <span class="mmenu-trigger">
-                    <button class="hamburger utf-hamburger-collapse-item" type="button"> <span class="utf-hamburger-box-item"> <span class="utf-hamburger-inner-item"></span> </span> </button>
-                    </span>
-                </div>
-            </div>
-        </header>
-    </div>
-
-    <div class="clearfix"></div>
-    <!-- Header Container / End -->
-
     <!-- Titlebar -->
     <div id="titlebar" class="gradient">
         <div class="container">
@@ -53,7 +36,7 @@
                 <div class="utf-login-register-page-aera margin-bottom-50">
                     <div class="utf-welcome-text-item">
                         <h3>Welcome to Sign in</h3>
-                        <span>Don't Have an Account? <a href="register.html">Sign Up!</a></span>
+                        <span>Don't Have an Account? <a href="/signup">Sign Up!</a></span>
                     </div>
                     <form @submit.prevent="login">
                         <div class="utf-no-border">
@@ -177,7 +160,7 @@
                     this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.data.access_token;
                     this.$router.push({name:'dashboard'});
                 })
-        }
+            }
         }
     }
 </script>

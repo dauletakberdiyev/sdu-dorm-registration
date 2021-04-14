@@ -29,19 +29,22 @@ class RegistrationRequest extends FormRequest
         return [
             'firstName'    => 'required',
             'lastName' => 'required',
-            'father' => 'string',
-            'birthDate' => 'date',
+            'father' => 'nullable|string',
+            'birthDate' => 'required|date',
+            'gender' => 'required|integer',
+            'iin' => 'required|string',
             'city' => 'required',
-            'typeOfStudy' => 'required',
             'facultyCode' => 'required',
             'programCode' => 'required',
             'course' => 'required|integer',
             'school' => 'required',
             'address' => 'required',
-            'fatherNumber' => 'string',
-            'motherNumber' => 'string',
-            'selfNumber' => 'string',
-            'checkPhoto' => 'required|image|mimes:jpeg,jpg,png'
+            'fatherName' => 'nullable|required',
+            'motherName' => 'nullable|required',
+            'fatherNumber' => 'nullable|string',
+            'motherNumber' => 'nullable|string',
+            'selfNumber' => 'nullable|string',
+            'passportPhoto' => 'required|image|mimes:jpeg,jpg,png'
         ];
     }
 
