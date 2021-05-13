@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\AdminPage\AccountingPage;
+namespace App\Http\Controllers\Helpers;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\AccountingPage\AccountingPageRepository;
+use App\Repositories\Helpers\RoleRepository;
 use Illuminate\Http\Request;
 
-class StudentListController extends Controller
+class RoleController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -14,7 +14,7 @@ class StudentListController extends Controller
      * @param  \App\Repositories\FacultyCodeRepository  $repository
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(AccountingPageRepository $repository)
+    public function __invoke(RoleRepository $repository)
     {
         return $repository->manage();
     }

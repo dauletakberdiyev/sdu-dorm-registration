@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="width: 100%">
     <!--Loader-->
     <div class="vfx-loader">
         <div class="loader-wrapper">
@@ -149,7 +149,7 @@
                 request:{
                     email:'',
                     password:''
-                }
+                },
             }
         },
         methods: {
@@ -158,7 +158,12 @@
                     let access_token=response.data.data.access_token;
                     localStorage.setItem('access_token',access_token);
                     this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.data.access_token;
-                    this.$router.push({name:'dashboard'});
+                    if(response.data.data.user_role === 'admin'){
+                        this.$router.push({name: 'adminPage'});
+                    }else {
+                        this.$router.push({name: 'dashboard'});
+                    }
+
                 })
             }
         }

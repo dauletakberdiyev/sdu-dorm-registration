@@ -5,6 +5,7 @@ namespace App\Repositories\AccountingPage;
 use App\Enums\ApiOutputStatus;
 use App\Enums\ApiOutputStatusCode;
 use App\Models\Tables\RegisterInfo;
+use Illuminate\Support\Facades\Auth;
 
 class AccountingPageRepository
 {

@@ -2569,7 +2569,7 @@ img.footer-logo {
 	color: #fff;
 	box-shadow: 0 2px 8px rgba(0,0,0,0.2)
 }
-.pagination ul li a.current-page {
+.pagination ul li a.current_page {
 	background-color: #66676b;
 	color: #fff;
 	box-shadow: 0 2px 8px rgba(102,103,107,0.25)
@@ -14837,7 +14837,7 @@ Submit Forms
 	color:#c8232c
 }
 .utf-submit-field h5 span {
-	color: #888;
+	color: red;
 	font-weight: 500;
 }
 .help-icon {
@@ -18023,6 +18023,11 @@ a.apply-now-button:hover {
 	-webkit-animation-delay: .5s;
 	animation-delay: .5s
 }
+
+.red-span{
+    color: red;
+}
+
 @-webkit-keyframes key-big {
 50% {
 -webkit-transform:scale(.5)

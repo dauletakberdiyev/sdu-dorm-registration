@@ -1,6 +1,6 @@
 <template>
     <!-- Titlebar -->
-    <div>
+    <div style="width: 100%">
     <div id="titlebar" class="gradient">
         <div class="container">
             <div class="row">

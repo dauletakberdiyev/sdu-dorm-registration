@@ -13,7 +13,7 @@
                 </div>
             </div>
         </div>
-        <form enctype="multipart/form-data" @submit.prevent="register">
+        <form enctype="multipart/form-data" @submit.prevent="pay">
         <div class="utf-dashboard-content-inner-aera">
             <div class="row">
                 <div class="col-xl-12">
@@ -25,15 +25,15 @@
                             <div class="row">
                                 <div class="col-xl-6 col-md-6 col-sm-6">
                                     <div class="utf-submit-field">
-                                        <h5>{{ $trans('registration.first_name') }}</h5>
-                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.first_name')" id="firstName" v-model="request.firstName">
+                                        <h5>{{ $trans('registration.first_name') }} <span>*</span></h5>
+                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.first_name')" id="firstName" v-model="request.firstName" required>
                                     </div>
                                 </div>
 
                                 <div class="col-xl-6 col-md-6 col-sm-6">
                                     <div class="utf-submit-field">
-                                        <h5>{{ $trans('registration.last_name') }}</h5>
-                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.last_name')" id="lastName" v-model="request.lastName">
+                                        <h5>{{ $trans('registration.last_name') }} <span>*</span></h5>
+                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.last_name')" id="lastName" v-model="request.lastName" required>
                                     </div>
                                 </div>
 
@@ -46,22 +46,22 @@
 
                                 <div class="col-xl-6 col-md-6 col-sm-6">
                                     <div class="utf-submit-field">
-                                        <h5>{{$trans('registration.phone_number')}}</h5>
-                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.phone_number')" id="selfNumber" v-model="request.selfNumber">
+                                        <h5>{{$trans('registration.phone_number')}} <span>*</span></h5>
+                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.phone_number')" id="selfNumber" v-model="request.selfNumber" required>
                                     </div>
                                 </div>
 
                                 <div class="col-xl-6 col-md-6 col-sm-6">
                                     <div class="utf-submit-field">
-                                        <h5>{{$trans('registration.iin')}}</h5>
-                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.iin')" id="iin" v-model="request.iin">
+                                        <h5>{{$trans('registration.iin')}} <span>*</span></h5>
+                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.iin')" id="iin" v-model="request.iin" required>
                                     </div>
                                 </div>
 
                                 <div class="col-xl-6 col-md-6 col-sm-6">
                                     <div class="utf-submit-field">
-                                        <h5>{{$trans('registration.gender')}}</h5>
-                                        <select class="utf-with-border" :title="$trans('registration.gender')" v-model="request.gender">
+                                        <h5>{{$trans('registration.gender')}} <span>*</span></h5>
+                                        <select class="utf-with-border" :title="$trans('registration.gender')" v-model="request.gender" required>
                                             <option v-for="gender in values.genderTitle" :value="gender.id">
                                                 {{ gender.title }}
                                             </option>
@@ -71,9 +71,9 @@
 
                                 <div class="col-xl-12 col-md-12 col-sm-12">
                                     <div class="utf-submit-field">
-                                        <h5>{{$trans('registration.upload_photo', {name: 'Passport'})}}</h5>
+                                        <h5>{{$trans('registration.upload_photo', {name: 'Passport'})}} <span>*</span></h5>
                                         <div class="uploadButton margin-top-15 margin-bottom-30">
-                                            <input class="uploadButton-input" type="file" accept="image/*" id="passport"  @change="onFileChange"/>
+                                            <input class="uploadButton-input" type="file" accept="image/*" id="passport"  @change="onFileChange" required>
                                             <label class="uploadButton-button ripple-effect" for="passport">{{$trans('registration.upload_photo', {name: 'Passport'})}}</label>
                                             <span class="uploadButton-file-name">{{$trans('registration.upload_passport')}}</span>
                                         </div>
@@ -94,36 +94,36 @@
 
                                 <div class="col-xl-6 col-md-6 col-sm-6">
                                     <div class="utf-submit-field datepicker">
-                                        <h5>{{$trans('registration.birth_date')}}</h5>
-                                        <input class="utf-with-border" type="date" id="birthDate" v-model="request.birthDate">
+                                        <h5>{{$trans('registration.birth_date')}} <span>*</span></h5>
+                                        <input class="utf-with-border" type="date" id="birthDate" v-model="request.birthDate" required>
                                     </div>
                                 </div>
 
                                 <div class="col-xl-6 col-md-6 col-sm-6">
                                     <div class="utf-submit-field">
-                                        <h5>{{$trans('registration.address')}}</h5>
-                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.birth_date')" id="address" v-model="request.address">
+                                        <h5>{{$trans('registration.address')}} <span>*</span></h5>
+                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.birth_date')" id="address" v-model="request.address" required>
                                     </div>
                                 </div>
 
                                 <div class="col-xl-6 col-md-6 col-sm-6">
                                     <div class="utf-submit-field">
-                                        <h5>{{$trans('registration.city')}}</h5>
-                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.city')" id="city" v-model="request.city">
+                                        <h5>{{$trans('registration.city')}} <span>*</span></h5>
+                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.city')" id="city" v-model="request.city" required>
                                     </div>
                                 </div>
 
                                 <div class="col-xl-6 col-md-6 col-sm-6">
                                     <div class="utf-submit-field">
-                                        <h5>{{$trans('registration.school')}}</h5>
-                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.school')" id="school" v-model="request.school">
+                                        <h5>{{$trans('registration.school')}} <span>*</span></h5>
+                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.school')" id="school" v-model="request.school" required>
                                     </div>
                                 </div>
 
                                 <div class="col-xl-6 col-md-6 col-sm-6">
                                     <div class="utf-submit-field">
-                                        <h5>{{$trans('registration.faculty')}}</h5>
-                                        <select class="utf-with-border" title="Select Faculty" v-model="request.facultyCode" @change="getProgramTitle()">
+                                        <h5>{{$trans('registration.faculty')}} <span>*</span></h5>
+                                        <select class="utf-with-border" title="Select Faculty" v-model="request.facultyCode" @change="getProgramTitle()" required>
                                             <option v-for="facultyCode in values.facultyCodes" :value="facultyCode.id">
                                                 {{ facultyCode.title }}
                                             </option>
@@ -133,8 +133,8 @@
 
                                 <div class="col-xl-6 col-md-6 col-sm-6">
                                     <div class="utf-submit-field">
-                                        <h5>{{$trans('registration.speciality')}}</h5>
-                                        <select class="utf-with-border" title="Select Speciality" v-model="request.programCode" id="speciality-list">
+                                        <h5>{{$trans('registration.speciality')}} <span>*</span></h5>
+                                        <select class="utf-with-border" title="Select Speciality" v-model="request.programCode" id="speciality-list" required>
                                             <option v-for="programCode in values.programCodes" :value="programCode.id">
                                                 {{ programCode.title }}
                                             </option>
@@ -144,8 +144,8 @@
 
                                 <div class="col-xl-6 col-md-6 col-sm-6">
                                     <div class="utf-submit-field">
-                                        <h5>{{$trans('registration.course')}}</h5>
-                                        <input type="number" class="utf-with-border" :placeholder="$trans('registration.course')" id="course" min="0" max="4" v-model="request.course">
+                                        <h5>{{$trans('registration.course')}} <span>*</span></h5>
+                                        <input type="number" class="utf-with-border" :placeholder="$trans('registration.course')" id="course" min="0" max="4" v-model="request.course" required>
                                     </div>
                                 </div>
 
@@ -195,9 +195,9 @@
                     </div>
                 </div>
             </div>
+
             <div class="utf-centered-button">
-                <input type="submit"  class="button utf-ripple-effect-dark utf-button-sliding-icon margin-top-0" :value="$trans('registration.send')">
-<!--                <a href="javascript:void(0);" class="button utf-ripple-effect-dark utf-button-sliding-icon margin-top-0">Submit Jobs <i class="icon-feather-plus"></i></a>-->
+                <button type="submit" id="sendButton" class="button ripple-effect margin-top-0">{{$trans('registration.send')}}</button>
             </div>
 
             <!-- Footer -->
@@ -211,7 +211,6 @@
     <!-- Dashboard Content / End -->
 </template>
 <script>
-    import LanguagesDropdown from 'vue-languages-dropdown';
     export default {
         data(){
             return{
@@ -295,7 +294,33 @@
 
             changeLanguage(e){
                 this.$lang.setLocale(e.target.value);
-            }
+            },
+
+            pay(){
+                var widget = new cp.CloudPayments();
+                let reg = this.register;
+                widget.pay('charge',{
+                    publicId: 'pk_f78dafe1f651e871a20e3ef43492d',
+                    description: 'Pay for Dorm',
+                    amount: 50,
+                    currency: 'KZT',
+                    skin: 'modern',
+                    email: 'dauletakberdiyev@gmail.com'
+                    },
+                    {
+                        onSuccess: function (options) { // success
+                            reg();
+                            console.log('success');
+                        },
+                        onFail: function (reason, options) { // fail
+                            console.log(reason);
+                        },
+                        onComplete: function (paymentResult, options) { //Вызывается как только виджет получает от api.cloudpayments ответ с результатом транзакции.
+                            console.log(paymentResult);
+                        }
+                    }
+                )
+            },
         }
     }
 </script>

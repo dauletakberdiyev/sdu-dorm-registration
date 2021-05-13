@@ -3,10 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel</title>
+    <title>Larav</title>
     <link rel="stylesheet" href="css/lib/bootstrap-grid.css">
     <link rel="stylesheet" href="css/lib/icons.css">
     <link rel="stylesheet" href="css/lib/style.css">
+    <script src="https://widget.cloudpayments.ru/bundles/cloudpayments"></script>
 </head>
 <body>
     <div id="app">

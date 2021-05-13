@@ -24,6 +24,7 @@ class LoginRepository
 
             $user = Auth::user();
             $token = $user->createToken(env('APP_PASSPORT_KEY'));
+            $userRole = $user->getUserRole();
 
             return response()->json([
                 'status' => ApiOutputStatus::SUCCESS,
@@ -33,7 +34,8 @@ class LoginRepository
                     "token_type"    => "Bearer",
                     "expires_in"    => $token->token->expires_at->diffInSeconds(Carbon::now()),
                     'access_token'  => $token->accessToken,
-                    'user'          => $user->toArray()
+                    'user'          => $user->toArray(),
+                    'user_role'     => $userRole
                 ]
             ], 200);
         }

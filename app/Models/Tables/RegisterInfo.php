@@ -5,6 +5,7 @@ namespace App\Models\Tables;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class RegisterInfo extends Model
 {
@@ -42,5 +43,25 @@ class RegisterInfo extends Model
     public function resident_info(){
         return $this->hasOne(ResindentModel::class, 'applicant_id')
             ->select('applicant_id', 'is_active', 'deposit', 'deposit_status');
+    }
+
+    public function relatedStudents($params){
+        return DB::table($this->table.' as dri')
+            ->leftJoin('dorm_residents as dre', 'dre.applicant_id', '=', 'dri.applicant_id')
+            ->leftJoin('rooms as rm', 'rm.id', '=', 'dre.room_id')
+            ->leftJoin('faculty_title as ft', 'ft.faculty_code', '=', 'dri.faculty_code')
+            ->leftJoin('program_title as pt', 'pt.program_code', '=', 'dri.program_code')
+            ->select('dri.first_name',
+                'dri.last_name',
+                'dri.city',
+                'ft.title_en as faculty',
+                'pt.title_en as speciality',
+                'dri.course',
+                'dri.school',
+                'dre.room_id',
+                'dri.applicant_id',
+                'dri.assistant_id')
+            ->where('rm.related_room', $params['related_room'])
+            ->get()->toArray();
     }
 }

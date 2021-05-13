@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\RegistrationDashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OnLoadRequest;
 use App\Http\Requests\RegistrationRequest;
+use App\Repositories\RegistrationDashboard\LoadDashboardRepository;
 use App\Repositories\RegistrationDashboard\RegistrationDashboardRepository;
 
 class RegistrationDashboardController extends Controller
