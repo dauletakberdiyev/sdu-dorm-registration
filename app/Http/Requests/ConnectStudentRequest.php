@@ -27,7 +27,8 @@ class ConnectStudentRequest extends FormRequest
     {
         return [
             'applicant_id' => 'required',
-            'assistant_id' => 'required'
+            'assistant_id' => 'required',
+            'room_id'      => 'nullable'
         ];
     }
 

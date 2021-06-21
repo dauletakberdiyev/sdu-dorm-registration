@@ -7,15 +7,17 @@
                     <h3>Manage Jobs Post</h3>
                     <nav id="breadcrumbs">
                         <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" v-for="lang in this.language.languageList" :value="lang.value" @click="changeLanguage">{{lang.title}}</button>
+                            <button class="btn btn-primary dropdown-toggle" style="margin-right: 10px;" v-for="lang in this.language.languageList" :value="lang.value" @click="changeLanguage">{{lang.title}}</button>
                         </div>
                     </nav>
                 </div>
             </div>
         </div>
+
         <form enctype="multipart/form-data" @submit.prevent="pay">
         <div class="utf-dashboard-content-inner-aera">
             <div class="row">
+
                 <div class="col-xl-12">
                     <div class="dashboard-box">
                         <div class="headline">
@@ -53,15 +55,22 @@
 
                                 <div class="col-xl-6 col-md-6 col-sm-6">
                                     <div class="utf-submit-field">
-                                        <h5>{{$trans('registration.iin')}} <span>*</span></h5>
-                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.iin')" id="iin" v-model="request.iin" required>
+                                        <h5>{{ $trans('registration.email') }} <span>*</span></h5>
+                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.email')" id="email" v-model="request.email" required>
                                     </div>
                                 </div>
 
                                 <div class="col-xl-6 col-md-6 col-sm-6">
                                     <div class="utf-submit-field">
+                                        <h5>{{$trans('registration.iin')}} <span>*</span></h5>
+                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.iin')" id="iin" v-model="request.iin" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-3 col-md-3 col-sm-3">
+                                    <div class="utf-submit-field">
                                         <h5>{{$trans('registration.gender')}} <span>*</span></h5>
-                                        <select class="utf-with-border" :title="$trans('registration.gender')" v-model="request.gender" required>
+                                        <select class="utf-with-border" :title="$trans('registration.gender')" v-model="request.gender" @change="getFreePlaceCount" required>
                                             <option v-for="gender in values.genderTitle" :value="gender.id">
                                                 {{ gender.title }}
                                             </option>
@@ -69,13 +78,32 @@
                                     </div>
                                 </div>
 
-                                <div class="col-xl-12 col-md-12 col-sm-12">
+                                <div class="col-xl-3 col-md-3 col-sm-3" style="display: flex; align-items: flex-end">
                                     <div class="utf-submit-field">
-                                        <h5>{{$trans('registration.upload_photo', {name: 'Passport'})}} <span>*</span></h5>
+                                        <h5>{{$trans('registration.place_count')}} {{values.freePlaceCount}}</h5>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6 col-md-6 col-sm-12"></div>
+
+                                <div class="col-xl-6 col-md-6 col-sm-6">
+                                    <div class="utf-submit-field">
+                                        <h5>{{$trans('registration.upload_pass')}} <span>*</span></h5>
                                         <div class="uploadButton margin-top-15 margin-bottom-30">
-                                            <input class="uploadButton-input" type="file" accept="image/*" id="passport"  @change="onFileChange" required>
-                                            <label class="uploadButton-button ripple-effect" for="passport">{{$trans('registration.upload_photo', {name: 'Passport'})}}</label>
+                                            <input class="uploadButton-input" type="file" accept="image/*" id="passport"  @change="onPassportChange" required>
+                                            <label class="uploadButton-button ripple-effect" for="passport">{{$trans('registration.upload_pass')}}</label>
                                             <span class="uploadButton-file-name">{{$trans('registration.upload_passport')}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6 col-md-6 col-sm-6">
+                                    <div class="utf-submit-field">
+                                        <h5>{{$trans('registration.upload_photo')}} <span>*</span></h5>
+                                        <div class="uploadButton margin-top-15 margin-bottom-30">
+                                            <input class="uploadButton-input" type="file" accept="image/*" id="photo"  @change="onPhotoChange" required>
+                                            <label class="uploadButton-button ripple-effect" for="photo">{{$trans('registration.upload_photo')}}</label>
+                                            <span class="uploadButton-file-name">{{$trans('registration.upload_photo_title')}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -102,7 +130,7 @@
                                 <div class="col-xl-6 col-md-6 col-sm-6">
                                     <div class="utf-submit-field">
                                         <h5>{{$trans('registration.address')}} <span>*</span></h5>
-                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.birth_date')" id="address" v-model="request.address" required>
+                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.address')" id="address" v-model="request.address" required>
                                     </div>
                                 </div>
 
@@ -194,10 +222,44 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-xl-12">
+                    <div class="dashboard-box">
+                        <div class="headline">
+                            <h3>{{$trans('registration.agreement')}}</h3>
+                        </div>
+                        <div class="content with-padding padding-bottom-10">
+                            <div class="row">
+                                <div class="col-xl-6 col-md-6 col-sm-12">
+                                    <div class="utf-submit-field">
+                                        <div class="margin-bottom-10">
+                                            <span>{{$trans('registration.read_agreement')}}:</span>
+                                            <router-link :to="{name: 'agreement'}" style="color: blue" target="_blank">{{$trans('registration.agreement')}}</router-link>
+                                        </div>
+
+                                        <div class="checkbox">
+                                            <input type="checkbox" id="agree-check" @click="agreementCheck">
+                                            <label for="agree-check"><span class="checkbox-icon"></span>{{$trans('registration.check_agree')}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12" style="display: none" id="error-notification">
+                    <div class="notification error closeable"> 
+                        <p>{{$trans('registration.dont_laugh')}}</p>
+                        <a class="close" href="#"></a>
+                    </div>
+                </div>
             </div>
 
+
+
             <div class="utf-centered-button">
-                <button type="submit" id="sendButton" class="button ripple-effect margin-top-0">{{$trans('registration.send')}}</button>
+                <button type="submit" id="sendButton" class="button ripple-effect margin-top-0"  :disabled="!this.request.agree">{{$trans('adminPage.pay')}}</button>
             </div>
 
             <!-- Footer -->
@@ -211,10 +273,14 @@
     <!-- Dashboard Content / End -->
 </template>
 <script>
+    import {goTo} from '../mixins/GoTo';
     export default {
+        mixins: [goTo],
+
         data(){
             return{
                 request:{
+                    email:'',
                     firstName:'',
                     lastName:'',
                     father:'',
@@ -231,13 +297,16 @@
                     iin:'',
                     gender:'',
                     passportPhoto:null,
+                    personalPhoto:null,
                     motherName:'',
                     fatherName:'',
+                    agree: false,
                 },
                 values:{
                     genderTitle:[],
                     facultyCodes:[],
                     programCodes:[],
+                    freePlaceCount:0,
                 },
                 language:{
                     languageList : [
@@ -255,8 +324,12 @@
         },
 
         methods: {
-            onFileChange(e){
+            onPassportChange(e){
                 this.request.passportPhoto = e.target.files[0];
+            },
+
+            onPhotoChange(e){
+                this.request.personalPhoto = e.target.files[0];
             },
 
             register(){
@@ -265,7 +338,7 @@
                     formData.append(key, this.request[key])
                 }
                 this.$http.post('api/dashboard',formData).then(response=>{
-                    console.log(response);
+                    this.goTo('successPage',{email: this.request.email});
                 })
             },
 
@@ -292,35 +365,67 @@
                     });
             },
 
+            getFreePlaceCount(){
+                this.$http.post('api/getFreePlaceCount',{
+                    building_id: this.request.gender
+                })
+                    .then(response => {
+                        this.values.freePlaceCount = response.data.data.place_count;
+                    });
+            },
+
             changeLanguage(e){
                 this.$lang.setLocale(e.target.value);
             },
 
+            viewPdf(){
+                window.open("~/public/agreement/agreement.pdf", "_blank");
+            },
+
+            agreementCheck(e){
+                this.request.agree = e.target.checked;
+            },
+
             pay(){
-                var widget = new cp.CloudPayments();
-                let reg = this.register;
-                widget.pay('charge',{
-                    publicId: 'pk_f78dafe1f651e871a20e3ef43492d',
-                    description: 'Pay for Dorm',
-                    amount: 50,
-                    currency: 'KZT',
-                    skin: 'modern',
-                    email: 'dauletakberdiyev@gmail.com'
-                    },
-                    {
-                        onSuccess: function (options) { // success
-                            reg();
-                            console.log('success');
+                if(this.request.agree) {
+                    var widget = new cp.CloudPayments();
+                    let reg = this.register;
+                    widget.pay('charge', {
+                            publicId: 'pk_f78dafe1f651e871a20e3ef43492d',
+                            description: 'Pay for Dorm',
+                            amount: 50,
+                            currency: 'KZT',
+                            skin: 'modern',
+                            email: 'dauletakberdiyev@gmail.com'
                         },
-                        onFail: function (reason, options) { // fail
-                            console.log(reason);
-                        },
-                        onComplete: function (paymentResult, options) { //Вызывается как только виджет получает от api.cloudpayments ответ с результатом транзакции.
-                            console.log(paymentResult);
+                        {
+                            onSuccess: function (options) { // success
+                                reg();
+                                console.log('success');
+                            },
+                            onFail: function (reason, options) { // fail
+                                console.log(reason);
+                            },
+                            onComplete: function (paymentResult, options) { //Вызывается как только виджет получает от api.cloudpayments ответ с результатом транзакции.
+                                console.log(paymentResult);
+                            }
                         }
-                    }
-                )
+                    )
+                }
+                else{
+                    //TODO: need to finish it
+                    console.log('Don\'t make me laugh');
+                    const notification = document.querySelector('#error-notification');
+                    notification.style.display = 'block';
+                }
             },
         }
     }
 </script>
+
+<style scoped>
+    #sendButton:disabled{
+        background-color: #66676b;
+        cursor: default;
+    }
+</style>

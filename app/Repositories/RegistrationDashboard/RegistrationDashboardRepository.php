@@ -16,8 +16,14 @@ class RegistrationDashboardRepository
 
         $infoArray = [];
 
+        $passportPath = '';
+        $photoPath = '';
+
         if($credentials->hasFile('passportPhoto')){
-            $pathName = RegistrationService::uploadCheckImage($credentials->file('passportPhoto'));
+            $passportPath = RegistrationService::uploadCheckImage($credentials->file('passportPhoto'),'passport', $credentials->input('iin'));
+        }
+        if($credentials->hasFile('personalPhoto')){
+            $photoPath = RegistrationService::uploadCheckImage($credentials->file('personalPhoto'), 'photo', $credentials->input('iin'));
         }
         else{
             // TODO: Implement else method.
@@ -36,21 +42,19 @@ class RegistrationDashboardRepository
         $infoArray['fatherNumber'] = $credentials->input('fatherNumber');
         $infoArray['motherNumber'] = $credentials->input('motherNumber');
         $infoArray['selfNumber'] = $credentials->input('selfNumber');
-        $infoArray['passportPath'] = $pathName;
-        $infoArray['applicantId'] = $user->applicant_id;
+        $infoArray['passportPath'] = $passportPath;
+        $infoArray['photoPath'] = $photoPath;
+        $infoArray['applicantEmail'] = $credentials->input('email');
         $infoArray['registerYear'] = 2020;
         $infoArray['registerTerm'] = 2;
         $infoArray['gender'] = $credentials->input('gender');
         $infoArray['iin'] = $credentials->input('iin');
         $infoArray['motherName'] = $credentials->input('motherName');
         $infoArray['fatherName'] = $credentials->input('fatherName');
+        ($credentials->input('agree'))? $infoArray['agreement'] = 1 : $infoArray['agreement'] = 0;
+        //$infoArray['agreement'] = $credentials->input('agree');
 
-        if(RegisterInfo::where('applicant_id', $infoArray['applicantId'])->first()){
-            $uRes = RegistrationService::updateStudent($infoArray);
-        }
-        else {
-            $uRes = RegistrationService::createStudent($infoArray);
-        }
+        $uRes = RegistrationService::createStudent($infoArray);
 
         if($uRes[0]->uRes == 1){
             return response()->json([

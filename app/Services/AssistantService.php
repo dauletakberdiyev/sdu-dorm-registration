@@ -34,9 +34,21 @@ class AssistantService
 
     public static function connectStudent($params){
         return DB::transaction(function () use ($params){
-           DB::select('call connectStudent(?,?,@uRes)',
+           DB::select('call connectStudent(?,?,?,@uRes)',
                array(
-                   $params['applicant_id'], $params['assistant_id']
+                   $params['applicant_id'],$params['assistant_id'],
+                   $params['room_id'],
+               ));
+
+           return DB::select('select @uRes as uRes');
+        });
+    }
+
+    public static function updateAssistantRoom($params){
+        return DB::transaction(function () use($params){
+           DB::select('call updateAssistantRoom(?,?,?,@uRes)',
+               array(
+                   $params['applicant_id'],$params['room_id'],$params['old_room_id'],
                ));
 
            return DB::select('select @uRes as uRes');

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\AdminPage;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StudentListRequest;
 use App\Repositories\AccountingPage\AccountingPageRepository;
 use App\Repositories\DirectorPage\DirectorStudentListRepository;
-use Illuminate\Http\Request;
 
 class StudentListController extends Controller
 {
@@ -20,8 +20,8 @@ class StudentListController extends Controller
         return $repository->manage();
     }
 
-    public function directorList(DirectorStudentListRepository $repository)
+    public function directorList(StudentListRequest $request, DirectorStudentListRepository $repository)
     {
-        return $repository->manage();
+        return $repository->manage($request);
     }
 }

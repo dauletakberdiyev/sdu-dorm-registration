@@ -13,6 +13,7 @@ class ConnectStudentRepository
 
         $info['applicant_id'] = $credentials['applicant_id'];
         $info['assistant_id'] = $credentials['assistant_id'];
+        $info['room_id'] = $credentials['room_id'];
 
         $uRes = AssistantService::connectStudent($info);
 

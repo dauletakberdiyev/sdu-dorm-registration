@@ -5,6 +5,8 @@ import AdminPage from "../components/AdminPage";
 import AssistantPage from "../components/AssistantPage";
 import RelateStudent from "../components/RelateStudent";
 import FloorAssistantPage from "../components/FloorAssistantPage";
+import SuccessPage from "../components/SuccessPage";
+import Agreement from "../components/Agreement";
 
 export default [
     {
@@ -64,6 +66,23 @@ export default [
         component: RelateStudent,
         name: 'relateAssistant',
         props: true,
+    },
+    {
+        path: '/dashboard/success',
+        component: SuccessPage,
+        name: 'successPage',
+        props: true,
+        meta: {
+            noSideBar: true
+        }
+    },
+    {
+        path: '/dashboard/agreement',
+        component: Agreement,
+        name: 'agreement',
+        meta: {
+            noSideBar: true
+        }
     },
     {
         path:'*',

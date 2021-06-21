@@ -11,6 +11,7 @@
             </div>
 
             <div class="utf-dashboard-content-inner-aera">
+                <form @submit="updateRoom">
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="utf_dashboard_list_box table-responsive recent_booking dashboard-box">
@@ -20,7 +21,7 @@
                                     <tr>
                                         <th>{{$trans('adminPage.name')}}</th>
                                         <th>{{$trans('adminPage.surname')}}</th>
-                                        <th>{{$trans('adminPage.email')}}</th>
+<!--                                        <th>{{$trans('adminPage.email')}}</th>-->
                                         <th>{{$trans('adminPage.course')}}</th>
                                         <th>{{$trans('adminPage.speciality')}}</th>
                                         <th>{{$trans('adminPage.phone_number')}}</th>
@@ -32,12 +33,18 @@
                                     <tr v-for="assistant in loadData.assistantList.data">
                                         <td>{{assistant.assistant_info.first_name}}</td>
                                         <td>{{assistant.assistant_info.last_name}}</td>
-                                        <td>{{assistant.applicant_email}}</td>
+<!--                                        <td>{{assistant.applicant_email}}</td>-->
                                         <td>{{assistant.assistant_info.course}}</td>
                                         <td>{{assistant.speciality.title_en}}</td>
                                         <td>{{assistant.assistant_info.self_number}}</td>
-                                        <td>{{assistant.room.room_id}}</td>
-                                        <td><button @click="goTo('relateStudent', {roomId: assistant.room.room_id, assistId: assistant.applicant_id})" class="button ripple-effect margin-top-5 margin-bottom-10">{{$trans('adminPage.update')}}</button></td>
+                                        <td>
+                                            <select class="utf-with-border" v-model="assistant.room.room_id" @change="changeRoom" :data-applicant="assistant.applicant_id" :data-oldRoom="assistant.room.old_room_id">
+                                                <option v-for="room in loadData.assistantRooms" :value="room.room_id" :title="room.free_place" :disabled="room.free_place == 0">
+                                                    {{room.room_id}}
+                                                </option>
+                                            </select>
+                                        </td>
+                                        <td><button @click="goTo('relateStudent', {roomId: assistant.room.room_id, assistId: assistant.applicant_id})" class="button ripple-effect margin-top-5 margin-bottom-10">{{$trans('adminPage.delete')}}</button></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -60,9 +67,16 @@
                     </nav>
                 </div>
 
-                <div class="col-xl-6 col-md-6">
-                    <a href="#small-dialog"  class="popup-with-zoom-anim button ripple-effect" data-tippy-placement="top">{{$trans('adminPage.add_assist')}}</a>
+                <div class="row">
+                    <div class="col-xl-6 col-md-6">
+                        <a href="#small-dialog"  class="popup-with-zoom-anim button ripple-effect" data-tippy-placement="top">{{$trans('adminPage.add_assist')}}</a>
+                    </div>
+
+                    <div class="col-xl-6 col-md-6" style="display: flex; justify-content: flex-end">
+                        <input type="submit" class="button ripple-effect margin-top-0" :value="$trans('adminPage.update')">
+                    </div>
                 </div>
+                </form>
 
                 <!-- Create Assistant Popup -->
                 <div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs user-message-box-item">
@@ -139,6 +153,7 @@
                                                         {{ room.title }}
                                                     </option>
                                                 </select>
+
                                             </div>
                                         </div>
                                     </div>
@@ -178,11 +193,13 @@
                 },
                 loadData:{
                     assistantList:{},
+                    assistantRooms:{},
                 },
                 values:{
                     facultyCodes:[],
                     programCodes:[],
                     rooms:[],
+                    studentRoomAssistant:{},
                 },
                 pagination: {}
             }
@@ -200,8 +217,13 @@
 
                 this.$http.post(page_url)
                     .then(response => {
-                        this.loadData.assistantList = response.data.data;
-                        this.makePagination(response.data.data);
+                        this.loadData.assistantList = response.data.data.assistants;
+                        this.loadData.assistantRooms = response.data.data.rooms;
+                        this.makePagination(response.data.data.assistants);
+
+                        this.loadData.assistantList.data.forEach(el =>{
+                            el.room.old_room_id = el.room.room_id;
+                        });
                     });
             },
 
@@ -246,6 +268,31 @@
                         console.log(response);
                     });
             },
+
+            changeRoom(e){
+                if(e.target.dataset.applicant in this.values.studentRoomAssistant){
+                    this.values.studentRoomAssistant[e.target.dataset.applicant].room_id = e.target.value;
+                }
+                else {
+                    this.values.studentRoomAssistant[e.target.dataset.applicant] = {
+                        'applicant_id': e.target.dataset.applicant,
+                        'room_id': e.target.value,
+                        'old_room_id': e.target.dataset.oldroom
+                    }
+                }
+            },
+
+            updateRoom(){
+                Object.keys(this.values.studentRoomAssistant).forEach(key => {
+                    this.$http.put('api/director/student-assistant/update-room', {
+                        applicant_id: this.values.studentRoomAssistant[key].applicant_id,
+                        room_id: this.values.studentRoomAssistant[key].room_id,
+                        old_room_id: this.values.studentRoomAssistant[key].old_room_id,
+                    }).then(response =>{
+                        console.log(response);
+                    });
+                });
+            }
         }
     }
 </script>

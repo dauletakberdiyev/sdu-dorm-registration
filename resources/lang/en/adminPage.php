@@ -19,12 +19,19 @@ return [
     'view_details' => 'View Details',
     'profile' => 'My Profile',
     'logout' => 'Logout',
+    'assistant' => 'Assistant',
+    'room' => 'Room',
 
     'abiwkas' => 'Student Assistants',
     'add_assistant' => 'Add Student Assistant',
     'room' => 'Room',
     'add_assist' => 'Add Assistant',
     'update' => 'Update',
+    'delete' => 'Delete',
+    'pay' => 'Pay',
+
+    'search' => 'Search',
+    'searchStudent' => 'Search Student',
 
     'katchi' => 'Floor Assistants',
 

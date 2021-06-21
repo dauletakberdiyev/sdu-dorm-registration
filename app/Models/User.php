@@ -62,8 +62,8 @@ class User extends Authenticatable
             ->select('title_en');
     }
 
-    public function studentList(){
-        return DB::table($this->table.' as dr')
+    public function studentList($params){
+        $studentList = DB::table($this->table.' as dr')
             ->leftJoin('dorm_register_info as dri', 'dri.applicant_id', '=', 'dr.applicant_id')
             ->leftJoin('dorm_residents as dre', 'dre.applicant_id', '=', 'dr.applicant_id')
             ->leftJoin('rooms as rm', 'rm.id', '=', 'dre.room_id')
@@ -73,16 +73,100 @@ class User extends Authenticatable
                 'dr.applicant_email as email',
                 'dri.first_name',
                 'dri.last_name',
-                'dri.city',
                 'ft.title_en as faculty',
                 'pt.title_en as speciality',
                 'dri.school',
                 'dri.course',
                 'dri.self_number',
+                'dri.assistant_id',
                 'dre.room_id')
             ->where('dre.is_active', '1')
-            ->where('dr.status', '=', 'a')
-            ->paginate(10);
+            ->where('dr.status', '=', 'a');
+
+        if($params['search_value'] !== null){
+//            $studentList = $studentList->where(DB::raw("(dri.last_name LIKE '".$params['search_value']."%' or dri.first_name LIKE '".$params['search_value']."%')"));
+//            $studentList = $studentList->where('dri.first_name', 'like', $params['search_value'].'%')
+//                            ->orWhere('dri.last_name', 'like', $params['search_value'].'%');
+            $studentList = $studentList->where(function($query) use($params){
+                $query->where('dri.first_name', 'like', $params['search_value'].'%')
+                    ->orWhere('dri.last_name', 'like', $params['search_value'].'%');
+            });
+        }
+
+        if($params['sortBy'] === 'id'){
+            if ($params['desc']){
+                $studentList = $studentList->orderByDesc('dri.applicant_id');
+            }
+            else{
+                $studentList = $studentList->orderBy('dri.applicant_id');
+            }
+        }
+        if($params['sortBy'] === 'name'){
+            if ($params['desc']) {
+                $studentList = $studentList->orderByDesc('dri.first_name');
+            }
+            else{
+                $studentList = $studentList->orderBy('dri.first_name');
+            }
+        }
+        if($params['sortBy'] === 'surname'){
+            if ($params['desc']) {
+                $studentList = $studentList->orderByDesc('dri.last_name');
+            }
+            else{
+                $studentList = $studentList->orderBy('dri.last_name');
+            }
+        }
+        if($params['sortBy'] === 'faculty'){
+            if ($params['desc']) {
+                $studentList = $studentList->orderByDesc('ft.title_en');
+            }
+            else{
+                $studentList = $studentList->orderBy('ft.title_en');
+            }
+        }
+        if($params['sortBy'] === 'speciality'){
+            if ($params['desc']) {
+                $studentList = $studentList->orderByDesc('pt.title_en');
+            }
+            else{
+                $studentList = $studentList->orderBy('pt.title_en');
+            }
+        }
+        if($params['sortBy'] === 'school'){
+            if ($params['desc']) {
+                $studentList = $studentList->orderByDesc('dri.school');
+            }
+            else{
+                $studentList = $studentList->orderBy('dri.school');
+            }
+        }
+        if($params['sortBy'] === 'course'){
+            if ($params['desc']) {
+                $studentList = $studentList->orderByDesc('dri.course');
+            }
+            else{
+                $studentList = $studentList->orderBy('dri.course');
+            }
+        }
+        if($params['sortBy'] === 'assistant'){
+            if ($params['desc']) {
+                $studentList = $studentList->orderByDesc('dri.assistant_id');
+            }
+            else{
+                $studentList = $studentList->orderBy('dri.assistant_id');
+            }
+        }
+        if($params['sortBy'] === 'room'){
+            if ($params['desc']) {
+                $studentList = $studentList->orderByDesc('dre.room_id');
+            }
+            else{
+                $studentList = $studentList->orderBy('dre.room_id');
+            }
+        }
+
+        return $studentList->paginate(5);
     }
 
     public function info(){

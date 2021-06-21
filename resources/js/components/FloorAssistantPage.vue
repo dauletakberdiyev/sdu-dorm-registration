@@ -1,5 +1,4 @@
 <template>
-
         <!-- Dashboard Content -->
         <div class="utf-dashboard-content-container-aera" data-simplebar>
             <div id="dashboard-titlebar" class="utf-dashboard-headline-item">
@@ -20,7 +19,7 @@
                                     <tr>
                                         <th>{{$trans('adminPage.name')}}</th>
                                         <th>{{$trans('adminPage.surname')}}</th>
-                                        <th>{{$trans('adminPage.email')}}</th>
+<!--                                        <th>{{$trans('adminPage.email')}}</th>-->
                                         <th>{{$trans('adminPage.course')}}</th>
                                         <th>{{$trans('adminPage.speciality')}}</th>
                                         <th>{{$trans('adminPage.phone_number')}}</th>
@@ -32,12 +31,12 @@
                                     <tr v-for="assistant in loadData.assistantList.data">
                                         <td>{{assistant.assistant_info.first_name}}</td>
                                         <td>{{assistant.assistant_info.last_name}}</td>
-                                        <td>{{assistant.applicant_email}}</td>
+<!--                                        <td>{{assistant.applicant_email}}</td>-->
                                         <td>{{assistant.assistant_info.course}}</td>
                                         <td>{{assistant.speciality.title_en}}</td>
                                         <td>{{assistant.assistant_info.self_number}}</td>
                                         <td>{{assistant.room.room_id}}</td>
-                                        <td><button @click="goTo('relateAssistant', {roomId: assistant.room.room_id, assistId: assistant.applicant_id})" class="button ripple-effect margin-top-5 margin-bottom-10">{{$trans('adminPage.update')}}</button></td>
+                                        <td><button @click="goTo('relateAssistant', {roomId: assistant.room.room_id, assistId: assistant.applicant_id})" class="button ripple-effect margin-top-5 margin-bottom-10">{{$trans('adminPage.delete')}}</button></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -142,7 +141,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <input class="button ripple-effect" type="submit" form="create-assistant" value="Send Message">
+                                    <input class="button ripple-effect" type="submit" form="create-assistant" value="Create Assistant">
                                 </form>
                             </div>
                         </div>
@@ -204,8 +203,8 @@
 
                 this.$http.post(page_url)
                     .then(response => {
-                        this.loadData.assistantList = response.data.data;
-                        this.makePagination(response.data.data);
+                        this.loadData.assistantList = response.data.data.assistants;
+                        this.makePagination(response.data.data.assistants);
                     });
             },
 

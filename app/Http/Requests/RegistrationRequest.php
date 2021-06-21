@@ -39,12 +39,13 @@ class RegistrationRequest extends FormRequest
             'course' => 'required|integer',
             'school' => 'required',
             'address' => 'required',
-            'fatherName' => 'nullable|required',
-            'motherName' => 'nullable|required',
-            'fatherNumber' => 'nullable|string',
-            'motherNumber' => 'nullable|string',
-            'selfNumber' => 'nullable|string',
-            'passportPhoto' => 'required|image|mimes:jpeg,jpg,png'
+            'fatherName' => 'nullable',
+            'motherName' => 'nullable',
+            'fatherNumber' => 'nullable',
+            'motherNumber' => 'nullable',
+            'selfNumber' => 'nullable',
+            'passportPhoto' => 'required|image|mimes:jpeg,jpg,png',
+            'personalPhoto' => 'required|image|mimes:jpeg,jpg,png'
         ];
     }
 

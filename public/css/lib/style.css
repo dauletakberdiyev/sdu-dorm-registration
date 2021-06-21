@@ -18028,6 +18028,18 @@ a.apply-now-button:hover {
     color: red;
 }
 
+.search-student{
+    display: flex;
+}
+
+.search-student > input{
+    margin-right: 15px;
+}
+
+.search-student > input:last-child{
+    margin-right: 0;
+}
+
 @-webkit-keyframes key-big {
 50% {
 -webkit-transform:scale(.5)
