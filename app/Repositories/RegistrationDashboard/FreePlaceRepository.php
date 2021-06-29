@@ -9,9 +9,9 @@ use App\Models\Tables\FreePlaceModel;
 
 class FreePlaceRepository
 {
-    public function manage($request){
+    public function manage(){
         $placeModel = new FreePlaceModel();
-        $freePlace = $placeModel->getFreePlace($request);
+        $freePlace = $placeModel->getFreePlaceGeneral();
 
         return response()->json([
             'status' => ApiOutputStatus::SUCCESS,

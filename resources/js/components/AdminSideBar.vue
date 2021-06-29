@@ -9,10 +9,7 @@
                 <div class="utf-dashboard-nav">
                     <div class="utf-dashboard-nav-inner">
                         <div class="dashboard-profile-box">
-                            <span class="avatar-img">
-                                <img alt="" src="images/user-avatar-placeholder.png" class="photo">
-                            </span>
-                            <div class="user-profile-text">
+                            <div class="user-profile-text" style="margin-left: 24px;">
                                 <span class="fullname">{{loadData.userInfo.info.first_name}} {{loadData.userInfo.info.last_name}}</span>
                                 <span class="user-role">Software Engineer</span>
                             </div>
@@ -47,7 +44,7 @@
             title:'adminPage.katchi'
         },
         {
-            name:'profilePage',
+            name:'myProfile',
             icon:'icon-feather-user',
             title:'adminPage.profile'
         },

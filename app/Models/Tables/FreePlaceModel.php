@@ -19,4 +19,9 @@ class FreePlaceModel extends Model
             ->where('fp.building_id', $params['building_id'])
             ->first();
     }
+
+    public function getFreePlaceGeneral(){
+        return DB::table($this->table, 'fp')
+            ->get()->toArray();
+    }
 }

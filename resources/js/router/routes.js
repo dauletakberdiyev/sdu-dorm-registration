@@ -7,6 +7,7 @@ import RelateStudent from "../components/RelateStudent";
 import FloorAssistantPage from "../components/FloorAssistantPage";
 import SuccessPage from "../components/SuccessPage";
 import Agreement from "../components/Agreement";
+import MyProfile from "../components/MyProfile";
 
 export default [
     {
@@ -83,6 +84,11 @@ export default [
         meta: {
             noSideBar: true
         }
+    },
+    {
+        path: '/my-profile',
+        component: MyProfile,
+        name: 'myProfile',
     },
     {
         path:'*',

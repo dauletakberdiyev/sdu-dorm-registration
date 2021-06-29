@@ -14,8 +14,8 @@ class FreePlaceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(FreePlaceRequest $request, FreePlaceRepository $repository)
+    public function __invoke(FreePlaceRepository $repository)
     {
-        return $repository->manage($request);
+        return $repository->manage();
     }
 }

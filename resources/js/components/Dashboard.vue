@@ -18,6 +18,20 @@
         <div class="utf-dashboard-content-inner-aera">
             <div class="row">
 
+                <div class="col-xl-12 counter_inner_block margin-bottom-20">
+                    <div class="utf-counters-container-aera justify-content-center">
+                        <div class="col-xl-3" v-for="count in values.freePlaceCount">
+                            <div class="utf-single-counter">
+                                <div class="utf-counter-inner-item">
+                                    <h3><span class="counter">{{count.place_count}}</span></h3>
+                                    <span class="utf-counter-title" v-if="count.building_id === 0">Male</span>
+                                    <span v-else class="utf-counter-title" >Female</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-xl-12">
                     <div class="dashboard-box">
                         <div class="headline">
@@ -70,7 +84,7 @@
                                 <div class="col-xl-3 col-md-3 col-sm-3">
                                     <div class="utf-submit-field">
                                         <h5>{{$trans('registration.gender')}} <span>*</span></h5>
-                                        <select class="utf-with-border" :title="$trans('registration.gender')" v-model="request.gender" @change="getFreePlaceCount" required>
+                                        <select class="utf-with-border" :title="$trans('registration.gender')" v-model="request.gender" required>
                                             <option v-for="gender in values.genderTitle" :value="gender.id">
                                                 {{ gender.title }}
                                             </option>
@@ -80,7 +94,10 @@
 
                                 <div class="col-xl-3 col-md-3 col-sm-3" style="display: flex; align-items: flex-end">
                                     <div class="utf-submit-field">
-                                        <h5>{{$trans('registration.place_count')}} {{values.freePlaceCount}}</h5>
+                                        <h5>{{$trans('registration.place_count')}}
+                                            <span v-if="request.gender === 0">{{values.freePlaceCount[0].place_count}}</span>
+                                            <span v-else-if="request.gender === 1"> {{values.freePlaceCount[1].place_count}}</span>
+                                        </h5>
                                     </div>
                                 </div>
 
@@ -249,7 +266,7 @@
                 </div>
 
                 <div class="col-xl-12" style="display: none" id="error-notification">
-                    <div class="notification error closeable"> 
+                    <div class="notification error closeable">
                         <p>{{$trans('registration.dont_laugh')}}</p>
                         <a class="close" href="#"></a>
                     </div>
@@ -306,7 +323,7 @@
                     genderTitle:[],
                     facultyCodes:[],
                     programCodes:[],
-                    freePlaceCount:0,
+                    freePlaceCount:[],
                 },
                 language:{
                     languageList : [
@@ -320,7 +337,8 @@
 
         mounted() {
             this.getGenderTitle(),
-            this.getFacultyTitle()
+            this.getFacultyTitle(),
+            this.getFreePlaceCount()
         },
 
         methods: {
@@ -366,11 +384,9 @@
             },
 
             getFreePlaceCount(){
-                this.$http.post('api/getFreePlaceCount',{
-                    building_id: this.request.gender
-                })
+                this.$http.post('api/getFreePlaceCount')
                     .then(response => {
-                        this.values.freePlaceCount = response.data.data.place_count;
+                        this.values.freePlaceCount = response.data.data;
                     });
             },
 

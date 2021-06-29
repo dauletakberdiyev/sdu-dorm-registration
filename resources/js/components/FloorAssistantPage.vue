@@ -36,7 +36,7 @@
                                         <td>{{assistant.speciality.title_en}}</td>
                                         <td>{{assistant.assistant_info.self_number}}</td>
                                         <td>{{assistant.room.room_id}}</td>
-                                        <td><button @click="goTo('relateAssistant', {roomId: assistant.room.room_id, assistId: assistant.applicant_id})" class="button ripple-effect margin-top-5 margin-bottom-10">{{$trans('adminPage.delete')}}</button></td>
+                                        <td><button @click="goTo('relateAssistant', {roomId: assistant.room.room_id, assistId: assistant.applicant_id})" class="button ripple-effect margin-top-5 margin-bottom-10">Connect</button></td>
                                     </tr>
                                     </tbody>
                                 </table>
