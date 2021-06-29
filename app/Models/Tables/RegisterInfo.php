@@ -45,9 +45,10 @@ class RegisterInfo extends Model
             ->select('applicant_id', 'is_active', 'deposit', 'deposit_status');
     }
 
-    public function relatedStudents($params){
-        return DB::table($this->table.' as dri')
+    public function relatedStudents($params, $isAssistant = 0){
+        $students = DB::table($this->table.' as dri')
             ->leftJoin('dorm_residents as dre', 'dre.applicant_id', '=', 'dri.applicant_id')
+            ->leftJoin('dorm_register as dr', 'dr.applicant_id', '=', 'dri.applicant_id')
             ->leftJoin('rooms as rm', 'rm.id', '=', 'dre.room_id')
             ->leftJoin('faculty_title as ft', 'ft.faculty_code', '=', 'dri.faculty_code')
             ->leftJoin('program_title as pt', 'pt.program_code', '=', 'dri.program_code')
@@ -60,8 +61,14 @@ class RegisterInfo extends Model
                 'dri.school',
                 'dre.room_id',
                 'dri.applicant_id',
-                'dri.assistant_id')
-            ->where('rm.related_room', $params['related_room'])
-            ->get()->toArray();
+                'dri.assistant_id');
+
+        if(!$isAssistant){
+            $students->where('dr.status', 'h');
+        }else{
+            $students->where('rm.related_room', $params['related_room']);
+        }
+
+            return $students->get()->toArray();
     }
 }

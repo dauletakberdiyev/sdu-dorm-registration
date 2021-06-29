@@ -29,6 +29,6 @@ class FloorAssistantController extends Controller
     }
 
     public function relatedAssistants(RelatedStudentRequest $request, RelatedStudentRepository $repository){
-        return $repository->manage($request);
+        return $repository->manage($request, 1);
     }
 }

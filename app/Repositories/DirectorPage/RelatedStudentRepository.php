@@ -8,9 +8,9 @@ use App\Models\Tables\RegisterInfo;
 
 class RelatedStudentRepository
 {
-    public function manage($credentials){
+    public function manage($credentials, $isAssistant = 0){
         $students = new RegisterInfo();
-        $students = $students->relatedStudents($credentials);
+        $students = $students->relatedStudents($credentials, $isAssistant);
 
         return response()->json([
             'status' => ApiOutputStatus::SUCCESS,
