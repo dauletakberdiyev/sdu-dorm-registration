@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'title' => 'Dorm registration',
+
     'general_info' => 'General Information',
     'email' => 'Email',
     'first_name' => 'First Name',
@@ -32,12 +34,24 @@ return [
     'mother_number' => 'Mother Number',
 
     'send' => 'Send',
+    'register' => 'Register',
 
-    'success_register_title' => 'Thanks for your registering',
-    'success_register_description' => 'You\'ll Receive a receipt to your email',
+    'male' => 'Male',
+    'female' => 'Female',
+
+    'success_register_title' => 'Thanks for your booking',
+    'success_register_description' => 'You\'ll receive a confirmation email to :email after successful payment',
     'read_agreement' => 'Read this agreement and check chekbox in the below',
     'agreement' => 'Agreement',
     'check_agree' => 'I have read and agree to the Agreement',
     'dont_laugh' => 'Don\'t make me laugh',
 
+    'payment' => 'Payment',
+
+    'kaspi_pay' => 'You can pay for dormitory with Kaspi.kz and Homebank apps',
+    'kaspi_info1' => 'Instruction about payment you can find',
+    'here' => 'here',
+    'kaspi_info4' => 'After payment, send a PDF version of the receipt to the following numbers via WhatsApp:',
+    'dorm_number_boy' => 'For Boys: +77007006185',
+    'dorm_number_girls' => 'For Girls: +77007006185',
 ];

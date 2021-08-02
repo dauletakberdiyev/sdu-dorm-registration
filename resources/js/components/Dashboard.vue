@@ -4,7 +4,10 @@
         <div id="dashboard-titlebar" class="utf-dashboard-headline-item">
             <div class="row">
                 <div class="col-xl-12">
-                    <h3>Manage Jobs Post</h3>
+                    <div class="utf-left-side">
+                        <img src="/images/sdulogo_white.png" alt="">
+                        <h3>{{$trans('registration.title')}}</h3>
+                    </div>
                     <nav id="breadcrumbs">
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle" style="margin-right: 10px;" v-for="lang in this.language.languageList" :value="lang.value" @click="changeLanguage">{{lang.title}}</button>
@@ -14,7 +17,7 @@
             </div>
         </div>
 
-        <form enctype="multipart/form-data" @submit.prevent="pay">
+        <form enctype="multipart/form-data" @submit.prevent="submit">
         <div class="utf-dashboard-content-inner-aera">
             <div class="row">
 
@@ -22,10 +25,10 @@
                     <div class="utf-counters-container-aera justify-content-center">
                         <div class="col-xl-3" v-for="count in values.freePlaceCount">
                             <div class="utf-single-counter">
-                                <div class="utf-counter-inner-item">
+                                <div class="utf-counter-inner-item" style="color: #000000">
                                     <h3><span class="counter">{{count.place_count}}</span></h3>
-                                    <span class="utf-counter-title" v-if="count.building_id === 0">Male</span>
-                                    <span v-else class="utf-counter-title" >Female</span>
+                                    <span class="utf-counter-title" v-if="count.building_id === 0">{{$trans('registration.male')}}</span>
+                                    <span v-else class="utf-counter-title" >{{$trans('registration.female')}}</span>
                                 </div>
                             </div>
                         </div>
@@ -250,13 +253,13 @@
                                 <div class="col-xl-6 col-md-6 col-sm-12">
                                     <div class="utf-submit-field">
                                         <div class="margin-bottom-10">
-                                            <span>{{$trans('registration.read_agreement')}}:</span>
+                                            <span style="color: #000">{{$trans('registration.read_agreement')}}:</span>
                                             <router-link :to="{name: 'agreement'}" style="color: blue" target="_blank">{{$trans('registration.agreement')}}</router-link>
                                         </div>
 
                                         <div class="checkbox">
                                             <input type="checkbox" id="agree-check" @click="agreementCheck">
-                                            <label for="agree-check"><span class="checkbox-icon"></span>{{$trans('registration.check_agree')}}</label>
+                                            <label for="agree-check" style="color: #000"><span class="checkbox-icon"></span>{{$trans('registration.check_agree')}}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -271,12 +274,36 @@
                         <a class="close" href="#"></a>
                     </div>
                 </div>
+
+                <div class="col-xl-12">
+                    <div class="dashboard-box">
+                        <div class="headline">
+                            <h3>{{$trans('registration.payment')}}</h3>
+                        </div>
+                        <div class="content with-padding">
+                            <div class="row">
+
+<!--                                <div class="col-xl-6 col-md-6 col-sm-12">-->
+<!--                                    <h3 class="margin-bottom-10">Here we go again</h3>-->
+<!--                                    <button type="submit" id="sendButton" class="button ripple-effect" :disabled="!this.request.agree">{{!admin ? $trans('adminPage.pay') : $trans('registration.register')}}</button>-->
+<!--                                </div>-->
+
+                                <div class="col-xl-6 col-md-6 col-sm-12">
+                                    <h3 class="margin-bottom-10">{{$trans('registration.kaspi_pay')}}</h3>
+                                    <h5>{{$trans('registration.kaspi_info1')}} <router-link :to="{name: 'instruction'}" style="color: blue" target="_blank">{{$trans('registration.here')}}</router-link></h5>
+                                    <h5>{{$trans('registration.kaspi_info4')}}</h5>
+                                    <h5>{{$trans('registration.dorm_number_boy')}}</h5>
+                                    <h5>{{$trans('registration.dorm_number_girls')}}</h5>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-
-
             <div class="utf-centered-button">
-                <button type="submit" id="sendButton" class="button ripple-effect margin-top-0"  :disabled="!this.request.agree">{{$trans('adminPage.pay')}}</button>
+                <button type="submit" id="sendButton" class="button margin-top-0"  style="background-color: #9E2629; font-weight: 400" :disabled="!this.request.agree">{{$trans('registration.register')}}</button>
             </div>
 
             <!-- Footer -->
@@ -291,9 +318,12 @@
 </template>
 <script>
     import {goTo} from '../mixins/GoTo';
+    import Axios from "axios";
     export default {
         mixins: [goTo],
-
+        props: {
+            admin: Boolean,
+        },
         data(){
             return{
                 request:{
@@ -356,7 +386,8 @@
                     formData.append(key, this.request[key])
                 }
                 this.$http.post('api/dashboard',formData).then(response=>{
-                    this.goTo('successPage',{email: this.request.email});
+                    (!this.admin) ? this.goTo('successPage',{email: this.request.email})
+                        : this.goTo('adminPage', {admin: true});
                 })
             },
 
@@ -392,6 +423,7 @@
 
             changeLanguage(e){
                 this.$lang.setLocale(e.target.value);
+                this.$http.defaults.headers.common['Content-Language'] = this.$lang.getLocale();
             },
 
             viewPdf(){
@@ -400,6 +432,15 @@
 
             agreementCheck(e){
                 this.request.agree = e.target.checked;
+            },
+
+            submit(){
+                this.register();
+                // if(this.admin){
+                //     this.register();
+                // }else{
+                //     this.pay();
+                // }
             },
 
             pay(){

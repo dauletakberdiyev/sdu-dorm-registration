@@ -9,6 +9,7 @@ use App\Models\Tables\FreePlaceModel;
 
 class FreePlaceRepository
 {
+
     public function manage(){
         $placeModel = new FreePlaceModel();
         $freePlace = $placeModel->getFreePlaceGeneral();

@@ -2230,6 +2230,10 @@ var links = [{
   icon: 'icon-feather-user',
   title: 'adminPage.profile'
 }, {
+  name: 'offlineRegistration',
+  icon: 'icon-material-outline-note-add',
+  title: 'adminPage.offRegistration'
+}, {
   name: 'logout',
   icon: 'icon-material-outline-power-settings-new',
   title: 'adminPage.logout'
@@ -2638,6 +2642,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _mixins_GoTo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../mixins/GoTo */ "./resources/js/mixins/GoTo.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2930,8 +2963,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mixins: [_mixins_GoTo__WEBPACK_IMPORTED_MODULE_0__.goTo],
+  props: {
+    admin: Boolean
+  },
   data: function data() {
     return {
       request: {
@@ -2997,8 +3034,10 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.$http.post('api/dashboard', formData).then(function (response) {
-        _this.goTo('successPage', {
+        !_this.admin ? _this.goTo('successPage', {
           email: _this.request.email
+        }) : _this.goTo('adminPage', {
+          admin: true
         });
       });
     },
@@ -3034,12 +3073,20 @@ __webpack_require__.r(__webpack_exports__);
     },
     changeLanguage: function changeLanguage(e) {
       this.$lang.setLocale(e.target.value);
+      this.$http.defaults.headers.common['Content-Language'] = this.$lang.getLocale();
     },
     viewPdf: function viewPdf() {
       window.open("~/public/agreement/agreement.pdf", "_blank");
     },
     agreementCheck: function agreementCheck(e) {
       this.request.agree = e.target.checked;
+    },
+    submit: function submit() {
+      this.register(); // if(this.admin){
+      //     this.register();
+      // }else{
+      //     this.pay();
+      // }
     },
     pay: function pay() {
       if (this.request.agree) {
@@ -3443,6 +3490,147 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
       });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/InstructionPage.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/InstructionPage.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "InstructionPage",
+  data: function data() {
+    return {
+      language: {
+        languageList: [{
+          title: 'EN',
+          value: 'en'
+        }, {
+          title: 'KZ',
+          value: 'kz'
+        }, {
+          title: 'RU',
+          value: 'ru'
+        }]
+      }
+    };
+  },
+  methods: {
+    changeLanguage: function changeLanguage(e) {
+      this.$lang.setLocale(e.target.value);
+      this.$http.defaults.headers.common['Content-Language'] = this.$lang.getLocale();
     }
   }
 });
@@ -3911,6 +4099,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_SuccessPage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/SuccessPage */ "./resources/js/components/SuccessPage.vue");
 /* harmony import */ var _components_Agreement__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Agreement */ "./resources/js/components/Agreement.vue");
 /* harmony import */ var _components_MyProfile__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/MyProfile */ "./resources/js/components/MyProfile.vue");
+/* harmony import */ var _components_InstructionPage__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/InstructionPage */ "./resources/js/components/InstructionPage.vue");
+
 
 
 
@@ -3988,9 +4178,21 @@ __webpack_require__.r(__webpack_exports__);
     noSideBar: true
   }
 }, {
+  path: '/dashboard/instruction',
+  component: _components_InstructionPage__WEBPACK_IMPORTED_MODULE_10__.default,
+  name: 'instruction',
+  meta: {
+    noSideBar: true
+  }
+}, {
   path: '/my-profile',
   component: _components_MyProfile__WEBPACK_IMPORTED_MODULE_9__.default,
   name: 'myProfile'
+}, {
+  path: '/offline-registration',
+  component: _components_Dashboard__WEBPACK_IMPORTED_MODULE_1__.default,
+  name: 'offlineRegistration',
+  props: true
 }, {
   path: '*',
   redirect: {
@@ -4023,6 +4225,7 @@ module.exports = {
     "katchi": "Floor Assistants",
     "logout": "Logout",
     "name": "Name",
+    "offRegistration": "Offline Registration",
     "pay": "Pay",
     "phone_number": "Phone Number",
     "profile": "My Profile",
@@ -4054,6 +4257,54 @@ module.exports = {
     "token_expired": "Token live time is expired!",
     "token_not_valid": "Token is not valid"
   },
+  "en.instruction": {
+    "booking_apply": "Only after confirmation of payment, an email will be sent to your email address specified during booking confirming a successful booking",
+    "booking_steps": "Sequence of booking",
+    "booking_system": "Online booking system",
+    "boys_number": "For Boys: :number",
+    "branches_details1": "TOO \u201CDorm-service\u201D 040900",
+    "branches_details2": "\u0410\u043B\u043C\u0430\u0442\u0438\u043D\u0441\u043A\u0430\u044F \u043E\u0431\u043B., \u0433.\u041A\u0430\u0441\u043A\u0435\u043B\u0435\u043D, \u0443\u043B. \u0410\u0431\u044B\u043B\u0430\u0439 \u0445\u0430\u043D\u0430, 1/1",
+    "branches_details3": "\u0411\u0418\u041D: 110440021346",
+    "branches_details4": "IBAN: KZ626017131000016522",
+    "branches_details5": "\u0411\u0418\u041A: KZKOKZKX",
+    "branches_details6": "\u041A\u0411\u0435 17",
+    "branches_details7": "\u0410\u041E \xAB\u041D\u0430\u0440\u043E\u0434\u043D\u044B\u0439 \u0411\u0430\u043D\u043A \u041A\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043D\xBB",
+    "branches_payment": "Payment through branches of any Bank of Kazakhstan using the following details:",
+    "day_of_booking": "The reservation is kept for 5 calendar days. The student is given 5 days to pay for the reservation. If the administration of the hostel does not receive payment within the agreed period, the reservation will be automatically canceled",
+    "fill_form": "Fill the form",
+    "girls_number": "For Girls: :number",
+    "homebank_details1": "1. Go to the \"Payments\" section",
+    "homebank_details2": "2. In the search write \"DORM\"",
+    "homebank_details3": "3. In results choose \"TOO Dorm Service \u0410\u043B\u043C\u0430\u0442\u0438\u043D\u0441\u043A\u0430\u044F \u043E\u0431\u043B\u0430\u0441\u0442\u044C\"",
+    "homebank_details4": "4. Here fill in all the data",
+    "homebank_details5": "5. Then press the button to pay",
+    "homebank_payment": "Payment through the HOMEBANK app",
+    "important": "Important!",
+    "kaspi_details1": "1. Go to the \"Payments\" section",
+    "kaspi_details2": "2. In the search write \"\u041E\u0411\u0429\u0415\u0416\u0418\u0422\u0418\u0415\"",
+    "kaspi_details3": "3. In results choose \"TOO \u041E\u0411\u0429\u0415\u0416\u0418\u0422\u0418\u0415 \u041F\u0420\u0418 \u0423\u041D\u0418\u0412\u0415\u0420\u0421\u0418\u0422\u0415\u0422\u0415 \u0418\u041C.\u0421\u0423\u041B\u0415\u0419\u041C\u0410\u041D\u0410 \u0414\u0415\u041C\u0418\u0420\u0415\u041B\u042F- \u041E\u041F\u041B\u0410\u0422\u0410 \u0417\u0410 \u041F\u0420\u041E\u0416\u0418\u0412\u0410\u041D\u0418\u0415 \u0418 \u0424\u0418\u0422\u041D\u0415\u0421\"",
+    "kaspi_details4": "4. Here fill in all the data",
+    "kaspi_details5": "5. Then press the button to pay",
+    "kaspi_payment": "Payment through the KASPI app",
+    "payment_methods": "Payment Methods",
+    "payment_way": "Make payment (see payment methods) according to the proposed and most convenient way for you",
+    "rebooking": "Dormitory reservations cannot be rebooked or canceled less than a week prior to check-in date",
+    "send_check": "Confirm the fact of payment by sending a check or receipt of payment to the following numbers via WhatsApp:",
+    "terminal_details1": "1. Go to the section \"Payments\"",
+    "terminal_details10": "10. Speciality",
+    "terminal_details11": "11. IIN",
+    "terminal_details12": "12. Pay Amount",
+    "terminal_details2": "2. Education",
+    "terminal_details3": "3. Universities, Colleges",
+    "terminal_details4": "4. TOO Dorm Service",
+    "terminal_details5": "5. Name, Surname of student",
+    "terminal_details6": "6. Course",
+    "terminal_details7": "7. Type of Study",
+    "terminal_details8": "8. Group",
+    "terminal_details9": "9. Faculty",
+    "terminal_payment": "Payment through the terminals of Halyk Bank",
+    "title": "Instruction"
+  },
   "en.pagination": {
     "next": "Next &raquo;",
     "previous": "&laquo; Previous"
@@ -4073,29 +4324,40 @@ module.exports = {
     "city": "City",
     "course": "Course",
     "dont_laugh": "Don't make me laugh",
+    "dorm_number_boy": "For Boys: +77007006185",
+    "dorm_number_girls": "For Girls: +77007006185",
     "email": "Email",
     "faculty": "Faculty",
     "father": "Father",
     "father_name": "Father name, surname",
     "father_number": "Father Number",
+    "female": "Female",
     "first_name": "First Name",
     "gender": "Gender",
     "general_info": "General Information",
+    "here": "here",
     "iin": "IIN",
+    "kaspi_info1": "Instruction about payment you can find",
+    "kaspi_info4": "After payment, send a PDF version of the receipt to the following numbers via WhatsApp:",
+    "kaspi_pay": "You can pay for dormitory with Kaspi.kz and Homebank apps",
     "last_name": "Last Name",
+    "male": "Male",
     "mother_name": "Mother name, surname",
     "mother_number": "Mother Number",
     "name_surname": "Name Surname",
     "parent_info": "Parent Information",
+    "payment": "Payment",
     "personal_info": "Personal Information",
     "phone_number": "Phone Number",
     "place_count": "Count of free places:",
     "read_agreement": "Read this agreement and check chekbox in the below",
+    "register": "Register",
     "school": "School",
     "send": "Send",
     "speciality": "Speciality",
-    "success_register_description": "You'll Receive a receipt to your email",
-    "success_register_title": "Thanks for your registering",
+    "success_register_description": "You'll receive a confirmation email to :email after successful payment",
+    "success_register_title": "Thanks for your booking",
+    "title": "Dorm registration",
     "upload_pass": "Upload Passport",
     "upload_passport": "Upload Passport (jpeg, jpg, png) File",
     "upload_photo": "Upload Photo",
@@ -4230,6 +4492,38 @@ module.exports = {
     "url": "The :attribute format is invalid.",
     "uuid": "The :attribute must be a valid UUID."
   },
+  "kz.adminPage": {
+    "abiwkas": "Student Assistants",
+    "add_assist": "Add Assistant",
+    "add_assistant": "Add Student Assistant",
+    "add_info": "Additional Information",
+    "assistant": "Assistant",
+    "city": "City",
+    "course": "Course",
+    "delete": "Delete",
+    "email": "E-Mail",
+    "faculty": "Faculty",
+    "gender": "Gender",
+    "iin": "IIN",
+    "katchi": "Floor Assistants",
+    "logout": "Logout",
+    "name": "Name",
+    "offRegistration": "Offline Registration",
+    "pay": "Pay",
+    "phone_number": "Phone Number",
+    "profile": "My Profile",
+    "room": "Room",
+    "school": "School",
+    "search": "Search",
+    "searchStudent": "Search Student",
+    "speciality": "Speciality",
+    "status": "Status",
+    "student_id": "Student ID",
+    "student_list": "List of Students",
+    "surname": "Surname",
+    "update": "Update",
+    "view_details": "View Details"
+  },
   "kz.auth": {
     "failed": "\u0411\u04B1\u043B \u043C\u04D9\u043B\u0456\u043C\u0435\u0442\u0442\u0435\u0440 \u0431\u0456\u0437\u0434\u0456\u04A3 \u0436\u0430\u0437\u0431\u0430\u043B\u0430\u0440\u044B\u043C\u044B\u0437\u0493\u0430 \u0441\u04D9\u0439\u043A\u0435\u0441 \u043A\u0435\u043B\u043C\u0435\u0439\u0434\u0456.",
     "password": "\u0411\u0435\u0440\u0456\u043B\u0433\u0435\u043D \u049B\u04B1\u043F\u0438\u044F \u0441\u04E9\u0437 \u0434\u04B1\u0440\u044B\u0441 \u0435\u043C\u0435\u0441.",
@@ -4245,6 +4539,54 @@ module.exports = {
     "signup_database_error": "\u0422\u0456\u0440\u043A\u0435\u043B\u0443\u0434\u0456 \u04E9\u04A3\u0434\u0435\u0443 \u043C\u04AF\u043C\u043A\u0456\u043D \u0435\u043C\u0435\u0441",
     "token_expired": "\u0422\u043E\u043A\u0435\u043D\u043D\u0456\u04A3 \u0442\u0456\u0440\u0456 \u0443\u0430\u049B\u044B\u0442\u044B \u0430\u044F\u049B\u0442\u0430\u043B\u0434\u044B!",
     "token_not_valid": "\u0422\u043E\u043A\u0435\u043D \u0436\u0430\u0440\u0430\u043C\u0441\u044B\u0437"
+  },
+  "kz.instruction": {
+    "booking_apply": "\u0422\u04E9\u043B\u0435\u043C \u0440\u0430\u0441\u0442\u0430\u043B\u0493\u0430\u043D\u043D\u0430\u043D \u043A\u0435\u0439\u0456\u043D \u0493\u0430\u043D\u0430 \u0431\u0440\u043E\u043D\u0434\u0430\u0443 \u043A\u0435\u0437\u0456\u043D\u0434\u0435 \u043A\u04E9\u0440\u0441\u0435\u0442\u0456\u043B\u0433\u0435\u043D \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u0434\u044B\u049B \u043F\u043E\u0448\u0442\u0430\u04A3\u044B\u0437\u0493\u0430 \u0441\u04D9\u0442\u0442\u0456 \u0431\u0440\u043E\u043D\u0434\u0430\u0443\u0434\u044B \u0440\u0430\u0441\u0442\u0430\u0439\u0442\u044B\u043D \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u0434\u044B\u049B \u0445\u0430\u0442 \u0436\u0456\u0431\u0435\u0440\u0456\u043B\u0435\u0434\u0456",
+    "booking_steps": "\u0411\u0440\u043E\u043D\u0434\u0430\u0443\u0434\u044B\u04A3 \u0440\u0435\u0442\u0442\u0456\u043B\u0456\u0433\u0456",
+    "booking_system": "\u041E\u043D\u043B\u0430\u0439\u043D \u0431\u0440\u043E\u043D\u0434\u0430\u0443 \u0436\u04AF\u0439\u0435\u0441\u0456",
+    "boys_number": "\u0415\u0440 \u0431\u0430\u043B\u0434\u0430\u0440\u0493\u0430: :number",
+    "branches_details1": "TOO \u201CDorm-service\u201D 040900",
+    "branches_details2": "\u0410\u043B\u043C\u0430\u0442\u0438\u043D\u0441\u043A\u0430\u044F \u043E\u0431\u043B., \u0433.\u041A\u0430\u0441\u043A\u0435\u043B\u0435\u043D, \u0443\u043B. \u0410\u0431\u044B\u043B\u0430\u0439 \u0445\u0430\u043D\u0430, 1/1",
+    "branches_details3": "\u0411\u0418\u041D: 110440021346",
+    "branches_details4": "IBAN: KZ626017131000016522",
+    "branches_details5": "\u0411\u0418\u041A: KZKOKZKX",
+    "branches_details6": "\u041A\u0411\u0435 17",
+    "branches_details7": "\u0410\u041E \xAB\u041D\u0430\u0440\u043E\u0434\u043D\u044B\u0439 \u0411\u0430\u043D\u043A \u041A\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043D\xBB",
+    "branches_payment": "\u041A\u0435\u043B\u0435\u0441\u0456 \u0434\u0435\u0440\u0435\u043A\u0442\u0435\u043C\u0435\u043B\u0435\u0440\u0434\u0456 \u043F\u0430\u0439\u0434\u0430\u043B\u0430\u043D\u0430 \u043E\u0442\u044B\u0440\u044B\u043F, \u043A\u0435\u0437 \u043A\u0435\u043B\u0433\u0435\u043D \u049A\u0430\u0437\u0430\u049B\u0441\u0442\u0430\u043D \u0431\u0430\u043D\u043A\u0456\u043D\u0456\u04A3 \u0444\u0438\u043B\u0438\u0430\u043B\u0434\u0430\u0440\u044B \u0430\u0440\u049B\u044B\u043B\u044B \u0442\u04E9\u043B\u0435\u043C:",
+    "day_of_booking": "\u0411\u0440\u043E\u043D\u0434\u0430\u0443 5 \u043A\u04AF\u043D\u0442\u0456\u0437\u0431\u0435\u043B\u0456\u043A \u043A\u04AF\u043D \u0456\u0448\u0456\u043D\u0434\u0435 \u0441\u0430\u049B\u0442\u0430\u043B\u0430\u0434\u044B. \u0411\u0440\u043E\u043D\u0434\u0430\u0443 \u0430\u049B\u044B\u0441\u044B\u043D \u0442\u04E9\u043B\u0435\u0443\u0433\u0435 \u0441\u0442\u0443\u0434\u0435\u043D\u0442\u043A\u0435 5 \u043A\u04AF\u043D \u0431\u0435\u0440\u0456\u043B\u0435\u0434\u0456. \u0415\u0433\u0435\u0440 \u0436\u0430\u0442\u0430\u049B\u0445\u0430\u043D\u0430 \u04D9\u043A\u0456\u043C\u0448\u0456\u043B\u0456\u0433\u0456 \u043A\u0435\u043B\u0456\u0441\u0456\u043B\u0433\u0435\u043D \u043C\u0435\u0440\u0437\u0456\u043C\u0434\u0435 \u0442\u04E9\u043B\u0435\u043C \u0430\u043B\u043C\u0430\u0441\u0430, \u0431\u0440\u043E\u043D\u0434\u0430\u0443 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0442\u044B \u0442\u04AF\u0440\u0434\u0435 \u0436\u043E\u0439\u044B\u043B\u0430\u0434\u044B",
+    "fill_form": "\u0424\u043E\u0440\u043C\u0430\u043D\u044B \u0442\u043E\u043B\u0442\u044B\u0440\u044B\u04A3\u044B\u0437",
+    "girls_number": "\u041A\u044B\u0437 \u0431\u0430\u043B\u0434\u0430\u0440\u0493\u0430: :number",
+    "homebank_details1": "1. \"\u0422\u04E9\u043B\u0435\u043C\u0434\u0435\u0440\" \u0431\u04E9\u043B\u0456\u043C\u0456\u043D\u0435 \u04E9\u0442\u0456\u04A3\u0456\u0437",
+    "homebank_details2": "2. \u0406\u0437\u0434\u0435\u0443 \u0436\u04AF\u0439\u0435\u0441\u0456\u043D\u0434\u0435 \u0436\u0430\u0437\u044B\u04A3\u044B\u0437 \"DORM\"",
+    "homebank_details3": "3. \u0421\u043E\u0434\u0430\u043D \u043A\u0435\u0439\u0456\u043D \u0431\u0430\u0441\u044B\u04A3\u044B\u0437 \"TOO Dorm Service \u0410\u043B\u043C\u0430\u0442\u0438\u043D\u0441\u043A\u0430\u044F \u043E\u0431\u043B\u0430\u0441\u0442\u044C\"",
+    "homebank_details4": "4. \u0424\u043E\u0440\u043C\u0430\u043D\u044B \u0442\u043E\u043B\u0442\u044B\u0440\u044B\u04A3\u044B\u0437",
+    "homebank_details5": "5. \u0422\u04E9\u043B\u0435\u0443 \u0442\u04AF\u0439\u043C\u0435\u0441\u0456\u043D \u0431\u0430\u0441\u044B\u04A3\u044B\u0437",
+    "homebank_payment": "HOMEBANK \u049A\u043E\u0441\u044B\u043C\u0448\u0430\u0441\u044B \u0430\u0440\u049B\u044B\u043B\u044B \u0442\u04E9\u043B\u0435\u0443",
+    "important": "\u041C\u0430\u04A3\u044B\u0437\u0434\u044B!",
+    "kaspi_details1": "1. \"\u0422\u04E9\u043B\u0435\u043C\u0434\u0435\u0440\" \u0431\u04E9\u043B\u0456\u043C\u0456\u043D\u0435 \u04E9\u0442\u0456\u04A3\u0456\u0437",
+    "kaspi_details2": "2. \u0406\u0437\u0434\u0435\u0443 \u0436\u04AF\u0439\u0435\u0441\u0456\u043D\u0434\u0435 \u0436\u0430\u0437\u044B\u04A3\u044B\u0437 \"\u041E\u0411\u0429\u0415\u0416\u0418\u0422\u0418\u0415\"",
+    "kaspi_details3": "3. \u0421\u043E\u0434\u0430\u043D \u043A\u0435\u0439\u0456\u043D \u0431\u0430\u0441\u044B\u04A3\u044B\u0437 \"TOO \u041E\u0411\u0429\u0415\u0416\u0418\u0422\u0418\u0415 \u041F\u0420\u0418 \u0423\u041D\u0418\u0412\u0415\u0420\u0421\u0418\u0422\u0415\u0422\u0415 \u0418\u041C.\u0421\u0423\u041B\u0415\u0419\u041C\u0410\u041D\u0410 \u0414\u0415\u041C\u0418\u0420\u0415\u041B\u042F- \u041E\u041F\u041B\u0410\u0422\u0410 \u0417\u0410 \u041F\u0420\u041E\u0416\u0418\u0412\u0410\u041D\u0418\u0415 \u0418 \u0424\u0418\u0422\u041D\u0415\u0421\"",
+    "kaspi_details4": "4. \u0424\u043E\u0440\u043C\u0430\u043D\u044B \u0442\u043E\u043B\u0442\u044B\u0440\u044B\u04A3\u044B\u0437",
+    "kaspi_details5": "5. \u0422\u04E9\u043B\u0435\u0443 \u0442\u04AF\u0439\u043C\u0435\u0441\u0456\u043D \u0431\u0430\u0441\u044B\u04A3\u044B\u0437",
+    "kaspi_payment": "KASPI.KZ \u049A\u043E\u0441\u044B\u043C\u0448\u0430\u0441\u044B \u0430\u0440\u049B\u044B\u043B\u044B \u0442\u04E9\u043B\u0435\u0443",
+    "payment_methods": "\u0422\u04E9\u043B\u0435\u043C \u04D9\u0434\u0456\u0441\u0442\u0435\u0440\u0456",
+    "payment_way": "\u0421\u0456\u0437\u0433\u0435 \u04B1\u0441\u044B\u043D\u044B\u043B\u0493\u0430\u043D \u0436\u04D9\u043D\u0435 \u044B\u04A3\u0493\u0430\u0439\u043B\u044B \u04D9\u0434\u0456\u0441 \u0431\u043E\u0439\u044B\u043D\u0448\u0430 \u0442\u04E9\u043B\u0435\u043C \u0436\u0430\u0441\u0430\u04A3\u044B\u0437 (\u0442\u04E9\u043B\u0435\u043C \u04D9\u0434\u0456\u0441\u0442\u0435\u0440\u0456\u043D \u049B\u0430\u0440\u0430\u04A3\u044B\u0437)",
+    "rebooking": "\u0416\u0430\u0442\u0430\u049B\u0445\u0430\u043D\u0430\u0434\u0430 \u043E\u0440\u044B\u043D \u0431\u0440\u043E\u043D\u0434\u0430\u0443\u0434\u044B \u0442\u0456\u0440\u043A\u0435\u0443 \u043A\u04AF\u043D\u0456\u043D\u0435 \u0431\u0456\u0440 \u0430\u043F\u0442\u0430\u0434\u0430\u043D \u043A\u0435\u043C \u0443\u0430\u049B\u044B\u0442 \u0431\u04B1\u0440\u044B\u043D \u049B\u0430\u0439\u0442\u0430 \u0431\u0440\u043E\u043D\u0434\u0430\u0443\u0493\u0430 \u043D\u0435\u043C\u0435\u0441\u0435 \u0436\u043E\u044E\u0493\u0430 \u0431\u043E\u043B\u043C\u0430\u0439\u0434\u044B",
+    "send_check": "WhatsApp \u0430\u0440\u049B\u044B\u043B\u044B \u043A\u0435\u043B\u0435\u0441\u0456 \u043D\u04E9\u043C\u0456\u0440\u043B\u0435\u0440\u0433\u0435 \u0447\u0435\u043A \u043D\u0435\u043C\u0435\u0441\u0435 \u0442\u04E9\u043B\u0435\u043C \u0442\u0443\u0440\u0430\u043B\u044B \u0442\u04AF\u0431\u0456\u0440\u0442\u0435\u043A\u0442\u0456 \u0436\u0456\u0431\u0435\u0440\u0443 \u0430\u0440\u049B\u044B\u043B\u044B \u0442\u04E9\u043B\u0435\u043C \u0444\u0430\u043A\u0442\u0456\u0441\u0456\u043D \u0440\u0430\u0441\u0442\u0430\u04A3\u044B\u0437:",
+    "terminal_details1": "1. \"\u0422\u04E9\u043B\u0435\u043C\u0434\u0435\u0440\" \u0431\u04E9\u043B\u0456\u043C\u0456\u043D\u0435 \u04E9\u0442\u0456\u04A3\u0456\u0437",
+    "terminal_details10": "10. \u041C\u0430\u043C\u0430\u043D\u0434\u044B\u049B",
+    "terminal_details11": "11. \u0416\u0421\u041D",
+    "terminal_details12": "12. \u0422\u04E9\u043B\u0435\u043C \u0441\u043E\u043C\u0430\u0441\u044B\u043D \u0435\u043D\u0433\u0456\u0437\u0456\u04A3\u0456\u0437",
+    "terminal_details2": "2. \u0411\u0456\u043B\u0456\u043C",
+    "terminal_details3": "3. \u0423\u043D\u0438\u0432\u0435\u0440\u0441\u0438\u0442\u0435\u0442\u0442\u0435\u0440, \u043A\u043E\u043B\u043B\u0435\u0434\u0436\u0434\u0435\u0440",
+    "terminal_details4": "4. TOO Dorm Service",
+    "terminal_details5": "5. \u041E\u049B\u0443\u0448\u044B\u043D\u044B\u04A3 \u0442\u043E\u043B\u044B\u049B \u0430\u0442\u044B -\u0436\u04E9\u043D\u0456 (\u0436\u0435\u043A\u0435 \u043A\u0443\u04D9\u043B\u0456\u0433\u0456\u043D\u0434\u0435 \u043A\u04E9\u0440\u0441\u0435\u0442\u0456\u043B\u0433\u0435\u043D\u0434\u0435\u0439)",
+    "terminal_details6": "6. \u041A\u0443\u0440\u0441",
+    "terminal_details7": "7. \u041E\u049B\u0443 \u0444\u043E\u0440\u043C\u0430\u0441\u044B",
+    "terminal_details8": "8. \u0413\u0440\u0443\u043F\u043F\u0430",
+    "terminal_details9": "9. \u0424\u0430\u043A\u0443\u043B\u044C\u0442\u0435\u0442",
+    "terminal_payment": "\u0425\u0430\u043B\u044B\u049B \u0431\u0430\u043D\u043A\u0456\u043D\u0456\u04A3 \u0442\u0435\u0440\u043C\u0438\u043D\u0430\u043B\u0434\u0430\u0440\u044B \u0430\u0440\u049B\u044B\u043B\u044B \u0442\u04E9\u043B\u0435\u043C",
+    "title": "\u041D\u04B1\u0441\u049B\u0430\u0443\u043B\u0430\u0440"
   },
   "kz.pagination": {
     "next": "\u041A\u0435\u043B\u0435\u0441\u0456 &raquo;",
@@ -4265,29 +4607,40 @@ module.exports = {
     "city": "\u049A\u0430\u043B\u0430\u0441\u044B",
     "course": "\u041A\u0443\u0440\u0441",
     "dont_laugh": "\u041C\u0435\u043D\u0456 \u043A\u04AF\u043B\u0434\u0456\u0440\u0442\u043F\u0435\u0448\u0456",
+    "dorm_number_boy": "\u0415\u0440 \u0431\u0430\u043B\u0434\u0430\u0440\u0493\u0430: +7 700 700 6185 ",
+    "dorm_number_girls": "\u049A\u044B\u0437 \u0431\u0430\u043B\u0434\u0430\u0440\u0493\u0430: +7 700 700 6185",
     "email": "\u042D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u0434\u044B\u049B \u043F\u043E\u0448\u0442\u0430",
     "faculty": "\u0424\u0430\u043A\u0443\u043B\u044C\u0442\u0435\u0442",
     "father": "\u04D8\u043A\u0435\u0441\u0456",
     "father_name": "\u04D8\u043A\u0435\u0441\u0456\u043D\u0456\u04A3 \u0430\u0442\u044B, \u0442\u0435\u0433\u0456",
     "father_number": "\u04D8\u043A\u0435\u0441\u0456\u043D\u0456\u04A3 \u043D\u04E9\u043C\u0456\u0440\u0456",
+    "female": "\u049A\u044B\u0437",
     "first_name": "\u0410\u0442\u044B",
     "gender": "\u0416\u044B\u043D\u044B\u0441\u044B",
     "general_info": "\u041D\u0435\u0433\u0456\u0437\u0433\u0456 \u0430\u049B\u043F\u0430\u0440\u0430\u0442",
+    "here": "\u041D\u04B1\u0441\u049B\u0430\u0443\u043B\u044B\u049B",
     "iin": "\u0416\u0421\u041D",
+    "kaspi_info1": "\u0422\u04E9\u043B\u0435\u043C \u0442\u0443\u0440\u0430\u043B\u044B \u043D\u04B1\u0441\u049B\u0430\u0443\u043B\u044B\u049B:",
+    "kaspi_info4": "\u0422\u04E9\u043B\u0435\u043C \u0436\u0430\u0441\u0430\u0493\u0430\u043D\u043D\u0430\u043D \u043A\u0435\u0439\u0456\u043D \u0442\u04AF\u0431\u0456\u0440\u0442\u0435\u043A\u0442\u0456\u04A3 PDF \u043D\u04B1\u0441\u049B\u0430\u0441\u044B\u043D \u043A\u0435\u043B\u0435\u0441\u0456 \u043D\u043E\u043C\u0435\u0440\u043B\u0435\u0440\u0433\u0435 WhatsApp \u0430\u0440\u049B\u044B\u043B\u044B \u0436\u0456\u0431\u0435\u0440\u0456\u04A3\u0456\u0437:",
+    "kaspi_pay": "\u0416\u0430\u0442\u0430\u049B\u0445\u0430\u043D\u0430 \u0430\u049B\u044B\u0441\u044B\u043D Kaspi.kz \u043D\u0435\u043C\u0435\u0441\u0435 Homebank \u0430\u0440\u049B\u044B\u043B\u044B \u0442\u04E9\u043B\u0435\u0439 \u0430\u043B\u0430\u0441\u044B\u0437",
     "last_name": "\u0422\u0435\u0433\u0456",
+    "male": "\u0415\u0440",
     "mother_name": "\u0410\u043D\u0430\u0441\u044B\u043D\u044B\u04A3 \u0430\u0442\u044B, \u0442\u0435\u0433\u0456",
     "mother_number": "\u0410\u043D\u0430\u0441\u044B\u043D\u044B\u04A3 \u043D\u04E9\u043C\u0456\u0440\u0456",
     "name_surname": "\u0410\u0442\u044B \u0442\u0435\u0433\u0456",
     "parent_info": "\u0410\u0442\u0430-\u0430\u043D\u0430 \u0442\u0443\u0440\u0430\u043B\u044B \u0430\u049B\u043F\u0430\u0440\u0430\u0442",
+    "payment": "\u0422\u04E9\u043B\u0435\u043C",
     "personal_info": "\u0416\u0435\u043A\u0435 \u0430\u049B\u043F\u0430\u0440\u0430\u0442",
     "phone_number": "\u0422\u0435\u043B\u0435\u0444\u043E\u043D \u043D\u04E9\u043C\u0456\u0440\u0456",
     "place_count": "\u0411\u043E\u0441 \u043E\u0440\u044B\u043D\u0434\u0430\u0440 \u0441\u0430\u043D\u044B:",
     "read_agreement": "\u041E\u0441\u044B \u043A\u0435\u043B\u0456\u0441\u0456\u043C\u0448\u0430\u0440\u0442\u0442\u044B \u043E\u049B\u044B\u043F, \u0442\u04E9\u043C\u0435\u043D\u0434\u0435\u0433\u0456 \u0447\u0435\u043A\u0431\u043E\u043A\u0441\u0442\u044B \u0431\u0430\u0441\u044B\u04A3\u044B\u0437",
+    "register": "\u0422\u0456\u0440\u043A\u0435\u0443",
     "school": "\u041C\u0435\u043A\u0442\u0435\u043F",
     "send": "\u0416\u0456\u0431\u0435\u0440\u0443",
     "speciality": "\u041C\u0430\u043C\u0430\u043D\u0434\u044B\u0493\u044B",
-    "success_register_description": "\u0421\u0456\u0437 \u04E9\u0437\u0456\u04A3\u0456\u0437\u0434\u0456\u04A3 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u0434\u044B\u049B \u043F\u043E\u0448\u0442\u0430\u04A3\u044B\u0437\u0493\u0430 \u0442\u04AF\u0431\u0456\u0440\u0442\u0435\u043A \u0430\u043B\u0430\u0441\u044B\u0437",
+    "success_register_description": "C\u04D9\u0442\u0442\u0456 \u0442\u04E9\u043B\u0435\u043C\u043D\u0435\u043D \u043A\u0435\u0439\u0456\u043D \u0441\u0456\u0437 \u04E9\u0437\u0456\u04A3\u0456\u0437\u0434\u0456\u04A3 \u043F\u043E\u0442\u0430\u04A3\u044B\u0437\u0493\u0430 (:email) \u0441\u04D9\u0442\u0442\u0456 \u0442\u0456\u0440\u043A\u0435\u043B\u0433\u0435\u043D\u0456\u04A3\u0456\u0437 \u0442\u0443\u0440\u0430\u043B\u044B \u0445\u0430\u0442 \u043A\u0435\u043B\u0435\u0434\u0456",
     "success_register_title": "\u0422\u0456\u0440\u043A\u0435\u043B\u0433\u0435\u043D\u0456\u04A3\u0456\u0437 \u04AF\u0448\u0456\u043D \u0440\u0430\u049B\u043C\u0435\u0442",
+    "title": "\u0416\u0430\u0442\u0430\u049B\u0445\u0430\u043D\u0430\u0493\u0430 \u0442\u0456\u0440\u043A\u0435\u043B\u0443",
     "upload_pass": "\u041F\u0430\u0441\u043F\u043E\u0440\u0442\u0442\u044B \u0436\u04AF\u043A\u0442\u0435\u0443",
     "upload_passport": "\u041F\u0430\u0441\u043F\u043E\u0440\u0442\u0442\u044B \u0436\u04AF\u043A\u0442\u0435\u0443 (jpeg, jpg, png)",
     "upload_photo": "\u0421\u0443\u0440\u0435\u0442\u0442\u0456 \u0436\u04AF\u043A\u0442\u0435\u0443",
@@ -4308,6 +4661,133 @@ module.exports = {
     "password_forgot_text": "\u0411\u0456\u0437 \u0441\u0456\u0437\u0433\u0435 \u0435\u0441\u043A\u0456 \u049B\u04B1\u043F\u0438\u044F \u0441\u04E9\u0437\u0434\u0456 \u0436\u0456\u0431\u0435\u0440\u0435 \u0430\u043B\u043C\u0430\u0439\u043C\u044B\u0437. \u0421\u0456\u0437 \u04AF\u0448\u0456\u043D \u049B\u04B1\u043F\u0438\u044F \u0441\u04E9\u0437\u0434\u0456 \u049B\u0430\u043B\u043F\u044B\u043D\u0430 \u043A\u0435\u043B\u0442\u0456\u0440\u0443 \u04AF\u0448\u0456\u043D \u0431\u0456\u0440\u0435\u0433\u0435\u0439 \u0441\u0456\u043B\u0442\u0435\u043C\u0435 \u0436\u0430\u0441\u0430\u043B\u0434\u044B. \u049A\u04B1\u043F\u0438\u044F \u0441\u04E9\u0437\u0434\u0456 \u049B\u0430\u043B\u043F\u044B\u043D\u0430 \u043A\u0435\u043B\u0442\u0456\u0440\u0443 \u04AF\u0448\u0456\u043D \u043A\u0435\u043B\u0435\u0441\u0456 \u0441\u0456\u043B\u0442\u0435\u043C\u0435\u0433\u0435 \u04E9\u0442\u0456\u043F, \u043D\u04B1\u0441\u049B\u0430\u0443\u043B\u0430\u0440\u0434\u044B \u043E\u0440\u044B\u043D\u0434\u0430\u04A3\u044B\u0437.",
     "reset_button_text": "\u049A\u04B1\u043F\u0438\u044F \u0441\u04E9\u0437\u0434\u0456 \u049B\u0430\u043B\u043F\u044B\u043D\u0430 \u043A\u0435\u043B\u0442\u0456\u0440\u0443",
     "reset_welcome_text": "\u0421\u0456\u0437 \u049B\u04B1\u043F\u0438\u044F \u0441\u04E9\u0437\u0434\u0456 \u049B\u0430\u043B\u043F\u044B\u043D\u0430 \u043A\u0435\u043B\u0442\u0456\u0440\u0443\u0434\u0456 \u0441\u04B1\u0440\u0430\u0434\u044B\u04A3\u044B\u0437"
+  },
+  "ru.adminPage": {
+    "abiwkas": "Student Assistants",
+    "add_assist": "Add Assistant",
+    "add_assistant": "Add Student Assistant",
+    "add_info": "Additional Information",
+    "assistant": "Assistant",
+    "city": "City",
+    "course": "Course",
+    "delete": "Delete",
+    "email": "E-Mail",
+    "faculty": "Faculty",
+    "gender": "Gender",
+    "iin": "IIN",
+    "katchi": "Floor Assistants",
+    "logout": "Logout",
+    "name": "Name",
+    "offRegistration": "Offline Registration",
+    "pay": "Pay",
+    "phone_number": "Phone Number",
+    "profile": "My Profile",
+    "room": "Room",
+    "school": "School",
+    "search": "Search",
+    "searchStudent": "Search Student",
+    "speciality": "Speciality",
+    "status": "Status",
+    "student_id": "Student ID",
+    "student_list": "List of Students",
+    "surname": "Surname",
+    "update": "Update",
+    "view_details": "View Details"
+  },
+  "ru.instruction": {
+    "booking_apply": "\u0422\u043E\u043B\u044C\u043A\u043E \u043F\u043E\u0441\u043B\u0435 \u043F\u043E\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043D\u0438\u044F \u043E\u043F\u043B\u0430\u0442\u044B, \u043D\u0430 \u0432\u0430\u0448 \u0430\u0434\u0440\u0435\u0441 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u043E\u0439 \u043F\u043E\u0447\u0442\u044B, \u0443\u043A\u0430\u0437\u0430\u043D\u043D\u044B\u0439 \u043F\u0440\u0438 \u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0438, \u0431\u0443\u0434\u0435\u0442 \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u043F\u0438\u0441\u044C\u043C\u043E \u0441 \u043F\u043E\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043D\u0438\u0435\u043C \u0443\u0441\u043F\u0435\u0448\u043D\u043E\u0433\u043E \u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F",
+    "booking_steps": "\u041F\u043E\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C \u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F",
+    "booking_system": "\u041E\u043D\u043B\u0430\u0439\u043D \u0441\u0438\u0441\u0442\u0435\u043C\u0430 \u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F",
+    "boys_number": "\u0414\u043B\u044F \u043C\u0430\u043B\u044C\u0447\u0438\u043A\u043E\u0432: :number",
+    "branches_details1": "TOO \u201CDorm-service\u201D 040900",
+    "branches_details2": "\u0410\u043B\u043C\u0430\u0442\u0438\u043D\u0441\u043A\u0430\u044F \u043E\u0431\u043B., \u0433.\u041A\u0430\u0441\u043A\u0435\u043B\u0435\u043D, \u0443\u043B. \u0410\u0431\u044B\u043B\u0430\u0439 \u0445\u0430\u043D\u0430, 1/1",
+    "branches_details3": "\u0411\u0418\u041D: 110440021346",
+    "branches_details4": "IBAN: KZ626017131000016522",
+    "branches_details5": "\u0411\u0418\u041A: KZKOKZKX",
+    "branches_details6": "\u041A\u0411\u0435 17",
+    "branches_details7": "\u0410\u041E \xAB\u041D\u0430\u0440\u043E\u0434\u043D\u044B\u0439 \u0411\u0430\u043D\u043A \u041A\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043D\xBB",
+    "branches_payment": "\u041E\u043F\u043B\u0430\u0442\u0430 \u0447\u0435\u0440\u0435\u0437 \u043E\u0442\u0434\u0435\u043B\u0435\u043D\u0438\u044F \u043B\u044E\u0431\u043E\u0433\u043E \u0411\u0430\u043D\u043A\u0430 \u041A\u0430\u0437\u0430\u0445\u0441\u0442\u0430\u043D\u0430 \u043F\u043E \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u043C \u0440\u0435\u043A\u0432\u0438\u0437\u0438\u0442\u0430\u043C:",
+    "day_of_booking": "\u0411\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u044F\u0435\u0442\u0441\u044F \u0432 \u0442\u0435\u0447\u0435\u043D\u0438\u0435 5 \u043A\u0430\u043B\u0435\u043D\u0434\u0430\u0440\u043D\u044B\u0445 \u0434\u043D\u0435\u0439. \u0421\u0442\u0443\u0434\u0435\u043D\u0442\u0443 \u043E\u0442\u0432\u043E\u0434\u0438\u0442\u0441\u044F 5 \u0441\u0443\u0442\u043E\u043A \u0434\u043B\u044F \u0442\u043E\u0433\u043E, \u0447\u0442\u043E\u0431\u044B \u043E\u043F\u043B\u0430\u0442\u0438\u0442\u044C \u0431\u0440\u043E\u043D\u044C. \u0415\u0441\u043B\u0438 \u0430\u0434\u043C\u0438\u043D\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u044F \u043E\u0431\u0449\u0435\u0436\u0438\u0442\u0438\u0438 \u043D\u0435 \u043F\u043E\u043B\u0443\u0447\u0438\u0442 \u043F\u043B\u0430\u0442\u0435\u0436 \u0432 \u0442\u0435\u0447\u0435\u043D\u0438\u0435 \u043E\u0433\u043E\u0432\u043E\u0440\u0435\u043D\u043D\u043E\u0433\u043E \u0441\u0440\u043E\u043A\u0430, \u0431\u0440\u043E\u043D\u044C \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u0441\u043D\u0438\u043C\u0430\u0435\u0442\u0441\u044F",
+    "fill_form": "\u0417\u0430\u043F\u043E\u043B\u043D\u0438\u0442\u0435 \u0444\u043E\u0440\u043C\u0443",
+    "girls_number": "\u0414\u043B\u044F \u0434\u0435\u0432\u0443\u0448\u0435\u043A: :number",
+    "homebank_details1": "1. \u041F\u0435\u0440\u0435\u0439\u0434\u0438\u0442\u0435 \u0432 \u0440\u0430\u0437\u0434\u0435\u043B \"\u041F\u043B\u0430\u0442\u0435\u0436\u0438\"",
+    "homebank_details2": "2. \u0412 \u043F\u0438\u0441\u043A\u043E\u0432\u0438\u043A\u0435 \u043D\u0430\u043F\u0438\u0448\u0438\u0442\u0435 \"DORM\"",
+    "homebank_details3": "3. \u041F\u043E\u0441\u043B\u0435 \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u043D\u0430 \"TOO Dorm Service \u0410\u043B\u043C\u0430\u0442\u0438\u043D\u0441\u043A\u0430\u044F \u043E\u0431\u043B\u0430\u0441\u0442\u044C\"",
+    "homebank_details4": "4. \u0417\u0430\u043F\u043E\u043B\u043D\u0438\u0442\u0435 \u044D\u0442\u0443 \u0444\u043E\u0440\u043C\u0443",
+    "homebank_details5": "5. \u041D\u0430\u0436\u043C\u0438\u0442\u0435 \u043A\u043D\u043E\u043F\u043A\u0443 \u043E\u043F\u043B\u0430\u0442\u0438\u0442\u044C",
+    "homebank_payment": "\u041E\u043F\u043B\u0430\u0442\u0430 \u0447\u0435\u0440\u0435\u0437 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435 HOMEBANK",
+    "important": "\u0412\u0430\u0436\u043D\u043E!",
+    "kaspi_details1": "1. \u041F\u0435\u0440\u0435\u0439\u0434\u0438\u0442\u0435 \u0432 \u0440\u0430\u0437\u0434\u0435\u043B \"\u041F\u043B\u0430\u0442\u0435\u0436\u0438\"",
+    "kaspi_details2": "2. \u0412 \u043F\u043E\u0438\u0441\u043A\u043E\u0432\u0438\u043A\u0435 \u043D\u0430\u043F\u0438\u0448\u0438\u0442\u0435 \"\u041E\u0411\u0429\u0415\u0416\u0418\u0422\u0418\u0415\"",
+    "kaspi_details3": "3. \u041F\u043E\u0441\u043B\u0435 \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u043D\u0430 \"TOO \u041E\u0411\u0429\u0415\u0416\u0418\u0422\u0418\u0415 \u041F\u0420\u0418 \u0423\u041D\u0418\u0412\u0415\u0420\u0421\u0418\u0422\u0415\u0422\u0415 \u0418\u041C.\u0421\u0423\u041B\u0415\u0419\u041C\u0410\u041D\u0410 \u0414\u0415\u041C\u0418\u0420\u0415\u041B\u042F- \u041E\u041F\u041B\u0410\u0422\u0410 \u0417\u0410 \u041F\u0420\u041E\u0416\u0418\u0412\u0410\u041D\u0418\u0415 \u0418 \u0424\u0418\u0422\u041D\u0415\u0421\"",
+    "kaspi_details4": "4. \u0417\u0430\u043F\u043E\u043B\u043D\u0438\u0442\u0435 \u044D\u0442\u0443 \u0444\u043E\u0440\u043C\u0443",
+    "kaspi_details5": "5. \u041D\u0430\u0436\u043C\u0438\u0442\u0435 \u043A\u043D\u043E\u043F\u043A\u0443 \u043E\u043F\u043B\u0430\u0442\u0438\u0442\u044C",
+    "kaspi_payment": "\u041E\u043F\u043B\u0430\u0442\u0430 \u0447\u0435\u0440\u0435\u0437 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435 KASPI.KZ",
+    "payment_methods": "\u0421\u043F\u043E\u0441\u043E\u0431\u044B \u043E\u043F\u043B\u0430\u0442\u044B",
+    "payment_way": "\u041F\u0440\u043E\u0438\u0437\u0432\u0435\u0441\u0442\u0438 \u043E\u043F\u043B\u0430\u0442\u0443 (\u0441\u043C. \u0441\u043F\u043E\u0441\u043E\u0431\u044B \u043E\u043F\u043B\u0430\u0442\u044B) \u043F\u043E \u043F\u0440\u0435\u0434\u043B\u043E\u0436\u0435\u043D\u043D\u044B\u043C \u0438 \u043D\u0430\u0438\u0431\u043E\u043B\u0435\u0435 \u0443\u0434\u043E\u0431\u043D\u044B\u043C \u0434\u043B\u044F \u0432\u0430\u0441 \u0441\u043F\u043E\u0441\u043E\u0431\u043E\u043C",
+    "rebooking": "\u0411\u0440\u043E\u043D\u044C \u043C\u0435\u0441\u0442\u0430 \u0432 \u043E\u0431\u0449\u0435\u0436\u0438\u0442\u0438\u0438 \u043D\u0435\u043B\u044C\u0437\u044F \u043F\u0435\u0440\u0435\u0431\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0438\u043B\u0438 \u043E\u0442\u043C\u0435\u043D\u0438\u0442\u044C \u043C\u0435\u043D\u0435\u0435, \u0447\u0435\u043C \u0437\u0430 \u043D\u0435\u0434\u0435\u043B\u044E \u0434\u043E \u0434\u0430\u0442\u044B \u0432\u044A\u0435\u0437\u0434\u0430",
+    "send_check": "\u041F\u043E\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u044C \u0444\u0430\u043A\u0442 \u043E\u043F\u043B\u0430\u0442\u044B \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0432 \u0447\u0435\u043A \u0438\u043B\u0438 \u043A\u0432\u0438\u0442\u0430\u043D\u0446\u0438\u044E \u043E\u0431 \u043E\u043F\u043B\u0430\u0442\u0435 \u043D\u0430 \u043D\u0430 \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0435 \u043D\u043E\u043C\u0435\u0440\u0430 \u043F\u043E WhatsApp:",
+    "terminal_details1": "1. \u041F\u0435\u0440\u0435\u0439\u0434\u0438\u0442\u0435 \u0432 \"\u041E\u043F\u043B\u0430\u0442\u0430 \u0443\u0441\u043B\u0443\u0433\"",
+    "terminal_details10": "10. \u0421\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E\u0441\u0442\u044C",
+    "terminal_details11": "11. \u0418\u0418\u041D",
+    "terminal_details12": "12. \u0412\u043D\u0435\u0441\u0442\u0438 \u0441\u0443\u043C\u043C\u0443 \u043E\u043F\u043B\u0430\u0442\u044B",
+    "terminal_details2": "2. \u041E\u0431\u0440\u0430\u0437\u043E\u0432\u0430\u043D\u0438\u0435",
+    "terminal_details3": "3. \u0412\u0423\u0417\u042B, \u041A\u043E\u043B\u043B\u0435\u0434\u0436\u0438",
+    "terminal_details4": "4. TOO Dorm Service",
+    "terminal_details5": "5. \u0424\u0418\u041E \u0421\u0442\u0443\u0434\u0435\u043D\u0442\u0430 (\u0442\u043E\u0447\u043D\u043E \u0442\u0430\u043A \u0436\u0435 \u043A\u0430\u043A \u0432 \u0443\u0434\u043E\u0441\u0442\u043E\u0432\u0435\u0440\u0435\u043D\u0438\u0438 \u043B\u0438\u0447\u043D\u043E\u0441\u0442\u0438)",
+    "terminal_details6": "6. \u041A\u0443\u0440\u0441",
+    "terminal_details7": "7. \u0424\u043E\u0440\u043C\u0430 \u043E\u0431\u0443\u0447\u0435\u043D\u0438\u044F",
+    "terminal_details8": "8. \u0413\u0440\u0443\u043F\u043F\u0430",
+    "terminal_details9": "9. \u0424\u0430\u043A\u0443\u043B\u044C\u0442\u0435\u0442",
+    "terminal_payment": "\u041E\u043F\u043B\u0430\u0442\u0430 \u0447\u0435\u0440\u0435\u0437 \u0442\u0435\u0440\u043C\u0438\u043D\u0430\u043B\u044B \u041D\u0430\u0440\u043E\u0434\u043D\u043E\u0433\u043E \u0411\u0430\u043D\u043A\u0430",
+    "title": "\u0418\u043D\u0441\u0442\u0440\u0443\u043A\u0446\u0438\u044F"
+  },
+  "ru.registration": {
+    "address": "\u0410\u0434\u0440\u0435\u0441",
+    "agreement": "\u0414\u043E\u0433\u043E\u0432\u043E\u0440",
+    "birth_date": "\u0414\u0435\u043D\u044C \u0440\u043E\u0436\u0434\u0435\u043D\u0438\u044F",
+    "check_agree": "\u042F \u043F\u0440\u043E\u0447\u0438\u0442\u0430\u043B \u0434\u043E\u0433\u043E\u0432\u043E\u0440 \u0438 \u0441\u043E\u0433\u043B\u0430\u0441\u0435\u043D \u0441 \u043D\u0438\u043C",
+    "city": "\u0413\u043E\u0440\u043E\u0434",
+    "course": "\u041A\u0443\u0440\u0441",
+    "dont_laugh": "\u041D\u0435 \u0441\u043C\u0435\u0448\u0438 \u043C\u0435\u043D\u044F",
+    "dorm_number_boy": "\u0414\u043B\u044F \u043C\u0430\u043B\u044C\u0447\u0438\u043A\u043E\u0432: +7 700 700 6185",
+    "dorm_number_girls": "\u0414\u043B\u044F \u0434\u0435\u0432\u0443\u0448\u0435\u043A: +7 700 700 6185",
+    "email": "\u042D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430\u044F \u043F\u043E\u0447\u0442\u0430",
+    "faculty": "\u0424\u0430\u043A\u0443\u043B\u044C\u0442\u0435\u0442",
+    "father": "\u041E\u0442\u0435\u0447\u0435\u0441\u0442\u0432\u043E",
+    "father_name": "\u0418\u043C\u044F, \u0424\u0430\u043C\u0438\u043B\u0438\u044F \u043E\u0442\u0446\u0430",
+    "father_number": "\u0421\u043E\u0442\u043E\u0432\u044B\u0439 \u043D\u043E\u043C\u0435\u0440 \u043E\u0442\u0446\u0430",
+    "female": "\u0414\u0435\u0432\u0443\u0448\u043A\u0430",
+    "first_name": "\u0418\u043C\u044F",
+    "gender": "\u041F\u043E\u043B",
+    "general_info": "\u041E\u0441\u043D\u043E\u0432\u043D\u0430\u044F \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F",
+    "here": "\u0418\u043D\u0441\u0442\u0440\u0443\u043A\u0446\u0438\u044F",
+    "iin": "\u0418\u0418\u041D",
+    "kaspi_info1": "\u0418\u043D\u0441\u0442\u0440\u0443\u043A\u0446\u0438\u044F \u043E\u0431 \u043E\u043F\u043B\u0430\u0442\u0435:",
+    "kaspi_info4": "\u041F\u043E\u0441\u043B\u0435 \u043F\u0440\u043E\u0438\u0437\u0432\u0435\u0434\u0435\u043D\u0438\u044F \u043E\u043F\u043B\u0430\u0442\u044B \u043F\u0440\u043E\u0441\u0438\u043C \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C PDF \u043A\u043E\u043F\u0438\u044E \u043A\u0432\u0438\u0442\u0430\u043D\u0446\u0438\u0438 \u043D\u0430 \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0435 \u043D\u043E\u043C\u0435\u0440\u0430 \u043F\u043E WhatsApp: ",
+    "kaspi_pay": "\u041E\u043F\u043B\u0430\u0442\u0443 \u0437\u0430 \u043E\u0431\u0449\u0435\u0436\u0438\u0442\u0438\u0435 \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u0441\u0434\u0435\u043B\u0430\u0442\u044C \u0447\u0435\u0440\u0435\u0437 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435 Kaspi.kz \u0438\u043B\u0438 Homebank",
+    "last_name": "\u0424\u0430\u043C\u0438\u043B\u0438\u044F",
+    "male": "\u041C\u0430\u043B\u044C\u0447\u0438\u043A",
+    "mother_name": "\u0418\u043C\u044F, \u0424\u0430\u043C\u0438\u043B\u0438\u044F \u043C\u0430\u0442\u0435\u0440\u0438",
+    "mother_number": "\u0421\u043E\u0442\u043E\u0432\u044B\u0439 \u043D\u043E\u043C\u0435\u0440 \u043C\u0430\u0442\u0435\u0440\u0438",
+    "name_surname": "\u0418\u043C\u044F, \u0424\u0430\u043C\u0438\u043B\u0438\u044F",
+    "parent_info": "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F \u043E \u0440\u043E\u0434\u0438\u0442\u0435\u043B\u044F\u0445",
+    "payment": "\u041E\u043F\u043B\u0430\u0442\u0430",
+    "personal_info": "\u041B\u0438\u0447\u043D\u0430\u044F \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F",
+    "phone_number": "\u041D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430",
+    "place_count": "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u0441\u0432\u043E\u0431\u043E\u0434\u043D\u044B\u0445 \u043C\u0435\u0441\u0442:",
+    "read_agreement": "\u041F\u0440\u043E\u0447\u0438\u0442\u0430\u0439\u0442\u0435 \u044D\u0442\u043E\u0442 \u0434\u043E\u0433\u043E\u0432\u043E\u0440 \u0438 \u043E\u0442\u043C\u0435\u0442\u044C\u0442\u0435 \u0447\u0435\u043A\u0431\u043E\u043A\u0441 \u0432\u043D\u0438\u0437\u0443",
+    "register": "\u0417\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C",
+    "school": "\u0428\u043A\u043E\u043B\u0430",
+    "send": "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C",
+    "speciality": "\u0421\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E\u0441\u0442\u044C",
+    "success_register_description": "\u041F\u043E\u0441\u043B\u0435 \u0443\u0441\u043F\u0435\u0448\u043D\u043E\u0439 \u043E\u043F\u043B\u0430\u0442\u044B \u043A \u0432\u0430\u043C \u043D\u0430 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0443\u044E \u043F\u043E\u0447\u0442\u0443 (:email) \u043F\u0440\u0438\u0434\u0435\u0442\u044C \u043F\u0438\u0441\u044C\u043C\u043E \u0441 \u043F\u043E\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043D\u0438\u0435\u043C \u043E\u0431 \u0443\u0441\u043F\u0435\u0448\u043D\u043E\u0439 \u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u0438",
+    "success_register_title": "\u0421\u043F\u0430\u0441\u0438\u0431\u043E \u0437\u0430 \u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u044E",
+    "title": "\u0420\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0438\u0446\u0438\u044F \u0432 \u043E\u0431\u0449\u0435\u0436\u0438\u0442\u0438\u0435",
+    "upload_pass": "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0443\u0434\u043E\u0441\u0442\u043E\u0432\u0435\u0440\u0435\u043D\u0438\u0435",
+    "upload_passport": "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0443\u0434\u043E\u0441\u0442\u043E\u0432\u0435\u0440\u0435\u043D\u0438\u0435 (jpeg, jpg, png)",
+    "upload_photo": "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0444\u043E\u0442\u043E",
+    "upload_photo_title": "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0444\u043E\u0442\u043E (jpeg, jpg, png)"
   }
 };
 
@@ -6118,6 +6598,45 @@ component.options.__file = "resources/js/components/Front.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/InstructionPage.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/InstructionPage.vue ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _InstructionPage_vue_vue_type_template_id_56691bbc_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./InstructionPage.vue?vue&type=template&id=56691bbc&scoped=true& */ "./resources/js/components/InstructionPage.vue?vue&type=template&id=56691bbc&scoped=true&");
+/* harmony import */ var _InstructionPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InstructionPage.vue?vue&type=script&lang=js& */ "./resources/js/components/InstructionPage.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _InstructionPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _InstructionPage_vue_vue_type_template_id_56691bbc_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _InstructionPage_vue_vue_type_template_id_56691bbc_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "56691bbc",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/InstructionPage.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/MyProfile.vue":
 /*!***********************************************!*\
   !*** ./resources/js/components/MyProfile.vue ***!
@@ -6425,6 +6944,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/InstructionPage.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/InstructionPage.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InstructionPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InstructionPage.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/InstructionPage.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InstructionPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/MyProfile.vue?vue&type=script&lang=js&":
 /*!************************************************************************!*\
   !*** ./resources/js/components/MyProfile.vue?vue&type=script&lang=js& ***!
@@ -6650,6 +7185,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Front_vue_vue_type_template_id_4c17cb64___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Front_vue_vue_type_template_id_4c17cb64___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Front.vue?vue&type=template&id=4c17cb64& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Front.vue?vue&type=template&id=4c17cb64&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/InstructionPage.vue?vue&type=template&id=56691bbc&scoped=true&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/InstructionPage.vue?vue&type=template&id=56691bbc&scoped=true& ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InstructionPage_vue_vue_type_template_id_56691bbc_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InstructionPage_vue_vue_type_template_id_56691bbc_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InstructionPage_vue_vue_type_template_id_56691bbc_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InstructionPage.vue?vue&type=template&id=56691bbc&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/InstructionPage.vue?vue&type=template&id=56691bbc&scoped=true&");
 
 
 /***/ }),
@@ -7410,7 +7962,11 @@ var render = function() {
                     [
                       _c(
                         "router-link",
-                        { attrs: { to: { name: link.name } } },
+                        {
+                          attrs: {
+                            to: { name: link.name, params: { admin: true } }
+                          }
+                        },
                         [
                           _c("i", { class: link.icon }),
                           _vm._v(_vm._s(_vm.$trans(link.title)))
@@ -8371,7 +8927,13 @@ var render = function() {
         [
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-xl-12" }, [
-              _c("h3", [_vm._v("Manage Jobs Post")]),
+              _c("div", { staticClass: "utf-left-side" }, [
+                _c("img", {
+                  attrs: { src: "/images/sdulogo_white.png", alt: "" }
+                }),
+                _vm._v(" "),
+                _c("h3", [_vm._v(_vm._s(_vm.$trans("registration.title")))])
+              ]),
               _vm._v(" "),
               _c("nav", { attrs: { id: "breadcrumbs" } }, [
                 _c(
@@ -8404,7 +8966,7 @@ var render = function() {
           on: {
             submit: function($event) {
               $event.preventDefault()
-              return _vm.pay($event)
+              return _vm.submit($event)
             }
           }
         },
@@ -8426,25 +8988,42 @@ var render = function() {
                     _vm._l(_vm.values.freePlaceCount, function(count) {
                       return _c("div", { staticClass: "col-xl-3" }, [
                         _c("div", { staticClass: "utf-single-counter" }, [
-                          _c("div", { staticClass: "utf-counter-inner-item" }, [
-                            _c("h3", [
-                              _c("span", { staticClass: "counter" }, [
-                                _vm._v(_vm._s(count.place_count))
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            count.building_id === 0
-                              ? _c(
-                                  "span",
-                                  { staticClass: "utf-counter-title" },
-                                  [_vm._v("Male")]
-                                )
-                              : _c(
-                                  "span",
-                                  { staticClass: "utf-counter-title" },
-                                  [_vm._v("Female")]
-                                )
-                          ])
+                          _c(
+                            "div",
+                            {
+                              staticClass: "utf-counter-inner-item",
+                              staticStyle: { color: "#000000" }
+                            },
+                            [
+                              _c("h3", [
+                                _c("span", { staticClass: "counter" }, [
+                                  _vm._v(_vm._s(count.place_count))
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              count.building_id === 0
+                                ? _c(
+                                    "span",
+                                    { staticClass: "utf-counter-title" },
+                                    [
+                                      _vm._v(
+                                        _vm._s(_vm.$trans("registration.male"))
+                                      )
+                                    ]
+                                  )
+                                : _c(
+                                    "span",
+                                    { staticClass: "utf-counter-title" },
+                                    [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.$trans("registration.female")
+                                        )
+                                      )
+                                    ]
+                                  )
+                            ]
+                          )
                         ])
                       ])
                     }),
@@ -8813,9 +9392,9 @@ var render = function() {
                                     { domProps: { value: gender.id } },
                                     [
                                       _vm._v(
-                                        "\n                                            " +
+                                        "\n                                                " +
                                           _vm._s(gender.title) +
-                                          "\n                                        "
+                                          "\n                                            "
                                       )
                                     ]
                                   )
@@ -8842,7 +9421,7 @@ var render = function() {
                                   _vm._s(
                                     _vm.$trans("registration.place_count")
                                   ) +
-                                    "\n                                        "
+                                    "\n                                            "
                                 ),
                                 _vm.request.gender === 0
                                   ? _c("span", [
@@ -9287,9 +9866,9 @@ var render = function() {
                                     { domProps: { value: facultyCode.id } },
                                     [
                                       _vm._v(
-                                        "\n                                            " +
+                                        "\n                                                " +
                                           _vm._s(facultyCode.title) +
-                                          "\n                                        "
+                                          "\n                                            "
                                       )
                                     ]
                                   )
@@ -9362,9 +9941,9 @@ var render = function() {
                                     { domProps: { value: programCode.id } },
                                     [
                                       _vm._v(
-                                        "\n                                            " +
+                                        "\n                                                " +
                                           _vm._s(programCode.title) +
-                                          "\n                                        "
+                                          "\n                                            "
                                       )
                                     ]
                                   )
@@ -9659,15 +10238,19 @@ var render = function() {
                                 "div",
                                 { staticClass: "margin-bottom-10" },
                                 [
-                                  _c("span", [
-                                    _vm._v(
-                                      _vm._s(
-                                        _vm.$trans(
-                                          "registration.read_agreement"
-                                        )
-                                      ) + ":"
-                                    )
-                                  ]),
+                                  _c(
+                                    "span",
+                                    { staticStyle: { color: "#000" } },
+                                    [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.$trans(
+                                            "registration.read_agreement"
+                                          )
+                                        ) + ":"
+                                      )
+                                    ]
+                                  ),
                                   _vm._v(" "),
                                   _c(
                                     "router-link",
@@ -9699,14 +10282,23 @@ var render = function() {
                                   on: { click: _vm.agreementCheck }
                                 }),
                                 _vm._v(" "),
-                                _c("label", { attrs: { for: "agree-check" } }, [
-                                  _c("span", { staticClass: "checkbox-icon" }),
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.$trans("registration.check_agree")
+                                _c(
+                                  "label",
+                                  {
+                                    staticStyle: { color: "#000" },
+                                    attrs: { for: "agree-check" }
+                                  },
+                                  [
+                                    _c("span", {
+                                      staticClass: "checkbox-icon"
+                                    }),
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.$trans("registration.check_agree")
+                                      )
                                     )
-                                  )
-                                ])
+                                  ]
+                                )
                               ])
                             ])
                           ]
@@ -9733,21 +10325,95 @@ var render = function() {
                     _c("a", { staticClass: "close", attrs: { href: "#" } })
                   ])
                 ]
-              )
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-xl-12" }, [
+                _c("div", { staticClass: "dashboard-box" }, [
+                  _c("div", { staticClass: "headline" }, [
+                    _c("h3", [
+                      _vm._v(_vm._s(_vm.$trans("registration.payment")))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "content with-padding" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c(
+                        "div",
+                        { staticClass: "col-xl-6 col-md-6 col-sm-12" },
+                        [
+                          _c("h3", { staticClass: "margin-bottom-10" }, [
+                            _vm._v(_vm._s(_vm.$trans("registration.kaspi_pay")))
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "h5",
+                            [
+                              _vm._v(
+                                _vm._s(_vm.$trans("registration.kaspi_info1")) +
+                                  " "
+                              ),
+                              _c(
+                                "router-link",
+                                {
+                                  staticStyle: { color: "blue" },
+                                  attrs: {
+                                    to: { name: "instruction" },
+                                    target: "_blank"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(_vm.$trans("registration.here"))
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("h5", [
+                            _vm._v(
+                              _vm._s(_vm.$trans("registration.kaspi_info4"))
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("h5", [
+                            _vm._v(
+                              _vm._s(_vm.$trans("registration.dorm_number_boy"))
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("h5", [
+                            _vm._v(
+                              _vm._s(
+                                _vm.$trans("registration.dorm_number_girls")
+                              )
+                            )
+                          ])
+                        ]
+                      )
+                    ])
+                  ])
+                ])
+              ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "utf-centered-button" }, [
               _c(
                 "button",
                 {
-                  staticClass: "button ripple-effect margin-top-0",
+                  staticClass: "button margin-top-0",
+                  staticStyle: {
+                    "background-color": "#9E2629",
+                    "font-weight": "400"
+                  },
                   attrs: {
                     type: "submit",
                     id: "sendButton",
                     disabled: !this.request.agree
                   }
                 },
-                [_vm._v(_vm._s(_vm.$trans("adminPage.pay")))]
+                [_vm._v(_vm._s(_vm.$trans("registration.register")))]
               )
             ]),
             _vm._v(" "),
@@ -10744,6 +11410,360 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/InstructionPage.vue?vue&type=template&id=56691bbc&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/InstructionPage.vue?vue&type=template&id=56691bbc&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "utf-dashboard-content-container-aera",
+      attrs: { "data-simplebar": "" }
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass: "utf-dashboard-headline-item",
+          attrs: { id: "dashboard-titlebar" }
+        },
+        [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-xl-12" }, [
+              _c("div", { staticClass: "utf-left-side" }, [
+                _c("img", {
+                  attrs: { src: "/images/sdulogo_white.png", alt: "" }
+                }),
+                _vm._v(" "),
+                _c("h3", [_vm._v(_vm._s(_vm.$trans("instruction.title")))])
+              ]),
+              _vm._v(" "),
+              _c("nav", { attrs: { id: "breadcrumbs" } }, [
+                _c(
+                  "div",
+                  { staticClass: "dropdown" },
+                  _vm._l(this.language.languageList, function(lang) {
+                    return _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary dropdown-toggle",
+                        staticStyle: { "margin-right": "10px" },
+                        attrs: { value: lang.value },
+                        on: { click: _vm.changeLanguage }
+                      },
+                      [_vm._v(_vm._s(lang.title))]
+                    )
+                  }),
+                  0
+                )
+              ])
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "utf-dashboard-content-inner-aera" }, [
+        _c("div", { staticClass: "col-xl-12 margin-bottom-20" }, [
+          _c("h3", { staticClass: "headline_part centered" }, [
+            _vm._v(_vm._s(_vm.$trans("instruction.booking_system")))
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-xl-12" }, [
+          _c(
+            "h4",
+            { staticClass: "headline_part margin-top-0 margin-bottom-15" },
+            [_vm._v(_vm._s(_vm.$trans("instruction.booking_steps")))]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xl-6 col-md-6" }, [
+            _c("ul", { staticClass: "list-3 color" }, [
+              _c("li", [_vm._v(_vm._s(_vm.$trans("instruction.fill_form")))]),
+              _vm._v(" "),
+              _c("li", [_vm._v(_vm._s(_vm.$trans("instruction.payment_way")))]),
+              _vm._v(" "),
+              _c("li", [_vm._v(_vm._s(_vm.$trans("instruction.send_check")))]),
+              _vm._v(" "),
+              _c("li", [
+                _vm._v(
+                  _vm._s(
+                    _vm.$trans("instruction.boys_number", {
+                      number: "+77007006185"
+                    })
+                  )
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _vm._v(
+                  _vm._s(
+                    _vm.$trans("instruction.girls_number", {
+                      number: "+77007006185"
+                    })
+                  )
+                )
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "h2",
+            { staticClass: "headline_part margin-top-0 margin-bottom-15" },
+            [_vm._v(_vm._s(_vm.$trans("instruction.important")))]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xl-6 col-md-6" }, [
+            _c("ul", { staticClass: "list-3 color" }, [
+              _c("li", [
+                _vm._v(_vm._s(_vm.$trans("instruction.day_of_booking")))
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _vm._v(_vm._s(_vm.$trans("instruction.booking_apply")))
+              ]),
+              _vm._v(" "),
+              _c("li", [_vm._v(_vm._s(_vm.$trans("instruction.rebooking")))])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "h4",
+            { staticClass: "headline_part margin-top-0 margin-bottom-15" },
+            [_vm._v(_vm._s(_vm.$trans("instruction.payment_methods")))]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xl-6 col-md-6" }, [
+            _c("ul", { staticClass: "list-3 color" }, [
+              _c("li", [
+                _c("b", [
+                  _vm._v(_vm._s(_vm.$trans("instruction.branches_payment")))
+                ]),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.branches_details1"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.branches_details2"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.branches_details3"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.branches_details4"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.branches_details5"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.branches_details6"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.branches_details7"))
+                ),
+                _c("br")
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c("b", [
+                  _vm._v(_vm._s(_vm.$trans("instruction.terminal_payment")))
+                ]),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.terminal_details1"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.terminal_details2"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.terminal_details3"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.terminal_details4"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.terminal_details5"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.terminal_details6"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.terminal_details7"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.terminal_details8"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.terminal_details9"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.terminal_details10"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.terminal_details11"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.terminal_details12"))
+                ),
+                _c("br")
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c("b", [
+                  _vm._v(_vm._s(_vm.$trans("instruction.homebank_payment")))
+                ]),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.homebank_details1"))
+                ),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("img", {
+                  staticStyle: { width: "300px" },
+                  attrs: { src: "/images/homebank/home1.jpg" }
+                }),
+                _c("br"),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.homebank_details2"))
+                ),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("img", {
+                  staticStyle: { width: "300px" },
+                  attrs: { src: "/images/homebank/home2.jpg" }
+                }),
+                _c("br"),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.homebank_details3"))
+                ),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("img", {
+                  staticStyle: { width: "300px" },
+                  attrs: { src: "/images/homebank/home3.jpg" }
+                }),
+                _c("br"),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.homebank_details4"))
+                ),
+                _c("br"),
+                _c("br"),
+                _vm._v(" "),
+                _c("img", {
+                  staticStyle: { width: "300px" },
+                  attrs: { src: "/images/homebank/home4.jpg" }
+                }),
+                _c("br"),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.homebank_details5")) +
+                    "\n                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c("b", [
+                  _vm._v(_vm._s(_vm.$trans("instruction.kaspi_payment")))
+                ]),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.kaspi_details1"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.kaspi_details2"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.kaspi_details3"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.kaspi_details4"))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.$trans("instruction.kaspi_details5"))
+                ),
+                _c("br")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MyProfile.vue?vue&type=template&id=670663fc&scoped=true&":
 /*!*********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MyProfile.vue?vue&type=template&id=670663fc&scoped=true& ***!
@@ -11402,10 +12422,12 @@ var render = function() {
           _vm._v(" "),
           _c("p", [
             _vm._v(
-              _vm._s(_vm.$trans("registration.success_register_description")) +
-                " "
-            ),
-            _c("b", [_vm._v(_vm._s(this.email))])
+              _vm._s(
+                _vm.$trans("registration.success_register_description", {
+                  email: this.email
+                })
+              )
+            )
           ])
         ])
       ])
@@ -77241,22 +78263,27 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! lang.js */ "./node_modules/lang.js/src/lang.js");
 
 
- // Axios.defaults.baseURL = window.configs.baseURL + window.configs.api
+
+vue__WEBPACK_IMPORTED_MODULE_7__.default.use((_eli5_vue_lang_js__WEBPACK_IMPORTED_MODULE_5___default()), {
+  messages: (_vue_translations_js__WEBPACK_IMPORTED_MODULE_6___default()),
+  // Provide locale file
+  locale: 'kz',
+  // Set locale
+  fallback: 'en' // Set fallback locale
+
+}); // localStorage.setItem('locale', 'kz');
 
 (axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.headers.common.Authorization) = 'Bearer ' + localStorage.getItem('access_token');
-(axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.headers.common["Content-Type"]) = 'application/json'; // Axios.defaults.headers.common['Content-Language'] = i18n.locale;
+(axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.headers.common["Content-Type"]) = 'application/json';
+(axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.headers.common["Content-Language"]) = 'kz'; // Axios.interceptors.request.use(function(config) {
+//     config.headers['Content-Language'] = Vue.prototype.$lang.getLocale();
+//     console.log(Vue.prototype.$lang.getLocale());
+//     return config;
+// });
 
 vue__WEBPACK_IMPORTED_MODULE_7__.default.prototype.$http = (axios__WEBPACK_IMPORTED_MODULE_0___default());
 vue__WEBPACK_IMPORTED_MODULE_7__.default.mixin(_mixins_Role__WEBPACK_IMPORTED_MODULE_3__.default);
 vue__WEBPACK_IMPORTED_MODULE_7__.default.component('side-bar', _components_AdminSideBar__WEBPACK_IMPORTED_MODULE_4__.default);
-vue__WEBPACK_IMPORTED_MODULE_7__.default.use((_eli5_vue_lang_js__WEBPACK_IMPORTED_MODULE_5___default()), {
-  messages: (_vue_translations_js__WEBPACK_IMPORTED_MODULE_6___default()),
-  // Provide locale file
-  locale: 'en',
-  // Set locale
-  fallback: 'en' // Set fallback locale
-
-});
 var app = new vue__WEBPACK_IMPORTED_MODULE_7__.default({
   render: function render(h) {
     return h(_App_vue__WEBPACK_IMPORTED_MODULE_2__.default);

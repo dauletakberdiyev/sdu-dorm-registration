@@ -8,6 +8,7 @@ import FloorAssistantPage from "../components/FloorAssistantPage";
 import SuccessPage from "../components/SuccessPage";
 import Agreement from "../components/Agreement";
 import MyProfile from "../components/MyProfile";
+import InstructionPage from "../components/InstructionPage";
 
 export default [
     {
@@ -86,9 +87,23 @@ export default [
         }
     },
     {
+        path: '/dashboard/instruction',
+        component: InstructionPage,
+        name: 'instruction',
+        meta: {
+            noSideBar: true
+        }
+    },
+    {
         path: '/my-profile',
         component: MyProfile,
         name: 'myProfile',
+    },
+    {
+        path: '/offline-registration',
+        component: Dashboard,
+        name: 'offlineRegistration',
+        props: true
     },
     {
         path:'*',

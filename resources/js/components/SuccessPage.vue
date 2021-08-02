@@ -6,7 +6,7 @@
                 <div class="utf-order-confirm-aera">
                     <i class="icon-feather-check-circle"></i>
                     <h2 class="margin-top-30">{{$trans('registration.success_register_title')}}</h2>
-                    <p>{{$trans('registration.success_register_description')}} <b>{{this.email}}</b></p>
+                    <p>{{$trans('registration.success_register_description', {email: this.email})}}</p>
                 </div>
             </div>
         </div>

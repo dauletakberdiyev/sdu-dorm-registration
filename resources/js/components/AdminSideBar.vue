@@ -16,7 +16,7 @@
                         </div>
                         <div class="clearfix"></div>
                         <ul>
-                            <li :class="{active:$route.name==link.name}" v-for="(link,index) in links" :key="index"><router-link :to="{name:link.name}"><i :class="link.icon"></i>{{$trans(link.title)}}</router-link></li>
+                            <li :class="{active:$route.name==link.name}" v-for="(link,index) in links" :key="index"><router-link :to="{name:link.name, params:{admin: true}}" ><i :class="link.icon"></i>{{$trans(link.title)}}</router-link></li>
                         </ul>
                     </div>
                 </div>
@@ -47,6 +47,11 @@
             name:'myProfile',
             icon:'icon-feather-user',
             title:'adminPage.profile'
+        },
+        {
+            name:'offlineRegistration',
+            icon:'icon-material-outline-note-add',
+            title:'adminPage.offRegistration'
         },
         {
             name:'logout',
