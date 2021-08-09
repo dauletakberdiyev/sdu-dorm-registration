@@ -54,6 +54,6 @@ return [
     'kaspi_info1' => 'Instruction about payment you can find',
     'here' => 'here',
     'kaspi_info4' => 'After payment, send a PDF version of the receipt to the following numbers via WhatsApp:',
-    'dorm_number_boy' => 'For Boys: +77007006185',
-    'dorm_number_girls' => 'For Girls: +77007006185',
+    'dorm_number_boy' => 'For Boys: +7 778 727 9567',
+    'dorm_number_girls' => 'For Girls: +7 778 637 2657',
 ];

@@ -13,7 +13,7 @@ import InstructionPage from "../components/InstructionPage";
 export default [
     {
         path:'/',
-        redirect: {name:'login'}
+        redirect: {name:'dashboard'}
     },
     {
         path: '/login',
