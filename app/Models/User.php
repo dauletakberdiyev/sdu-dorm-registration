@@ -173,4 +173,19 @@ class User extends Authenticatable
         return $this->hasOne(RegisterInfo::class, 'applicant_id')
             ->select('applicant_id', 'first_name', 'last_name');
     }
+
+    public function bookingStudents($params){
+        $students = DB::table($this->table, 'dr')
+            ->leftJoin('dorm_register_info as dri','dri.applicant_id','=','dr.applicant_id')
+            ->select('dr.applicant_id',
+                'dri.first_name',
+                'dri.last_name',
+                'dri.iin'
+            )
+            ->where('dr.status','w')
+            ->where('dri.gender', $params['gender'])
+            ->get()->toArray();
+
+        return $students;
+    }
 }

@@ -60,6 +60,7 @@ Route::group(['middleware' => 'auth:api'], function(){
         Route::post('/director/floor-create', [FloorAssistantController::class, 'create'])->name('floorAssistantCreate');
         Route::post('/director/related-assistant', [FloorAssistantController::class, 'relatedAssistants'])->name('relatedAssistant');
         Route::post('/director/floor-assistant-room', [RoomController::class, 'floorAssistantRoom'])->name('floorAssistantRooms');
+        Route::get('/director/bookingStudents', [StudentListController::class, 'bookingStudentList'])->name('bookingStudents');
     });
 
     Route::post('/getUserRole', RoleController::class)->name('getUserRole');

@@ -8,6 +8,11 @@
                         <img src="/images/sdulogo_white.png" alt="">
                         <h3>{{$trans('registration.title')}}</h3>
                     </div>
+
+                    <div class="instruction_link">
+                        <router-link :to="{name: 'instruction'}" target="_blank" style="color:#fff;">{{$trans('registration.instruction')}}</router-link>
+                    </div>
+
                     <nav id="breadcrumbs">
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle" style="margin-right: 10px;" v-for="lang in this.language.languageList" :value="lang.value" @click="changeLanguage">{{lang.title}}</button>

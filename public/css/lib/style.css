@@ -2625,6 +2625,18 @@ body #backtotop a {
 	transform: rotate(90deg);
 }
 /* ---------------------------------- */
+
+.instruction_link{
+    position: absolute;
+    right: 130px;
+    top: 28%;
+    color: #fff;
+}
+
+.instruction_link a:hover{
+    font-weight: 700;
+}
+
 /* Sidebar Styles
 ------------------------------------- */
 .utf-sidebar-container-aera {

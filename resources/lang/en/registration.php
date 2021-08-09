@@ -3,6 +3,8 @@
 return [
     'title' => 'Dorm registration',
 
+    'instruction' => 'Instruction',
+
     'general_info' => 'General Information',
     'email' => 'Email',
     'first_name' => 'First Name',
