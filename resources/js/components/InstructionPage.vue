@@ -30,8 +30,8 @@
                         <li>{{$trans('instruction.fill_form')}}</li>
                         <li>{{$trans('instruction.payment_way')}}</li>
                         <li>{{$trans('instruction.send_check')}}</li>
-                        <li>{{$trans('instruction.boys_number', {number: '+77007006185'})}}</li>
-                        <li>{{$trans('instruction.girls_number', {number: '+77007006185'})}}</li>
+                        <li>{{$trans('instruction.boys_number', {number: '+7 778 727 9567'})}}</li>
+                        <li>{{$trans('instruction.girls_number', {number: '+7 778 637 2657'})}}</li>
                     </ul>
                 </div>
 
