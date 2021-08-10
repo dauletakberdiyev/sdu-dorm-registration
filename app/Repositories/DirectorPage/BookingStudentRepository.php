@@ -4,14 +4,18 @@ namespace App\Repositories\DirectorPage;
 
 use App\Enums\ApiOutputStatus;
 use App\Enums\ApiOutputStatusCode;
+use App\Http\Controllers\Helpers\ApiHelper;
 use App\Models\User;
 
 class BookingStudentRepository
 {
-    public function manage($request){
+    use ApiHelper;
+
+    public function manage(){
         $user = new User();
 
-        $params['gender'] = $request['building_id'];
+        $params['gender'] = $this->userGender();
+
         $bookingStudents = $user->bookingStudents($params);
 
         return response()->json([

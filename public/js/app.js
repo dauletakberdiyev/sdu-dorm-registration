@@ -2224,13 +2224,13 @@ var links = [{
   icon: 'icon-material-outline-group',
   title: 'adminPage.katchi'
 }, {
-  name: 'myProfile',
-  icon: 'icon-feather-user',
-  title: 'adminPage.profile'
-}, {
   name: 'bookingStudents',
   icon: 'icon-material-outline-note-add',
   title: 'adminPage.booked_student'
+}, {
+  name: 'myProfile',
+  icon: 'icon-feather-user',
+  title: 'adminPage.profile'
 }, {
   name: 'logout',
   icon: 'icon-material-outline-power-settings-new',
@@ -9197,26 +9197,33 @@ var render = function() {
                               _c("td", [_vm._v(_vm._s(student.iin))]),
                               _vm._v(" "),
                               _c("td", [
-                                _c("div", { staticClass: "checkbox" }, [
-                                  _c("input", {
-                                    attrs: {
-                                      type: "checkbox",
-                                      id: student.applicant_id,
-                                      "data-applicant": student.applicant_id
-                                    },
-                                    on: { click: _vm.checkStudent }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "label",
-                                    { attrs: { for: student.applicant_id } },
-                                    [
-                                      _c("span", {
-                                        staticClass: "checkbox-icon"
-                                      })
-                                    ]
-                                  )
-                                ])
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "checkbox",
+                                    staticStyle: { "margin-bottom": "10px" }
+                                  },
+                                  [
+                                    _c("input", {
+                                      attrs: {
+                                        type: "checkbox",
+                                        id: student.applicant_id,
+                                        "data-applicant": student.applicant_id
+                                      },
+                                      on: { click: _vm.checkStudent }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "label",
+                                      { attrs: { for: student.applicant_id } },
+                                      [
+                                        _c("span", {
+                                          staticClass: "checkbox-icon"
+                                        })
+                                      ]
+                                    )
+                                  ]
+                                )
                               ])
                             ])
                           }),
@@ -10806,7 +10813,18 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "utf-small-footer margin-top-15" }, [
       _c("div", { staticClass: "utf-small-footer-copyrights" }, [
-        _vm._v("Copyright © 2020 All Rights Reserved.")
+        _vm._v("© 2021 All Rights Reserved. By "),
+        _c(
+          "a",
+          {
+            staticStyle: { color: "#061B47" },
+            attrs: {
+              href: "https://www.instagram.com/iamdauletakberdiyev",
+              target: "_blank"
+            }
+          },
+          [_vm._v("Daulet Akberdiyev")]
+        )
       ])
     ])
   }

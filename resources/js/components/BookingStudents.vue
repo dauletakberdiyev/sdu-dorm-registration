@@ -31,7 +31,7 @@
                                         <td>{{student.last_name}}</td>
                                         <td>{{student.iin}}</td>
                                         <td>
-                                            <div class="checkbox">
+                                            <div class="checkbox" style="margin-bottom: 10px;">
                                                 <input type="checkbox" :id="student.applicant_id" :data-applicant="student.applicant_id" @click="checkStudent">
                                                 <label :for="student.applicant_id"><span class="checkbox-icon"></span></label>
                                             </div>

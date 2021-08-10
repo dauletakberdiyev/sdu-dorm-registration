@@ -314,7 +314,7 @@
             <!-- Footer -->
             <div class="utf-dashboard-footer-spacer-aera"></div>
             <div class="utf-small-footer margin-top-15">
-                <div class="utf-small-footer-copyrights">Copyright &copy; 2020 All Rights Reserved.</div>
+                <div class="utf-small-footer-copyrights">&copy; 2021 All Rights Reserved. By <a href="https://www.instagram.com/iamdauletakberdiyev"  target="_blank" style="color: #061B47">Daulet Akberdiyev</a></div>
             </div>
         </div>
         </form>

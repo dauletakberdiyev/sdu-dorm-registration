@@ -26,8 +26,8 @@ class StudentListController extends Controller
         return $repository->manage($request);
     }
 
-    public function bookingStudentList(StudentListRequest $request, BookingStudentRepository $repository)
+    public function bookingStudentList(BookingStudentRepository $repository)
     {
-        return $repository->manage($request);
+        return $repository->manage();
     }
 }

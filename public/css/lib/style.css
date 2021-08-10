@@ -2633,6 +2633,14 @@ body #backtotop a {
     color: #fff;
 }
 
+@media screen and (max-width: 600px) {
+    .instruction_link{
+        position: absolute;
+        right: 35px;
+        top: 75%;
+    }
+}
+
 .instruction_link a:hover{
     font-weight: 700;
 }

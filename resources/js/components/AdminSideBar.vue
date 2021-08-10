@@ -44,14 +44,14 @@
             title:'adminPage.katchi'
         },
         {
-            name:'myProfile',
-            icon:'icon-feather-user',
-            title:'adminPage.profile'
-        },
-        {
             name:'bookingStudents',
             icon:'icon-material-outline-note-add',
             title:'adminPage.booked_student'
+        },
+        {
+            name:'myProfile',
+            icon:'icon-feather-user',
+            title:'adminPage.profile'
         },
         {
             name:'logout',
