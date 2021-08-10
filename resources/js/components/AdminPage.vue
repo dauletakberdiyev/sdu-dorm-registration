@@ -213,8 +213,6 @@
                     }).then(response =>{
                         console.log(response);
                     });
-
-                    console.log(key, this.values.studentRoomAssistant[key].assistant_id);
                 });
             },
 

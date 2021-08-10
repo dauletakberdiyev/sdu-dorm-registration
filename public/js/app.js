@@ -2135,8 +2135,6 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (response) {
           console.log(response);
         });
-
-        console.log(key, _this2.values.studentRoomAssistant[key].assistant_id);
       });
     },
     changeAssistant: function changeAssistant(e) {
@@ -2230,9 +2228,9 @@ var links = [{
   icon: 'icon-feather-user',
   title: 'adminPage.profile'
 }, {
-  name: 'offlineRegistration',
+  name: 'bookingStudents',
   icon: 'icon-material-outline-note-add',
-  title: 'adminPage.offRegistration'
+  title: 'adminPage.booked_student'
 }, {
   name: 'logout',
   icon: 'icon-material-outline-power-settings-new',
@@ -2624,6 +2622,128 @@ __webpack_require__.r(__webpack_exports__);
           console.log(response);
         });
       });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingStudents.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingStudents.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "BookingStudents",
+  data: function data() {
+    return {
+      values: {
+        acceptedStudents: []
+      },
+      loadData: {
+        studentList: {}
+      }
+    };
+  },
+  mounted: function mounted() {
+    this.onPageLoad();
+  },
+  methods: {
+    onPageLoad: function onPageLoad() {
+      var _this = this;
+
+      this.$http.get('api/director/bookingStudents?building_id=' + 0).then(function (response) {
+        _this.loadData.studentList = response.data.data.bookingStudents;
+        console.log(_this.loadData.studentList);
+      });
+    },
+    acceptStudent: function acceptStudent() {
+      var _this2 = this;
+
+      this.values.acceptedStudents.forEach(function (elem) {
+        _this2.$http.post('/api/director/acceptStudent', {
+          applicant_id: elem.applicant_id
+        }).then(function (response) {
+          console.log(response);
+        });
+      });
+    },
+    checkStudent: function checkStudent(e) {
+      if (e.target.checked) {
+        this.values.acceptedStudents.push({
+          "applicant_id": e.target.dataset.applicant
+        });
+      } else {
+        for (var i = 0; i < this.values.acceptedStudents.length; i++) {
+          if (this.values.acceptedStudents[i]['applicant_id'] == e.target.dataset.applicant) {
+            this.values.acceptedStudents.splice(i, 1);
+          }
+        }
+      }
+
+      console.log(this.values.acceptedStudents);
     }
   }
 });
@@ -4105,6 +4225,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Agreement__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Agreement */ "./resources/js/components/Agreement.vue");
 /* harmony import */ var _components_MyProfile__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/MyProfile */ "./resources/js/components/MyProfile.vue");
 /* harmony import */ var _components_InstructionPage__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/InstructionPage */ "./resources/js/components/InstructionPage.vue");
+/* harmony import */ var _components_BookingStudents__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/BookingStudents */ "./resources/js/components/BookingStudents.vue");
+
 
 
 
@@ -4199,6 +4321,10 @@ __webpack_require__.r(__webpack_exports__);
   name: 'offlineRegistration',
   props: true
 }, {
+  path: '/booking-students',
+  component: _components_BookingStudents__WEBPACK_IMPORTED_MODULE_11__.default,
+  name: 'bookingStudents'
+}, {
   path: '*',
   redirect: {
     name: 'login'
@@ -4216,10 +4342,12 @@ __webpack_require__.r(__webpack_exports__);
 module.exports = {
   "en.adminPage": {
     "abiwkas": "Student Assistants",
+    "action": "Action",
     "add_assist": "Add Assistant",
     "add_assistant": "Add Student Assistant",
     "add_info": "Additional Information",
     "assistant": "Assistant",
+    "booked_student": "Booked Students",
     "city": "City",
     "course": "Course",
     "delete": "Delete",
@@ -6487,6 +6615,45 @@ component.options.__file = "resources/js/components/AssistantPage.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/BookingStudents.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/BookingStudents.vue ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _BookingStudents_vue_vue_type_template_id_5f6e3614_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BookingStudents.vue?vue&type=template&id=5f6e3614&scoped=true& */ "./resources/js/components/BookingStudents.vue?vue&type=template&id=5f6e3614&scoped=true&");
+/* harmony import */ var _BookingStudents_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BookingStudents.vue?vue&type=script&lang=js& */ "./resources/js/components/BookingStudents.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _BookingStudents_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _BookingStudents_vue_vue_type_template_id_5f6e3614_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _BookingStudents_vue_vue_type_template_id_5f6e3614_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "5f6e3614",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/BookingStudents.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Dashboard.vue":
 /*!***********************************************!*\
   !*** ./resources/js/components/Dashboard.vue ***!
@@ -6904,6 +7071,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/BookingStudents.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/BookingStudents.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingStudents_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./BookingStudents.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingStudents.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingStudents_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Dashboard.vue?vue&type=script&lang=js&":
 /*!************************************************************************!*\
   !*** ./resources/js/components/Dashboard.vue?vue&type=script&lang=js& ***!
@@ -7142,6 +7325,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AssistantPage_vue_vue_type_template_id_40beb7b2_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AssistantPage_vue_vue_type_template_id_40beb7b2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AssistantPage.vue?vue&type=template&id=40beb7b2&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AssistantPage.vue?vue&type=template&id=40beb7b2&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/BookingStudents.vue?vue&type=template&id=5f6e3614&scoped=true&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/BookingStudents.vue?vue&type=template&id=5f6e3614&scoped=true& ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingStudents_vue_vue_type_template_id_5f6e3614_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingStudents_vue_vue_type_template_id_5f6e3614_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingStudents_vue_vue_type_template_id_5f6e3614_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./BookingStudents.vue?vue&type=template&id=5f6e3614&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingStudents.vue?vue&type=template&id=5f6e3614&scoped=true&");
 
 
 /***/ }),
@@ -8897,6 +9097,155 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingStudents.vue?vue&type=template&id=5f6e3614&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingStudents.vue?vue&type=template&id=5f6e3614&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "utf-dashboard-content-container-aera",
+      attrs: { "data-simplebar": "" }
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass: "utf-dashboard-headline-item",
+          attrs: { id: "dashboard-titlebar" }
+        },
+        [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-xl-12" }, [
+              _c("h3", [_vm._v(_vm._s(_vm.$trans("adminPage.booked_student")))])
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "utf-dashboard-content-inner-aera" }, [
+        _c("form", { on: { submit: _vm.acceptStudent } }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-xl-12" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "utf_dashboard_list_box table-responsive recent_booking dashboard-box"
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "dashboard-list-box table-responsive invoices with-icons"
+                    },
+                    [
+                      _c("table", { staticClass: "table table-hover" }, [
+                        _c("thead", [
+                          _c("tr", [
+                            _c("th", { staticClass: "column-name" }, [
+                              _vm._v(_vm._s(_vm.$trans("adminPage.student_id")))
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { staticClass: "column-name" }, [
+                              _vm._v(_vm._s(_vm.$trans("adminPage.name")))
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { staticClass: "column-name" }, [
+                              _vm._v(_vm._s(_vm.$trans("adminPage.surname")))
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { staticClass: "column-name" }, [
+                              _vm._v(_vm._s(_vm.$trans("adminPage.iin")))
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { staticClass: "column-name" }, [
+                              _vm._v(_vm._s(_vm.$trans("adminPage.action")))
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          _vm._l(_vm.loadData.studentList, function(student) {
+                            return _c("tr", [
+                              _c("td", [_vm._v(_vm._s(student.applicant_id))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(student.first_name))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(student.last_name))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(student.iin))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c("div", { staticClass: "checkbox" }, [
+                                  _c("input", {
+                                    attrs: {
+                                      type: "checkbox",
+                                      id: student.applicant_id,
+                                      "data-applicant": student.applicant_id
+                                    },
+                                    on: { click: _vm.checkStudent }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "label",
+                                    { attrs: { for: student.applicant_id } },
+                                    [
+                                      _c("span", {
+                                        staticClass: "checkbox-icon"
+                                      })
+                                    ]
+                                  )
+                                ])
+                              ])
+                            ])
+                          }),
+                          0
+                        )
+                      ])
+                    ]
+                  )
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "margin-top-10 utf-centered-button" }, [
+            _c(
+              "button",
+              {
+                staticClass: "button ripple-effect margin-top-0",
+                attrs: { type: "submit", id: "sendButton" }
+              },
+              [_vm._v(_vm._s(_vm.$trans("adminPage.update")))]
+            )
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -11524,7 +11873,7 @@ var render = function() {
                 _vm._v(
                   _vm._s(
                     _vm.$trans("instruction.boys_number", {
-                      number: "+77007006185"
+                      number: "+7 778 727 9567"
                     })
                   )
                 )
@@ -11534,7 +11883,7 @@ var render = function() {
                 _vm._v(
                   _vm._s(
                     _vm.$trans("instruction.girls_number", {
-                      number: "+77007006185"
+                      number: "+7 778 637 2657"
                     })
                   )
                 )

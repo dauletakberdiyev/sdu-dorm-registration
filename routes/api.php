@@ -19,6 +19,7 @@ use App\Http\Controllers\AdminPage\DirectorPage\FloorAssistantController;
 use App\Http\Controllers\AdminPage\AdminSideBarController;
 use App\Http\Controllers\RegistrationDashboard\FreePlaceController;
 use App\Http\Controllers\Helpers\FileToBase64Controller;
+use App\Http\Controllers\AdminPage\DirectorPage\AcceptStudentController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -61,6 +62,7 @@ Route::group(['middleware' => 'auth:api'], function(){
         Route::post('/director/related-assistant', [FloorAssistantController::class, 'relatedAssistants'])->name('relatedAssistant');
         Route::post('/director/floor-assistant-room', [RoomController::class, 'floorAssistantRoom'])->name('floorAssistantRooms');
         Route::get('/director/bookingStudents', [StudentListController::class, 'bookingStudentList'])->name('bookingStudents');
+        Route::post('/director/acceptStudent', AcceptStudentController::class)->name('acceptStudent');
     });
 
     Route::post('/getUserRole', RoleController::class)->name('getUserRole');

@@ -9,6 +9,7 @@ import SuccessPage from "../components/SuccessPage";
 import Agreement from "../components/Agreement";
 import MyProfile from "../components/MyProfile";
 import InstructionPage from "../components/InstructionPage";
+import BookingStudents from "../components/BookingStudents";
 
 export default [
     {
@@ -104,6 +105,11 @@ export default [
         component: Dashboard,
         name: 'offlineRegistration',
         props: true
+    },
+    {
+        path: '/booking-students',
+        component: BookingStudents,
+        name: 'bookingStudents',
     },
     {
         path:'*',

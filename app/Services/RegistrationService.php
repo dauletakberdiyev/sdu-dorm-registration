@@ -54,4 +54,16 @@ class RegistrationService
 
         return $pathName;
     }
+
+    public static function acceptStudent($params){
+        $uRes = DB::transaction(function () use ($params) {
+            DB::select('call acceptStudent(?,@uRes)',
+                array(
+                    $params['applicant_id'],
+                ));
+            return DB::select('select @uRes as uRes');
+        });
+
+        return $uRes;
+    }
 }

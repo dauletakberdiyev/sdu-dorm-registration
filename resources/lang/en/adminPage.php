@@ -34,6 +34,8 @@ return [
     'searchStudent' => 'Search Student',
 
     'katchi' => 'Floor Assistants',
-    'offRegistration' => 'Offline Registration'
+    'offRegistration' => 'Offline Registration',
 
+    'booked_student' => 'Booked Students',
+    'action' => 'Action',
 ];

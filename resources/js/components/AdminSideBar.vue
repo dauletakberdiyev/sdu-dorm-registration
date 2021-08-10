@@ -49,9 +49,9 @@
             title:'adminPage.profile'
         },
         {
-            name:'offlineRegistration',
+            name:'bookingStudents',
             icon:'icon-material-outline-note-add',
-            title:'adminPage.offRegistration'
+            title:'adminPage.booked_student'
         },
         {
             name:'logout',
