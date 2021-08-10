@@ -20,7 +20,7 @@ class RoomModel extends Model
             ->select('r.id as room_id',
                 'r.free_place'
             )
-            ->where('r.building_id', $params['buildingId'])
+            ->where('r.building_id', $params['gender'])
             ->where('r.room_type', $params['roomType'])
             ->get()->toArray();
     }

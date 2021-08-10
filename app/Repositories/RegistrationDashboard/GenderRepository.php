@@ -11,7 +11,7 @@ class GenderRepository
     public function manage(){
         $genderTitle = GenderModel::select(
             'id',
-            'gender_title_en as title'
+            'gender_title_kz as title'
         )->get()->toArray();
 
         return response()->json([

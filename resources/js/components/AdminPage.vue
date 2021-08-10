@@ -76,7 +76,7 @@
                                             <td>
                                                 <select class="utf-with-border" v-model="student.assistant_id" @change="changeAssistant" :data-applicant="student.id">
                                                     <option v-for="assistant in loadData.assistantList" :value="assistant.applicant_id">
-                                                        {{assistant.assistant_info.first_name}} {{assistant.assistant_info.last_name}}
+                                                        {{assistant.first_name}} {{assistant.last_name}}
                                                     </option>
                                                 </select>
                                             </td>

@@ -4,21 +4,23 @@ namespace App\Repositories\DirectorPage;
 
 use App\Enums\ApiOutputStatus;
 use App\Enums\ApiOutputStatusCode;
+use App\Http\Controllers\Helpers\ApiHelper;
 use App\Models\Tables\RoomModel;
 use App\Models\User;
 
 class StudentAssistantRepository
 {
+    use ApiHelper;
+
     public function manage($assistantType)
     {
         $roomModel = new RoomModel();
+        $params['gender'] = $this->userGender();
 
         $assistants = User::with('assistantInfo', 'speciality', 'room')
             ->where('status', $assistantType)
             ->paginate(5);
 
-        $params = array();
-        $params['buildingId'] = 0;
 
         if($assistantType == 'h'){
             $params['roomType'] = 1;

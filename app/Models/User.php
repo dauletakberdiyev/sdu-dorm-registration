@@ -81,7 +81,8 @@ class User extends Authenticatable
                 'dri.assistant_id',
                 'dre.room_id')
             ->where('dre.is_active', '1')
-            ->where('dr.status', '=', 'a');
+            ->where('dr.status', '=', 'a')
+            ->where('dri.gender','=',$params['gender']);
 
         if($params['search_value'] !== null){
 //            $studentList = $studentList->where(DB::raw("(dri.last_name LIKE '".$params['search_value']."%' or dri.first_name LIKE '".$params['search_value']."%')"));
@@ -166,7 +167,7 @@ class User extends Authenticatable
             }
         }
 
-        return $studentList->paginate(5);
+        return $studentList->paginate(10);
     }
 
     public function info(){

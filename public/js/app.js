@@ -7874,14 +7874,9 @@ var render = function() {
                                       [
                                         _vm._v(
                                           "\n                                                        " +
-                                            _vm._s(
-                                              assistant.assistant_info
-                                                .first_name
-                                            ) +
+                                            _vm._s(assistant.first_name) +
                                             " " +
-                                            _vm._s(
-                                              assistant.assistant_info.last_name
-                                            ) +
+                                            _vm._s(assistant.last_name) +
                                             "\n                                                    "
                                         )
                                       ]

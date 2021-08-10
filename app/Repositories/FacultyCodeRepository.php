@@ -11,7 +11,7 @@ class FacultyCodeRepository
     public function manage(){
         $facultyTitle = FacultyModel::select(
             'faculty_code as id',
-            'title_en as title'
+            'title_kz as title'
             )->get()->toArray();
 
         return response()->json([

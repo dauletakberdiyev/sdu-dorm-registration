@@ -71,4 +71,18 @@ class RegisterInfo extends Model
 
             return $students->get()->toArray();
     }
+
+    public function getAssistants($params){
+        $assistants = DB::table($this->table, 'dri')
+            ->leftJoin('dorm_register as dr','dr.applicant_id','=','dri.applicant_id')
+            ->select('dri.applicant_id',
+                'dri.first_name',
+                'dri.last_name'
+            )
+            ->where('dri.gender', $params['gender'])
+            ->where('dr.status','h')
+            ->get()->toArray();
+
+        return $assistants;
+    }
 }

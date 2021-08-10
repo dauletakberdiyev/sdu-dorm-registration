@@ -26,7 +26,6 @@ class StudentListRequest extends FormRequest
     public function rules()
     {
         return [
-            'building_id' => 'required',
             'sort_by' => 'nullable',
             'desc' => 'nullable',
             'search_value' => 'nullable',
