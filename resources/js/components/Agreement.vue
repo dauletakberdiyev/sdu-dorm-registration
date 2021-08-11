@@ -25,7 +25,7 @@
         methods:{
             onPageLoad(){
                 this.$http.post('/api/fileToBase64',{
-                    file_path: 'C:/xampp/htdocs/dorm-registration/public/agreement/agreement.pdf'
+                    file_path: 'agreement/agreement.pdf'
                 }).then(response=>{
                     this.base64ToArrayBuffer(response.data.data);
                 });

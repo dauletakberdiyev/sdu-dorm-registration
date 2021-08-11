@@ -2303,7 +2303,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.$http.post('/api/fileToBase64', {
-        file_path: 'C:/xampp/htdocs/dorm-registration/public/agreement/agreement.pdf'
+        file_path: 'agreement/agreement.pdf'
       }).then(function (response) {
         _this.base64ToArrayBuffer(response.data.data);
       });
