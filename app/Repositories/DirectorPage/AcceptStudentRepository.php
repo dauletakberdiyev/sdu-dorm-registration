@@ -4,12 +4,18 @@ namespace App\Repositories\DirectorPage;
 
 use App\Enums\ApiOutputStatus;
 use App\Enums\ApiOutputStatusCode;
+use App\Events\SendConfirmMessageEvent;
+use App\Models\Tables\RegisterInfo;
 use App\Services\RegistrationService;
 
 class AcceptStudentRepository
 {
     public function manage($request){
         $uRes = RegistrationService::acceptStudent($request);
+
+        $userInfo = RegisterInfo::where('applicant_id', $request['applicant_id'])->first();
+
+        event(new SendConfirmMessageEvent($userInfo, $request['email']));
 
         if($uRes[0]->uRes == 1) {
             return response()->json([

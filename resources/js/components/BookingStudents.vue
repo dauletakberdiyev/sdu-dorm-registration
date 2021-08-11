@@ -32,7 +32,7 @@
                                         <td>{{student.iin}}</td>
                                         <td>
                                             <div class="checkbox" style="margin-bottom: 10px;">
-                                                <input type="checkbox" :id="student.applicant_id" :data-applicant="student.applicant_id" @click="checkStudent">
+                                                <input type="checkbox" :id="student.applicant_id" :data-applicant="student.applicant_id" :data-email="student.applicant_email" @click="checkStudent">
                                                 <label :for="student.applicant_id"><span class="checkbox-icon"></span></label>
                                             </div>
                                         </td>
@@ -60,7 +60,7 @@
         data(){
             return{
                 values:{
-                    acceptedStudents:[]
+                    acceptedStudents:{}
                 },
                 loadData:{
                     studentList:{},
@@ -74,7 +74,7 @@
 
         methods: {
             onPageLoad() {
-                this.$http.get('api/director/bookingStudents?building_id='+0)
+                this.$http.get('api/director/bookingStudents')
                     .then(response =>{
                        this.loadData.studentList = response.data.data.bookingStudents;
                        console.log(this.loadData.studentList);
@@ -82,28 +82,28 @@
             },
 
             acceptStudent(){
-                this.values.acceptedStudents.forEach((elem)=>{
-                    this.$http.post('/api/director/acceptStudent', {
-                        applicant_id: elem.applicant_id,
-                    })
-                        .then(response => {
-                            console.log(response);
-                        });
+                Object.keys(this.values.acceptedStudents).forEach(key =>{
+                    this.$http.post('api/director/acceptStudent', {
+                        applicant_id: this.values.acceptedStudents[key].applicant_id,
+                        email: this.values.acceptedStudents[key].email,
+                    }).then(response =>{
+                        console.log(response);
+                    });
                 });
             },
 
             checkStudent(e){
-                if(e.target.checked){
-                    this.values.acceptedStudents.push({"applicant_id": e.target.dataset.applicant});
+                if(e.target.dataset.applicant in this.values.acceptedStudents){
+                    delete this.values.acceptedStudents[e.target.dataset.applicant];
                 }
-                else {
-                    for (let i = 0; i < this.values.acceptedStudents.length; i++) {
-                        if (this.values.acceptedStudents[i]['applicant_id'] == e.target.dataset.applicant) {
-                            this.values.acceptedStudents.splice(i, 1);
-                        }
+                else{
+                    this.values.acceptedStudents[e.target.dataset.applicant] = {
+                        'applicant_id': e.target.dataset.applicant,
+                        'email': e.target.dataset.email
                     }
                 }
-                console.log(this.values.acceptedStudents);
+
+                // console.log(this.values.acceptedStudents['56'].email);
             },
         }
     }

@@ -2700,7 +2700,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       values: {
-        acceptedStudents: []
+        acceptedStudents: {}
       },
       loadData: {
         studentList: {}
@@ -2714,7 +2714,7 @@ __webpack_require__.r(__webpack_exports__);
     onPageLoad: function onPageLoad() {
       var _this = this;
 
-      this.$http.get('api/director/bookingStudents?building_id=' + 0).then(function (response) {
+      this.$http.get('api/director/bookingStudents').then(function (response) {
         _this.loadData.studentList = response.data.data.bookingStudents;
         console.log(_this.loadData.studentList);
       });
@@ -2722,28 +2722,25 @@ __webpack_require__.r(__webpack_exports__);
     acceptStudent: function acceptStudent() {
       var _this2 = this;
 
-      this.values.acceptedStudents.forEach(function (elem) {
-        _this2.$http.post('/api/director/acceptStudent', {
-          applicant_id: elem.applicant_id
+      Object.keys(this.values.acceptedStudents).forEach(function (key) {
+        _this2.$http.post('api/director/acceptStudent', {
+          applicant_id: _this2.values.acceptedStudents[key].applicant_id,
+          email: _this2.values.acceptedStudents[key].email
         }).then(function (response) {
           console.log(response);
         });
       });
     },
     checkStudent: function checkStudent(e) {
-      if (e.target.checked) {
-        this.values.acceptedStudents.push({
-          "applicant_id": e.target.dataset.applicant
-        });
+      if (e.target.dataset.applicant in this.values.acceptedStudents) {
+        delete this.values.acceptedStudents[e.target.dataset.applicant];
       } else {
-        for (var i = 0; i < this.values.acceptedStudents.length; i++) {
-          if (this.values.acceptedStudents[i]['applicant_id'] == e.target.dataset.applicant) {
-            this.values.acceptedStudents.splice(i, 1);
-          }
-        }
-      }
+        this.values.acceptedStudents[e.target.dataset.applicant] = {
+          'applicant_id': e.target.dataset.applicant,
+          'email': e.target.dataset.email
+        };
+      } // console.log(this.values.acceptedStudents['56'].email);
 
-      console.log(this.values.acceptedStudents);
     }
   }
 });
@@ -9203,7 +9200,8 @@ var render = function() {
                                       attrs: {
                                         type: "checkbox",
                                         id: student.applicant_id,
-                                        "data-applicant": student.applicant_id
+                                        "data-applicant": student.applicant_id,
+                                        "data-email": student.applicant_email
                                       },
                                       on: { click: _vm.checkStudent }
                                     }),

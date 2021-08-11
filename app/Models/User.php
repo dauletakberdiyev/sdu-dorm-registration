@@ -179,6 +179,7 @@ class User extends Authenticatable
         $students = DB::table($this->table, 'dr')
             ->leftJoin('dorm_register_info as dri','dri.applicant_id','=','dr.applicant_id')
             ->select('dr.applicant_id',
+                'dr.applicant_email',
                 'dri.first_name',
                 'dri.last_name',
                 'dri.iin'

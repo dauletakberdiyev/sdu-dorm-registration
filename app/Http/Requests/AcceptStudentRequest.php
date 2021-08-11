@@ -27,6 +27,7 @@ class AcceptStudentRequest extends FormRequest
     {
         return [
             'applicant_id' => 'required',
+            'email' => 'required'
         ];
     }
 

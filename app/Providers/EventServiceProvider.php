@@ -21,6 +21,10 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\SendForgotPasswordLinkMailEvent' => [
             'App\Listeners\SendForgotPasswordLinkMailListener',
         ],
+
+        'App\Events\SendConfirmMessageEvent' => [
+            'App\Listeners\SendConfirmMessageListener',
+        ],
     ];
 
     /**
