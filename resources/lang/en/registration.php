@@ -15,7 +15,7 @@ return [
     'gender' => 'Gender',
     'upload_pass' => 'Upload Passport',
     'upload_passport' => 'Upload Passport (jpeg, jpg, png) File',
-    'upload_photo' => 'Upload Photo',
+    'upload_photo' => 'Upload Photo(3x4)',
     'upload_photo_title' => 'Upload Photo (jpeg, jpg, png) File',
     'place_count' => 'Count of free places:',
 

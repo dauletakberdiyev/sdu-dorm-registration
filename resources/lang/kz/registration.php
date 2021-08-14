@@ -13,9 +13,9 @@ return [
     'phone_number' => 'Телефон нөмірі',
     'iin' => 'ЖСН',
     'gender' => 'Жынысы',
-    'upload_pass' => 'Паспортты жүктеу',
-    'upload_passport' => 'Паспортты жүктеу (jpeg, jpg, png)',
-    'upload_photo' => 'Суретті жүктеу',
+    'upload_pass' => 'Жеке күәлікті жүктеу',
+    'upload_passport' => 'Жеке күәлікті жүктеу (jpeg, jpg, png)',
+    'upload_photo' => 'Суретті жүктеу(3x4)',
     'upload_photo_title' => 'Суретті жүктеу (jpeg, jpg, png)',
     'place_count' => 'Бос орындар саны:',
 

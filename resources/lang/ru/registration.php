@@ -15,7 +15,7 @@ return [
     'gender' => 'Пол',
     'upload_pass' => 'Загрузить удостоверение',
     'upload_passport' => 'Загрузить удостоверение (jpeg, jpg, png)',
-    'upload_photo' => 'Загрузить фото',
+    'upload_photo' => 'Загрузить фото(3x4)',
     'upload_photo_title' => 'Загрузить фото (jpeg, jpg, png)',
     'place_count' => 'Количество свободных мест:',
 

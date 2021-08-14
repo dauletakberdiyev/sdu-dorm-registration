@@ -47,10 +47,10 @@ class RegistrationService
     public static function uploadCheckImage($image, $folderTitle, $iin){
         $user = Auth::user();
         $imageName = time().'.'.$image->getClientOriginalExtension();
-        $path = public_path('uploads').'\\'.$iin.'\\'.$folderTitle;
+        $path = public_path('uploads').'/'.$iin.'/'.$folderTitle;
         $image->move($path, $imageName);
 
-        $pathName = $path.'\\'.$imageName;
+        $pathName = $path.'/'.$imageName;
 
         return $pathName;
     }
