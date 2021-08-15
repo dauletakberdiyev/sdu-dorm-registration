@@ -16,7 +16,7 @@ class RegistrationDashboardRepository
             ->where('dri.iin', $credentials->input('iin'))
             ->first();
 
-        if ($credentials->input('iin') === $userIin->iin){
+        if (isset($userIin->iin) && $credentials->input('iin') === $userIin->iin){
             return response()->json([
                 'status' => ApiOutputStatus::ERROR,
                 'status_code' => ApiOutputStatusCode::ERROR,

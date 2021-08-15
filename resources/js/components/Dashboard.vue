@@ -78,14 +78,14 @@
                                 <div class="col-xl-6 col-md-6 col-sm-6">
                                     <div class="utf-submit-field">
                                         <h5>{{ $trans('registration.email') }} <span>*</span></h5>
-                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.email')" id="email" v-model="request.email" required>
+                                        <input type="email" class="utf-with-border" :placeholder="$trans('registration.email')" id="email" v-model="request.email" required>
                                     </div>
                                 </div>
 
                                 <div class="col-xl-6 col-md-6 col-sm-6">
                                     <div class="utf-submit-field">
                                         <h5>{{$trans('registration.iin')}} <span>*</span></h5>
-                                        <input type="text" class="utf-with-border" :placeholder="$trans('registration.iin')" id="iin" v-model="request.iin" required>
+                                        <input type="text" maxlength="12" class="utf-with-border" :placeholder="$trans('registration.iin')" id="iin" v-model="request.iin" required>
                                     </div>
                                 </div>
 

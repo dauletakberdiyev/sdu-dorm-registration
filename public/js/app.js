@@ -9638,7 +9638,7 @@ var render = function() {
                                 ],
                                 staticClass: "utf-with-border",
                                 attrs: {
-                                  type: "text",
+                                  type: "email",
                                   placeholder: _vm.$trans("registration.email"),
                                   id: "email",
                                   required: ""
@@ -9685,6 +9685,7 @@ var render = function() {
                                 staticClass: "utf-with-border",
                                 attrs: {
                                   type: "text",
+                                  maxlength: "12",
                                   placeholder: _vm.$trans("registration.iin"),
                                   id: "iin",
                                   required: ""
