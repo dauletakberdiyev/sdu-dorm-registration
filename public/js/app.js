@@ -3161,6 +3161,8 @@ __webpack_require__.r(__webpack_exports__);
         }) : _this.goTo('adminPage', {
           admin: true
         });
+      })["catch"](function (e) {
+        alert(e.response.data.message);
       });
     },
     getGenderTitle: function getGenderTitle() {

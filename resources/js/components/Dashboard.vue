@@ -390,9 +390,12 @@
                 for(const key in this.request){
                     formData.append(key, this.request[key])
                 }
-                this.$http.post('api/dashboard',formData).then(response=>{
+                this.$http.post('api/dashboard',formData)
+                    .then(response=>{
                     (!this.admin) ? this.goTo('successPage',{email: this.request.email})
                         : this.goTo('adminPage', {admin: true});
+                }).catch((e) => {
+                    alert(e.response.data.message);
                 })
             },
 
