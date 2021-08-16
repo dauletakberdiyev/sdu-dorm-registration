@@ -116,6 +116,9 @@ export default [
         path: '/not-found',
         component: Page404,
         name: 'notFound',
+        meta: {
+            noSideBar: true
+        }
     },
     {
         path:'*',
