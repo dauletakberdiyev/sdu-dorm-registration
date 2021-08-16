@@ -4211,17 +4211,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes */ "./resources/js/router/routes.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./routes */ "./resources/js/router/routes.js");
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_0__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_1__.default);
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__.default({
+vue__WEBPACK_IMPORTED_MODULE_1__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_2__.default);
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__.default({
   mode: 'history',
   base: '',
-  routes: _routes__WEBPACK_IMPORTED_MODULE_2__.default
+  routes: _routes__WEBPACK_IMPORTED_MODULE_0__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
 
@@ -4264,109 +4264,99 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([// {
-//     path:'/',
-//     redirect: {name:'dashboard'}
-// },
-// {
-//     path: '/login',
-//     component: Login,
-//     name: 'login',
-//     meta: {
-//         noSideBar: true
-//     }
-// },
-// {
-//     path:'/dashboard',
-//     component:Dashboard,
-//     name:'dashboard',
-//     meta: {
-//         noSideBar: true
-//     }
-// },
-// {
-//     path:'/signup',
-//     component:Signup,
-//     name:'signup',
-//     meta: {
-//         noSideBar: true
-//     }
-// },
-// {
-//     path: '/admin-page',
-//     component: AdminPage,
-//     name: 'adminPage',
-//     // meta: {
-//     //     auth: {roles:['admin'], redirect:{name: 'login'}}
-//     // }
-// },
-// {
-//     path: '/assistants',
-//     component: AssistantPage,
-//     name: 'assistantPage'
-// },
-// {
-//     path: '/assistants/relateStudent',
-//     component: RelateStudent,
-//     name: 'relateStudent',
-//     props: true,
-// },
-// {
-//     path: '/floor-assistants',
-//     component: FloorAssistantPage,
-//     name: 'floorAssistant'
-// },
-// {
-//     path: '/floor-assistants/relate-assistant',
-//     component: RelateStudent,
-//     name: 'relateAssistant',
-//     props: true,
-// },
-// {
-//     path: '/dashboard/success',
-//     component: SuccessPage,
-//     name: 'successPage',
-//     props: true,
-//     meta: {
-//         noSideBar: true
-//     }
-// },
-// {
-//     path: '/dashboard/agreement',
-//     component: Agreement,
-//     name: 'agreement',
-//     meta: {
-//         noSideBar: true
-//     }
-// },
-// {
-//     path: '/dashboard/instruction',
-//     component: InstructionPage,
-//     name: 'instruction',
-//     meta: {
-//         noSideBar: true
-//     }
-// },
-// {
-//     path: '/my-profile',
-//     component: MyProfile,
-//     name: 'myProfile',
-// },
-// {
-//     path: '/offline-registration',
-//     component: Dashboard,
-//     name: 'offlineRegistration',
-//     props: true
-// },
-// {
-//     path: '/booking-students',
-//     component: BookingStudents,
-//     name: 'bookingStudents',
-// },
-{
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([{
+  path: '/',
+  redirect: {
+    name: 'dashboard'
+  }
+}, {
+  path: '/login',
+  component: _components_Front__WEBPACK_IMPORTED_MODULE_0__.default,
+  name: 'login',
+  meta: {
+    noSideBar: true
+  }
+}, {
+  path: '/dashboard',
+  component: _components_Dashboard__WEBPACK_IMPORTED_MODULE_1__.default,
+  name: 'dashboard',
+  meta: {
+    noSideBar: true
+  }
+}, {
+  path: '/signup',
+  component: _components_Signup__WEBPACK_IMPORTED_MODULE_2__.default,
+  name: 'signup',
+  meta: {
+    noSideBar: true
+  }
+}, {
+  path: '/admin-page',
+  component: _components_AdminPage__WEBPACK_IMPORTED_MODULE_3__.default,
+  name: 'adminPage' // meta: {
+  //     auth: {roles:['admin'], redirect:{name: 'login'}}
+  // }
+
+}, {
+  path: '/assistants',
+  component: _components_AssistantPage__WEBPACK_IMPORTED_MODULE_4__.default,
+  name: 'assistantPage'
+}, {
+  path: '/assistants/relateStudent',
+  component: _components_RelateStudent__WEBPACK_IMPORTED_MODULE_5__.default,
+  name: 'relateStudent',
+  props: true
+}, {
+  path: '/floor-assistants',
+  component: _components_FloorAssistantPage__WEBPACK_IMPORTED_MODULE_6__.default,
+  name: 'floorAssistant'
+}, {
+  path: '/floor-assistants/relate-assistant',
+  component: _components_RelateStudent__WEBPACK_IMPORTED_MODULE_5__.default,
+  name: 'relateAssistant',
+  props: true
+}, {
+  path: '/dashboard/success',
+  component: _components_SuccessPage__WEBPACK_IMPORTED_MODULE_7__.default,
+  name: 'successPage',
+  props: true,
+  meta: {
+    noSideBar: true
+  }
+}, {
+  path: '/dashboard/agreement',
+  component: _components_Agreement__WEBPACK_IMPORTED_MODULE_8__.default,
+  name: 'agreement',
+  meta: {
+    noSideBar: true
+  }
+}, {
+  path: '/dashboard/instruction',
+  component: _components_InstructionPage__WEBPACK_IMPORTED_MODULE_10__.default,
+  name: 'instruction',
+  meta: {
+    noSideBar: true
+  }
+}, {
+  path: '/my-profile',
+  component: _components_MyProfile__WEBPACK_IMPORTED_MODULE_9__.default,
+  name: 'myProfile'
+}, {
+  path: '/offline-registration',
+  component: _components_Dashboard__WEBPACK_IMPORTED_MODULE_1__.default,
+  name: 'offlineRegistration',
+  props: true
+}, {
+  path: '/booking-students',
+  component: _components_BookingStudents__WEBPACK_IMPORTED_MODULE_11__.default,
+  name: 'bookingStudents'
+}, {
   path: '/not-found',
   component: _components_Page404__WEBPACK_IMPORTED_MODULE_12__.default,
-  name: 'notFound'
+  name: 'notFound',
+  meta: {
+    noSideBar: true
+  }
 }, {
   path: '*',
   redirect: {
