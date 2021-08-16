@@ -17,16 +17,6 @@
             <table style="background-color: #f2f3f8; max-width:670px;  margin:0 auto;" width="100%" border="0"
                    align="center" cellpadding="0" cellspacing="0">
                 <tr>
-                    <td style="height:80px;">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td style="text-align:center;">
-                        <a href="{{ URL::to('/') }}" title="logo" target="_blank">
-                            <img width="250" src="{{ URL::to('/') . '/images/mail/logo.png'}}" title="logo" alt="logo">
-                        </a>
-                    </td>
-                </tr>
-                <tr>
                     <td style="height:20px;">&nbsp;</td>
                 </tr>
                 <tr>
