@@ -11,10 +11,11 @@ class BookingStudentRepository
 {
     use ApiHelper;
 
-    public function manage(){
+    public function manage($request){
         $user = new User();
 
         $params['gender'] = $this->userGender();
+        $params['search_value'] = $request['search_value'];
 
         $bookingStudents = $user->bookingStudents($params);
 

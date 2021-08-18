@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AdminPage;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BookedStudentsRequest;
 use App\Http\Requests\StudentListRequest;
 use App\Repositories\AccountingPage\AccountingPageRepository;
 use App\Repositories\DirectorPage\BookingStudentRepository;
@@ -26,8 +27,8 @@ class StudentListController extends Controller
         return $repository->manage($request);
     }
 
-    public function bookingStudentList(BookingStudentRepository $repository)
+    public function bookingStudentList(BookedStudentsRequest $request, BookingStudentRepository $repository)
     {
-        return $repository->manage();
+        return $repository->manage($request);
     }
 }

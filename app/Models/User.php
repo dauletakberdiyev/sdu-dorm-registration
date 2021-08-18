@@ -85,9 +85,6 @@ class User extends Authenticatable
             ->where('dri.gender','=',$params['gender']);
 
         if($params['search_value'] !== null){
-//            $studentList = $studentList->where(DB::raw("(dri.last_name LIKE '".$params['search_value']."%' or dri.first_name LIKE '".$params['search_value']."%')"));
-//            $studentList = $studentList->where('dri.first_name', 'like', $params['search_value'].'%')
-//                            ->orWhere('dri.last_name', 'like', $params['search_value'].'%');
             $studentList = $studentList->where(function($query) use($params){
                 $query->where('dri.first_name', 'like', $params['search_value'].'%')
                     ->orWhere('dri.last_name', 'like', $params['search_value'].'%');
@@ -185,9 +182,15 @@ class User extends Authenticatable
                 'dri.iin'
             )
             ->where('dr.status','w')
-            ->where('dri.gender', $params['gender'])
-            ->get()->toArray();
+            ->where('dri.gender', $params['gender']);
 
-        return $students;
+        if($params['search_value'] !== null){
+            $students = $students->where(function($query) use($params){
+                $query->where('dri.first_name', 'like', $params['search_value'].'%')
+                    ->orWhere('dri.last_name', 'like', $params['search_value'].'%');
+            });
+        }
+
+        return $students->get()->toArray();
     }
 }

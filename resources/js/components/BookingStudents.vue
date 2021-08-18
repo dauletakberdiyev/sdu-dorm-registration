@@ -9,6 +9,15 @@
         </div>
 
         <div class="utf-dashboard-content-inner-aera">
+            <form @submit.prevent="onPageLoad()">
+                <div class="utf-submit-field">
+                    <h5>{{$trans('adminPage.searchStudent')}}</h5>
+                    <div class="search-student">
+                        <input type="text" id="studentSearch" v-model="request.searchValue">
+                        <input type="submit" :value="$trans('adminPage.search')">
+                    </div>
+                </div>
+            </form>
             <form @submit="acceptStudent">
                 <div class="row">
                     <div class="col-xl-12">
@@ -59,6 +68,9 @@
         name: "BookingStudents",
         data(){
             return{
+                request:{
+                    searchValue: '',
+                },
                 values:{
                     acceptedStudents:{}
                 },
@@ -74,7 +86,9 @@
 
         methods: {
             onPageLoad() {
-                this.$http.get('api/director/bookingStudents')
+                this.$http.post('api/director/bookingStudents',{
+                    search_value: this.request.searchValue,
+                })
                     .then(response =>{
                        this.loadData.studentList = response.data.data.bookingStudents;
                        console.log(this.loadData.studentList);
