@@ -4,7 +4,6 @@ namespace App\Repositories\RegistrationDashboard;
 
 use App\Enums\ApiOutputStatus;
 use App\Enums\ApiOutputStatusCode;
-use App\Models\Tables\RegisterInfo;
 use App\Services\RegistrationService;
 use Illuminate\Support\Facades\DB;
 
@@ -21,6 +20,15 @@ class RegistrationDashboardRepository
                 'status' => ApiOutputStatus::ERROR,
                 'status_code' => ApiOutputStatusCode::ERROR,
                 'message' => __('error.already_exist_user'),
+                'data' => []
+            ], 406);
+        }
+
+        if (intval($credentials->input('course')) === 1){
+            return response()->json([
+                'status' => ApiOutputStatus::ERROR,
+                'status_code' => ApiOutputStatusCode::ERROR,
+                'message' => __('error.first_course_student'),
                 'data' => []
             ], 406);
         }

@@ -10,5 +10,7 @@ return [
     'reset_database_error' => '#SYSDB001; Reset password can not be handled.',
     'signup_database_error' => 'Sign up can not be handled',
     'already_exist_user' => 'This user already exist',
-    'insert_database_error' => 'Cannot insert this data to database'
+    'insert_database_error' => 'Cannot insert this data to database',
+
+    'first_course_student' => 'We can not accept first course student. Sorry :(',
 ];

@@ -56,4 +56,6 @@ return [
     'kaspi_info4' => 'After payment, send a PDF version of the receipt to the following numbers via WhatsApp:',
     'dorm_number_boy' => 'For Boys: +7 778 727 9567',
     'dorm_number_girls' => 'For Girls: +7 778 637 2657',
+
+    'first_course_warning' => 'Due to the fact that the first courses will have an online form of study, the Dormitory will not accept first-year students this semester',
 ];

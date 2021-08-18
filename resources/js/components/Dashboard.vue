@@ -40,6 +40,18 @@
                     </div>
                 </div>
 
+                <div class="col-xl-12 counter_inner_block margin-bottom-20 margin-left-10 margin-right-10">
+                    <div class="utf-counters-container-aera justify-content-center">
+                        <div class="utf-job-listing utf-apply-button-item">
+                            <div class="utf-job-listing-details">
+                                <div class="utf-job-listing-description">
+                                    <h3 style="color: red">{{ $trans('registration.first_course_warning') }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-xl-12">
                     <div class="dashboard-box">
                         <div class="headline">
