@@ -61,7 +61,8 @@ class RegisterInfo extends Model
                 'dri.school',
                 'dre.room_id',
                 'dri.applicant_id',
-                'dri.assistant_id');
+                'dri.assistant_id')
+            ->where('dri.gender', $params['gender']);
 
         if(!$isAssistant){
             $students->where('dr.status', 'h');
@@ -82,6 +83,26 @@ class RegisterInfo extends Model
             ->where('dri.gender', $params['gender'])
             ->where('dr.status','h')
             ->get()->toArray();
+
+        return $assistants;
+    }
+
+    public function assistantList($params){
+        $assistants = DB::table($this->table, 'dri')
+            ->leftJoin('dorm_register as dr','dr.applicant_id','=','dri.applicant_id')
+            ->leftJoin('dorm_residents as dre','dre.applicant_id','=','dri.applicant_id')
+            ->leftJoin('program_title as pt', 'pt.program_code','=','dri.program_code')
+            ->select('dr.applicant_id',
+                'dri.first_name',
+                'dri.last_name',
+                'dri.course',
+                'dri.self_number',
+                'dre.room_id as room',
+                'pt.title_en as speciality'
+            )
+            ->where('dri.gender', $params['gender'])
+            ->where('dr.status', $params['assistantType'])
+            ->paginate(5);;
 
         return $assistants;
     }

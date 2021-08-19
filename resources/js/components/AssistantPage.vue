@@ -26,25 +26,23 @@
                                         <th>{{$trans('adminPage.speciality')}}</th>
                                         <th>{{$trans('adminPage.phone_number')}}</th>
                                         <th>{{$trans('adminPage.room')}}</th>
-                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr v-for="assistant in loadData.assistantList.data">
-                                        <td>{{assistant.assistant_info.first_name}}</td>
-                                        <td>{{assistant.assistant_info.last_name}}</td>
+                                        <td>{{assistant.first_name}}</td>
+                                        <td>{{assistant.last_name}}</td>
 <!--                                        <td>{{assistant.applicant_email}}</td>-->
-                                        <td>{{assistant.assistant_info.course}}</td>
-                                        <td>{{assistant.speciality.title_en}}</td>
-                                        <td>{{assistant.assistant_info.self_number}}</td>
+                                        <td>{{assistant.course}}</td>
+                                        <td>{{assistant.speciality}}</td>
+                                        <td>{{assistant.self_number}}</td>
                                         <td>
-                                            <select class="utf-with-border" v-model="assistant.room.room_id" @change="changeRoom" :data-applicant="assistant.applicant_id" :data-oldRoom="assistant.room.old_room_id">
+                                            <select class="utf-with-border" v-model="assistant.room" @change="changeRoom" :data-applicant="assistant.applicant_id" :data-oldRoom="assistant.room.old_room_id">
                                                 <option v-for="room in loadData.assistantRooms" :value="room.room_id" :title="room.free_place" :disabled="room.free_place == 0">
                                                     {{room.room_id}}
                                                 </option>
                                             </select>
                                         </td>
-                                        <td><button @click="goTo('relateStudent', {roomId: assistant.room.room_id, assistId: assistant.applicant_id})" class="button ripple-effect margin-top-5 margin-bottom-10">{{$trans('adminPage.delete')}}</button></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -149,15 +147,15 @@
                                             <div class="utf-submit-field">
                                                 <h5>{{$trans('adminPage.room')}}</h5>
                                                 <select class="utf-with-border" title="Select Room" v-model="request.room_id" id="room-list">
-                                                    <option v-for="room in values.rooms" :value="room.title" :title="'In this room ' + room.free_place + ' place(s) is(are) free'">
-                                                        {{ room.title }}
+                                                    <option v-for="room in loadData.assistantRooms" :value="room.room_id" :title="'In this room ' + room.free_place + ' place(s) is(are) free'">
+                                                        {{ room.room_id }}
                                                     </option>
                                                 </select>
 
                                             </div>
                                         </div>
                                     </div>
-                                    <input class="button ripple-effect" type="submit" form="create-assistant" value="Send Message">
+                                    <input class="button ripple-effect" type="submit" form="create-assistant" value="Create Assistant">
                                 </form>
                             </div>
                         </div>
@@ -208,7 +206,6 @@
         mounted() {
             this.onPageLoad()
             this.getFacultyTitle()
-            this.getRoomsTitle()
         },
 
         methods:{
@@ -234,12 +231,12 @@
                     })
             },
 
-            getRoomsTitle(){
-                this.$http.post('api/director/assistant-room')
-                    .then(response => {
-                        this.values.rooms = response.data.data;
-                    })
-            },
+            // getRoomsTitle(){
+            //     this.$http.post('api/director/assistant-room')
+            //         .then(response => {
+            //             this.values.rooms = response.data.data;
+            //         })
+            // },
 
             getProgramTitle(){
                 this.$http.post('api/getProgramTitle',{

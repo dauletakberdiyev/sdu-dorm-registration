@@ -29,14 +29,14 @@
                                     </thead>
                                     <tbody>
                                     <tr v-for="assistant in loadData.assistantList.data">
-                                        <td>{{assistant.assistant_info.first_name}}</td>
-                                        <td>{{assistant.assistant_info.last_name}}</td>
+                                        <td>{{assistant.first_name}}</td>
+                                        <td>{{assistant.last_name}}</td>
 <!--                                        <td>{{assistant.applicant_email}}</td>-->
-                                        <td>{{assistant.assistant_info.course}}</td>
-                                        <td>{{assistant.speciality.title_en}}</td>
-                                        <td>{{assistant.assistant_info.self_number}}</td>
-                                        <td>{{assistant.room.room_id}}</td>
-                                        <td><button @click="goTo('relateAssistant', {roomId: assistant.room.room_id, assistId: assistant.applicant_id})" class="button ripple-effect margin-top-5 margin-bottom-10">Connect</button></td>
+                                        <td>{{assistant.course}}</td>
+                                        <td>{{assistant.speciality}}</td>
+                                        <td>{{assistant.self_number}}</td>
+                                        <td>{{assistant.room}}</td>
+                                        <td><button @click="goTo('relateAssistant', {roomId: assistant.room, assistId: assistant.applicant_id})" class="button ripple-effect margin-top-5 margin-bottom-10">Connect</button></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -134,8 +134,8 @@
                                             <div class="utf-submit-field">
                                                 <h5>{{$trans('adminPage.room')}}</h5>
                                                 <select class="utf-with-border" title="Select Room" v-model="request.room_id" id="room-list">
-                                                    <option v-for="room in values.rooms" :value="room.title" :title="'In this room ' + room.free_place + ' place(s) is(are) free'">
-                                                        {{ room.title }}
+                                                    <option v-for="room in loadData.assistantRooms" :value="room.room_id" :title="'In this room ' + room.free_place + ' place(s) is(are) free'">
+                                                        {{ room.room_id }}
                                                     </option>
                                                 </select>
                                             </div>
@@ -185,6 +185,7 @@
 
                 loadData:{
                     assistantList:{},
+                    assistantRooms:{},
                 },
 
                 pagination: {}
@@ -194,7 +195,6 @@
         mounted(){
             this.onPageLoad()
             this.getFacultyTitle()
-            this.getRoomsTitle()
         },
 
         methods: {
@@ -204,6 +204,7 @@
                 this.$http.post(page_url)
                     .then(response => {
                         this.loadData.assistantList = response.data.data.assistants;
+                        this.loadData.assistantRooms = response.data.data.rooms;
                         this.makePagination(response.data.data.assistants);
                     });
             },
@@ -215,12 +216,12 @@
                     })
             },
 
-            getRoomsTitle(){
-                this.$http.post('api/director/floor-assistant-room')
-                    .then(response => {
-                        this.values.rooms = response.data.data;
-                    })
-            },
+            // getRoomsTitle(){
+            //     this.$http.post('api/director/floor-assistant-room')
+            //         .then(response => {
+            //             this.values.rooms = response.data.data;
+            //         })
+            // },
 
             getProgramTitle(){
                 this.$http.post('api/getProgramTitle',{

@@ -8,11 +8,11 @@ class AssistantService
 {
     public static function createAssistant($params){
         return DB::transaction(function () use ($params){
-            DB::select('call createAssistant(?,?,?,?,?,?,?,?,?,@uRes)',
+            DB::select('call createAssistant(?,?,?,?,?,?,?,?,?,?,@uRes)',
                 array(
                     $params['email'],$params['first_name'],$params['last_name'],
                     $params['faculty_code'],$params['program_code'],$params['course'],
-                    $params['self_number'],$params['room_id'],$params['status'],
+                    $params['self_number'],$params['room_id'],$params['status'],$params['gender']
                 ));
 
             return DB::select('select @uRes as uRes');

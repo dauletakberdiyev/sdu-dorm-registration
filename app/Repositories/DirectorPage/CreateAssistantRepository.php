@@ -4,10 +4,13 @@ namespace App\Repositories\DirectorPage;
 
 use App\Enums\ApiOutputStatus;
 use App\Enums\ApiOutputStatusCode;
+use App\Http\Controllers\Helpers\ApiHelper;
 use App\Services\AssistantService;
 
 class CreateAssistantRepository
 {
+    use ApiHelper;
+
     public function create($credentials, $assistantType)
     {
         $assistantInfo = [];
@@ -21,6 +24,7 @@ class CreateAssistantRepository
         $assistantInfo['self_number'] = $credentials['self_number'];
         $assistantInfo['room_id'] = $credentials['room_id'];
         $assistantInfo['status'] = $assistantType;
+        $assistantInfo['gender'] = $this->userGender();
 
         $uRes = AssistantService::createAssistant($assistantInfo);
 

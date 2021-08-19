@@ -5,6 +5,7 @@ namespace App\Repositories\DirectorPage;
 use App\Enums\ApiOutputStatus;
 use App\Enums\ApiOutputStatusCode;
 use App\Http\Controllers\Helpers\ApiHelper;
+use App\Models\Tables\RegisterInfo;
 use App\Models\Tables\RoomModel;
 use App\Models\User;
 
@@ -15,11 +16,15 @@ class StudentAssistantRepository
     public function manage($assistantType)
     {
         $roomModel = new RoomModel();
+        $userInfo = new RegisterInfo();
         $params['gender'] = $this->userGender();
+        $params['assistantType'] = $assistantType;
 
-        $assistants = User::with('assistantInfo', 'speciality', 'room')
-            ->where('status', $assistantType)
-            ->paginate(5);
+        $assistants = $userInfo->assistantList($params);
+
+//        $assistants = User::with('assistantInfo', 'speciality', 'room')
+//            ->where('status', $assistantType)
+//            ->paginate(5);
 
 
         if($assistantType == 'h'){
