@@ -48,6 +48,9 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td>{{$trans('adminPage.student_count')}}{{values.studentCount}}</td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -74,7 +77,8 @@
                     searchValue: '',
                 },
                 values:{
-                    acceptedStudents:{}
+                    acceptedStudents:{},
+                    studentCount:0,
                 },
                 loadData:{
                     studentList:{},
@@ -92,8 +96,9 @@
                     search_value: this.request.searchValue,
                 })
                     .then(response =>{
-                       this.loadData.studentList = response.data.data.bookingStudents;
-                       console.log(this.loadData.studentList);
+                        this.loadData.studentList = response.data.data.bookingStudents;
+                       // console.log(this.loadData.studentList);
+                        this.values.studentCount = this.loadData.studentList.length;
                     });
             },
 

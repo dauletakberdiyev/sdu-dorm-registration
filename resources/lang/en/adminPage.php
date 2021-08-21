@@ -38,4 +38,6 @@ return [
 
     'booked_student' => 'Booked Students',
     'action' => 'Action',
+
+    'student_count' => 'Student count: ',
 ];
