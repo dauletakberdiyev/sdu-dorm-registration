@@ -2700,6 +2700,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "BookingStudents",
   data: function data() {
@@ -9379,6 +9381,10 @@ var render = function() {
                             ]),
                             _vm._v(" "),
                             _c("th", { staticClass: "column-name" }, [
+                              _vm._v(_vm._s(_vm.$trans("adminPage.course")))
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { staticClass: "column-name" }, [
                               _vm._v(_vm._s(_vm.$trans("adminPage.action")))
                             ])
                           ])
@@ -9395,6 +9401,8 @@ var render = function() {
                               _c("td", [_vm._v(_vm._s(student.last_name))]),
                               _vm._v(" "),
                               _c("td", [_vm._v(_vm._s(student.iin))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(student.course))]),
                               _vm._v(" "),
                               _c("td", [
                                 _c(

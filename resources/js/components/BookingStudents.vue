@@ -30,6 +30,7 @@
                                         <th class="column-name">{{$trans('adminPage.name')}}</th>
                                         <th class="column-name">{{$trans('adminPage.surname')}}</th>
                                         <th class="column-name">{{$trans('adminPage.iin')}}</th>
+                                        <th class="column-name">{{$trans('adminPage.course')}}</th>
                                         <th class="column-name">{{$trans('adminPage.action')}}</th>
                                     </tr>
                                     </thead>
@@ -39,6 +40,7 @@
                                         <td>{{student.first_name}}</td>
                                         <td>{{student.last_name}}</td>
                                         <td>{{student.iin}}</td>
+                                        <td>{{student.course}}</td>
                                         <td>
                                             <div class="checkbox" style="margin-bottom: 10px;">
                                                 <input type="checkbox" :id="student.applicant_id" :data-applicant="student.applicant_id" :data-email="student.applicant_email" @click="checkStudent">

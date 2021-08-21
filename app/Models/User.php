@@ -179,7 +179,8 @@ class User extends Authenticatable
                 'dr.applicant_email',
                 'dri.first_name',
                 'dri.last_name',
-                'dri.iin'
+                'dri.iin',
+                'dri.course'
             )
             ->where('dr.status','w')
             ->where('dri.gender', $params['gender']);
