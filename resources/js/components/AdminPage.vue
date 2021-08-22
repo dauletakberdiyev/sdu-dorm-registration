@@ -100,8 +100,9 @@
                     <div class="margin-top-10 utf-centered-button">
                         <button type="submit" id="sendButton" class="button ripple-effect margin-top-0">{{$trans('adminPage.update')}}</button>
                     </div>
-
                 </form>
+
+                <button @click="downloadItem" id="exportButton" class="button ripple-effect margin-top-0">{{$trans('adminPage.export')}}</button>
 
                 <div class="utf-pagination-container-aera margin-top-10 margin-bottom-50">
                     <nav class="pagination">
@@ -250,6 +251,25 @@
                 }
 
                 this.pagination = pagination;
+            },
+
+            exportToExcel(){
+                this.$http.get('api/director/exportStudentList')
+                    .then(response =>{
+                        console.log(response);
+                    });
+            },
+
+            downloadItem () {
+                this.$http.get('api/director/exportStudentList', { responseType: 'blob' })
+                    .then(response => {
+                        const blob = new Blob([response.data], { type: 'application/xls' })
+                        const link = document.createElement('a')
+                        link.href = URL.createObjectURL(blob)
+                        link.download = 'studentlist.xls'
+                        link.click()
+                        URL.revokeObjectURL(link.href)
+                    }).catch(console.error)
             }
         }
     }

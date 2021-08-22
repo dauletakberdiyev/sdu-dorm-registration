@@ -40,4 +40,5 @@ return [
     'action' => 'Action',
 
     'student_count' => 'Student count: ',
+    'export' => 'Export to Excel',
 ];

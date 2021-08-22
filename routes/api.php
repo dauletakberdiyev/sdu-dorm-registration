@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Helpers\ImportExportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -63,6 +64,7 @@ Route::group(['middleware' => 'auth:api'], function(){
         Route::post('/director/floor-assistant-room', [RoomController::class, 'floorAssistantRoom'])->name('floorAssistantRooms');
         Route::post('/director/bookingStudents', [StudentListController::class, 'bookingStudentList'])->name('bookingStudents');
         Route::post('/director/acceptStudent', AcceptStudentController::class)->name('acceptStudent');
+        Route::get('/director/exportStudentList', [ImportExportController::class, 'export'])->name('export');
     });
 
     Route::post('/getUserRole', RoleController::class)->name('getUserRole');
