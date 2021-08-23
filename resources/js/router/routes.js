@@ -117,7 +117,7 @@ export default [
         component: Page404,
         name: 'notFound',
         meta: {
-            noSideBar: truegit
+            noSideBar: true
         }
     },
     {
