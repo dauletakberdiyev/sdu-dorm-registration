@@ -112,14 +112,14 @@ export default [
     //     component: BookingStudents,
     //     name: 'bookingStudents',
     // },
-    // {
-    //     path: '/not-found',
-    //     component: Page404,
-    //     name: 'notFound',
-    //     meta: {
-    //         noSideBar: true
-    //     }
-    // },
+    {
+        path: '/not-found',
+        component: Page404,
+        name: 'notFound',
+        meta: {
+            noSideBar: truegit
+        }
+    },
     {
         path:'*',
         redirect:{name:'notFound'}
