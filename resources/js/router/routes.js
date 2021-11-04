@@ -13,105 +13,105 @@ import BookingStudents from "../components/BookingStudents";
 import Page404 from "../components/Page404";
 
 export default [
-    // {
-    //     path:'/',
-    //     redirect: {name:'dashboard'}
-    // },
-    // {
-    //     path: '/login',
-    //     component: Login,
-    //     name: 'login',
-    //     meta: {
-    //         noSideBar: true
-    //     }
-    // },
-    // {
-    //     path:'/dashboard',
-    //     component:Dashboard,
-    //     name:'dashboard',
-    //     meta: {
-    //         noSideBar: true
-    //     }
-    // },
-    // {
-    //     path:'/signup',
-    //     component:Signup,
-    //     name:'signup',
-    //     meta: {
-    //         noSideBar: true
-    //     }
-    // },
-    // {
-    //     path: '/admin-page',
-    //     component: AdminPage,
-    //     name: 'adminPage',
-    //     // meta: {
-    //     //     auth: {roles:['admin'], redirect:{name: 'login'}}
-    //     // }
-    // },
-    // {
-    //     path: '/assistants',
-    //     component: AssistantPage,
-    //     name: 'assistantPage'
-    // },
-    // {
-    //     path: '/assistants/relateStudent',
-    //     component: RelateStudent,
-    //     name: 'relateStudent',
-    //     props: true,
-    // },
-    // {
-    //     path: '/floor-assistants',
-    //     component: FloorAssistantPage,
-    //     name: 'floorAssistant'
-    // },
-    // {
-    //     path: '/floor-assistants/relate-assistant',
-    //     component: RelateStudent,
-    //     name: 'relateAssistant',
-    //     props: true,
-    // },
-    // {
-    //     path: '/dashboard/success',
-    //     component: SuccessPage,
-    //     name: 'successPage',
-    //     props: true,
-    //     meta: {
-    //         noSideBar: true
-    //     }
-    // },
-    // {
-    //     path: '/dashboard/agreement',
-    //     component: Agreement,
-    //     name: 'agreement',
-    //     meta: {
-    //         noSideBar: true
-    //     }
-    // },
-    // {
-    //     path: '/dashboard/instruction',
-    //     component: InstructionPage,
-    //     name: 'instruction',
-    //     meta: {
-    //         noSideBar: true
-    //     }
-    // },
-    // {
-    //     path: '/my-profile',
-    //     component: MyProfile,
-    //     name: 'myProfile',
-    // },
-    // {
-    //     path: '/offline-registration',
-    //     component: Dashboard,
-    //     name: 'offlineRegistration',
-    //     props: true
-    // },
-    // {
-    //     path: '/booking-students',
-    //     component: BookingStudents,
-    //     name: 'bookingStudents',
-    // },
+    {
+        path:'/',
+        redirect: {name:'dashboard'}
+    },
+    {
+        path: '/login',
+        component: Login,
+        name: 'login',
+        meta: {
+            noSideBar: true
+        }
+    },
+    {
+        path:'/dashboard',
+        component:Dashboard,
+        name:'dashboard',
+        meta: {
+            noSideBar: true
+        }
+    },
+    {
+        path:'/signup',
+        component:Signup,
+        name:'signup',
+        meta: {
+            noSideBar: true
+        }
+    },
+    {
+        path: '/admin-page',
+        component: AdminPage,
+        name: 'adminPage',
+        // meta: {
+        //     auth: {roles:['admin'], redirect:{name: 'login'}}
+        // }
+    },
+    {
+        path: '/assistants',
+        component: AssistantPage,
+        name: 'assistantPage'
+    },
+    {
+        path: '/assistants/relateStudent',
+        component: RelateStudent,
+        name: 'relateStudent',
+        props: true,
+    },
+    {
+        path: '/floor-assistants',
+        component: FloorAssistantPage,
+        name: 'floorAssistant'
+    },
+    {
+        path: '/floor-assistants/relate-assistant',
+        component: RelateStudent,
+        name: 'relateAssistant',
+        props: true,
+    },
+    {
+        path: '/dashboard/success',
+        component: SuccessPage,
+        name: 'successPage',
+        props: true,
+        meta: {
+            noSideBar: true
+        }
+    },
+    {
+        path: '/dashboard/agreement',
+        component: Agreement,
+        name: 'agreement',
+        meta: {
+            noSideBar: true
+        }
+    },
+    {
+        path: '/dashboard/instruction',
+        component: InstructionPage,
+        name: 'instruction',
+        meta: {
+            noSideBar: true
+        }
+    },
+    {
+        path: '/my-profile',
+        component: MyProfile,
+        name: 'myProfile',
+    },
+    {
+        path: '/offline-registration',
+        component: Dashboard,
+        name: 'offlineRegistration',
+        props: true
+    },
+    {
+        path: '/booking-students',
+        component: BookingStudents,
+        name: 'bookingStudents',
+    },
     {
         path: '/not-found',
         component: Page404,
