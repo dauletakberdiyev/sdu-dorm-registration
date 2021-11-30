@@ -14,11 +14,11 @@ class ParentInfo extends Migration
     public function up()
     {
         Schema::create('parent_info', function (Blueprint $table){
-            $table->unsignedInteger('applicant_id')->primary();
-            $table->string('mother_name_surname');
-            $table->string('mother_number');
-            $table->string('father_name_surname');
-            $table->string('father_number');
+            $table->unsignedInteger('applicant_id')->primary()->autoIncrement();
+            $table->string('mother_name_surname')->nullable();
+            $table->string('mother_number')->nullable();
+            $table->string('father_name_surname')->nullable();
+            $table->string('father_number')->nullable();
         });
     }
 

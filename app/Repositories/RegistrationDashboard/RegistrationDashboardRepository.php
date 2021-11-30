@@ -24,29 +24,29 @@ class RegistrationDashboardRepository
             ], 406);
         }
 
-        if (intval($credentials->input('course')) === 1){
-            return response()->json([
-                'status' => ApiOutputStatus::ERROR,
-                'status_code' => ApiOutputStatusCode::ERROR,
-                'message' => __('error.first_course_student'),
-                'data' => []
-            ], 406);
-        }
+//        if (intval($credentials->input('course')) === 1){
+//            return response()->json([
+//                'status' => ApiOutputStatus::ERROR,
+//                'status_code' => ApiOutputStatusCode::ERROR,
+//                'message' => __('error.first_course_student'),
+//                'data' => []
+//            ], 406);
+//        }
 
         $infoArray = [];
 
         $passportPath = '';
         $photoPath = '';
 
-        if($credentials->hasFile('passportPhoto')){
-            $passportPath = RegistrationService::uploadCheckImage($credentials->file('passportPhoto'),'passport', $credentials->input('iin'));
-        }
-        if($credentials->hasFile('personalPhoto')){
-            $photoPath = RegistrationService::uploadCheckImage($credentials->file('personalPhoto'), 'photo', $credentials->input('iin'));
-        }
-        else{
-            // TODO: Implement else method.
-        }
+//        if($credentials->hasFile('passportPhoto')){
+//            $passportPath = RegistrationService::uploadCheckImage($credentials->file('passportPhoto'),'passport', $credentials->input('iin'));
+//        }
+//        if($credentials->hasFile('personalPhoto')){
+//            $photoPath = RegistrationService::uploadCheckImage($credentials->file('personalPhoto'), 'photo', $credentials->input('iin'));
+//        }
+//        else{
+//            // TODO: Implement else method.
+//        }
 
         $infoArray['firstName'] = $credentials->input('firstName');
         $infoArray['lastName'] = $credentials->input('lastName');
@@ -73,9 +73,9 @@ class RegistrationDashboardRepository
         ($credentials->input('agree'))? $infoArray['agreement'] = 1 : $infoArray['agreement'] = 0;
         //$infoArray['agreement'] = $credentials->input('agree');
 
-        $uRes = RegistrationService::createStudent($infoArray);
+        $uRes = RegistrationService::createStudentNew($infoArray);
 
-        if($uRes[0]->uRes == 1){
+        if($uRes == 1){
             return response()->json([
                 'status' => ApiOutputStatus::SUCCESS,
                 'status_code' => ApiOutputStatusCode::SUCCESS,

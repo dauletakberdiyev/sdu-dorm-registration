@@ -14,10 +14,10 @@ class CreateRegisterInfosTable extends Migration
     public function up()
     {
         Schema::create('dorm_register_info', function (Blueprint $table) {
-            $table->unsignedInteger('applicant_id')->primary();
+            $table->unsignedInteger('applicant_id')->primary()->autoIncrement();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('father');
+            $table->string('father')->nullable();
             $table->date('birth_date');
             $table->integer('gender');
             $table->integer('iin');

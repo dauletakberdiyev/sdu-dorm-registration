@@ -22,6 +22,7 @@ class User extends Authenticatable
     protected $table = 'dorm_register';
 
     protected $primaryKey = 'applicant_id';
+    public $timestamps = false;
 
     protected $hidden = [
         'password',

@@ -12,4 +12,5 @@ class ResindentModel extends Model
     protected $table = 'dorm_residents';
 
     protected $primaryKey = 'applicant_id';
+    public $timestamps = false;
 }
