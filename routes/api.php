@@ -48,7 +48,7 @@ Route::post('/getFreePlaceCount', FreePlaceController::class)->name('getFreePlac
 
 Route::group(['middleware' => 'auth:api'], function(){
 
-    Route::group(['middleware' => ['role:admin']], function () {
+//    Route::group(['middleware' => ['role:admin']], function () {
         Route::post('/admin/side-bar', AdminSideBarController::class)->name('AdminSideBar');
         Route::post('/director/student-list', [StudentListController::class, 'directorList'])->name('studentsList');
         Route::post('/director/student-assistant', StudentAssistantController::class)->name('assistantList');
@@ -65,7 +65,7 @@ Route::group(['middleware' => 'auth:api'], function(){
         Route::post('/director/bookingStudents', [StudentListController::class, 'bookingStudentList'])->name('bookingStudents');
         Route::post('/director/acceptStudent', AcceptStudentController::class)->name('acceptStudent');
         Route::get('/director/exportStudentList', [ImportExportController::class, 'export'])->name('export');
-    });
+//    });
 
     Route::post('/getUserRole', RoleController::class)->name('getUserRole');
 });

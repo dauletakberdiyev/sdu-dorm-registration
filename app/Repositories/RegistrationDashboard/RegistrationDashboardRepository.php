@@ -73,7 +73,7 @@ class RegistrationDashboardRepository
         ($credentials->input('agree'))? $infoArray['agreement'] = 1 : $infoArray['agreement'] = 0;
         //$infoArray['agreement'] = $credentials->input('agree');
 
-        $uRes = RegistrationService::createStudentNew($infoArray);
+        $uRes = RegistrationService::createStudent($infoArray);
 
         if($uRes == 1){
             return response()->json([

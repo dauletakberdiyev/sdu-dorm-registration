@@ -13,4 +13,11 @@ class ResindentModel extends Model
 
     protected $primaryKey = 'applicant_id';
     public $timestamps = false;
+
+    protected $fillable = [
+        'is_active',
+        'deposit',
+        'deposit_status',
+        'room_id'
+    ];
 }

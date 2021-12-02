@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Tables\FreePlaceModel;
 use App\Models\Tables\ParentInfoModel;
 use App\Models\Tables\RegisterInfo;
 use App\Models\Tables\ResindentModel;
@@ -11,42 +12,42 @@ use Illuminate\Support\Facades\DB;
 
 class RegistrationService
 {
-    public static function updateStudent($params){
-        $uRes = DB::transaction(function () use ($params){
-            DB::select('call updateStudent(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,@uRes)',
-                array(
-                    $params['firstName'],$params['lastName'],$params['father'],
-                    $params['birthDate'],$params['city'],$params['facultyCode'],
-                    $params['programCode'],$params['course'],$params['school'],
-                    $params['address'],$params['fatherNumber'],$params['motherNumber'],
-                    $params['selfNumber'],$params['passportPath'],$params['applicantId'],
-                    $params['registerYear'],$params['registerTerm'],$params['fatherName'],
-                    $params['gender'],$params['iin'],$params['motherName'],$params['photoPath'],
-                ));
-            return DB::select('select @uRes as uRes');
-        });
+//    public static function updateStudent($params){
+//        $uRes = DB::transaction(function () use ($params){
+//            DB::select('call updateStudent(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,@uRes)',
+//                array(
+//                    $params['firstName'],$params['lastName'],$params['father'],
+//                    $params['birthDate'],$params['city'],$params['facultyCode'],
+//                    $params['programCode'],$params['course'],$params['school'],
+//                    $params['address'],$params['fatherNumber'],$params['motherNumber'],
+//                    $params['selfNumber'],$params['passportPath'],$params['applicantId'],
+//                    $params['registerYear'],$params['registerTerm'],$params['fatherName'],
+//                    $params['gender'],$params['iin'],$params['motherName'],$params['photoPath'],
+//                ));
+//            return DB::select('select @uRes as uRes');
+//        });
+//
+//        return $uRes;
+//    }
 
-        return $uRes;
-    }
-
-    public static function createStudent($params){
-        $uRes = DB::transaction(function () use ($params) {
-            DB::select('call insertNewStudent(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,@uRes)',
-                array(
-                    $params['firstName'],$params['lastName'],$params['father'],
-                    $params['birthDate'],$params['city'],$params['facultyCode'],
-                    $params['programCode'],$params['course'],$params['school'],
-                    $params['address'],$params['fatherNumber'],$params['motherNumber'],
-                    $params['selfNumber'],$params['passportPath'], $params['registerYear'],
-                    $params['registerTerm'],$params['fatherName'], $params['gender'],
-                    $params['iin'],$params['motherName'],$params['photoPath'],
-                    $params['applicantEmail'],$params['agreement'],
-                ));
-            return DB::select('select @uRes as uRes');
-        });
-
-        return $uRes;
-    }
+//    public static function createStudent($params){
+//        $uRes = DB::transaction(function () use ($params) {
+//            DB::select('call insertNewStudent(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,@uRes)',
+//                array(
+//                    $params['firstName'],$params['lastName'],$params['father'],
+//                    $params['birthDate'],$params['city'],$params['facultyCode'],
+//                    $params['programCode'],$params['course'],$params['school'],
+//                    $params['address'],$params['fatherNumber'],$params['motherNumber'],
+//                    $params['selfNumber'],$params['passportPath'], $params['registerYear'],
+//                    $params['registerTerm'],$params['fatherName'], $params['gender'],
+//                    $params['iin'],$params['motherName'],$params['photoPath'],
+//                    $params['applicantEmail'],$params['agreement'],
+//                ));
+//            return DB::select('select @uRes as uRes');
+//        });
+//
+//        return $uRes;
+//    }
 
     public static function uploadCheckImage($image, $folderTitle, $iin){
         $user = Auth::user();
@@ -71,7 +72,22 @@ class RegistrationService
         return $uRes;
     }
 
-    public static function createStudentNew($params){
+    public static function acceptStudentNew($params){
+        return DB::transaction(function () use ($params){
+            User::findOrFail($params['applicant_id'])
+                ->update([
+                    'status' => 'a'
+                ]);
+            ResindentModel::findOrFail($params['applicant_id'])
+                ->update([
+                    'is_active' => 1
+                ]);
+
+            return 1;
+        });
+    }
+
+    public static function createStudent($params){
          return DB::transaction(function () use ($params){
              $dormRegister = new User();
              $dormRegister->applicant_email = $params['applicantEmail'];
@@ -87,7 +103,6 @@ class RegistrationService
              $dormRegisterInfo->father = $params['father'];
              $dormRegisterInfo->father = $params['father'];
              $dormRegisterInfo->birth_date = $params['birthDate'];
-             $dormRegisterInfo->gender = $params['gender'];
              $dormRegisterInfo->gender = $params['gender'];
              $dormRegisterInfo->iin = $params['iin'];
              $dormRegisterInfo->city = $params['city'];
@@ -116,6 +131,13 @@ class RegistrationService
              $residentInfo->deposit = 15000;
              $residentInfo->deposit_status = 1;
              $residentInfo->save();
+
+             $freePlace = FreePlaceModel::findOrFail($params['gender']);
+             if($freePlace->place_count === 0) {
+                 return 0;
+             }
+             $freePlace->place_count = $freePlace->place_count - 1;
+             $freePlace->save();
 
              return 1;
         });

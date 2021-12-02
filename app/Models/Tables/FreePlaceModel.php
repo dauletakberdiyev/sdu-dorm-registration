@@ -12,6 +12,7 @@ class FreePlaceModel extends Model
 
     protected $table = 'free_place';
     protected $primaryKey = 'building_id';
+    public $timestamps = false;
 
     public function getFreePlace($params){
         return DB::table($this->table, 'fp')

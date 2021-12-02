@@ -11,13 +11,13 @@ use App\Services\RegistrationService;
 class AcceptStudentRepository
 {
     public function manage($request){
-        $uRes = RegistrationService::acceptStudent($request);
+        $uRes = RegistrationService::acceptStudentNew($request);
 
         $userInfo = RegisterInfo::where('applicant_id', $request['applicant_id'])->first();
 
         event(new SendConfirmMessageEvent($userInfo, $request['email']));
 
-        if($uRes[0]->uRes == 1) {
+        if($uRes === 1) {
             return response()->json([
                 'status' => ApiOutputStatus::SUCCESS,
                 'status_code' => ApiOutputStatusCode::SUCCESS,

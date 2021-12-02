@@ -5,6 +5,7 @@ use App\Enums\ApiOutputStatus;
 use App\Enums\ApiOutputStatusCode;
 use App\Http\Controllers\Helpers\DB\MySqlProcedure;
 use App\Models\User;
+use App\Services\AuthService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -12,14 +13,11 @@ use Illuminate\Support\Facades\DB;
 class LoginRepository
 {
     public function manage($credentials){
-        $mail = $credentials['email'];
-        $pass = $credentials['password'];
 
-        DB::select('call checkMailPassword(?,?,@isVerified)',array($mail, $pass));
-        $isVerified = DB::select('select @isVerified as isVerified');
+        $isVerified = AuthService::checkLoginCredentials($credentials);
 
-        if($isVerified[0]->isVerified > 0) {
-            $temp = User::where('applicant_email', $mail)->first();
+        if($isVerified > 0) {
+            $temp = User::where('applicant_email', $credentials['email'])->first();
             Auth::login($temp);
 
             $user = Auth::user();

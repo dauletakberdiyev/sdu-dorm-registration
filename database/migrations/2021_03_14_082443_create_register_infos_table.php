@@ -20,7 +20,7 @@ class CreateRegisterInfosTable extends Migration
             $table->string('father')->nullable();
             $table->date('birth_date');
             $table->integer('gender');
-            $table->integer('iin');
+            $table->string('iin');
             $table->string('city');
             $table->string('faculty_code');
             $table->string('program_code');

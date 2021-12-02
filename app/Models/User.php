@@ -24,6 +24,14 @@ class User extends Authenticatable
     protected $primaryKey = 'applicant_id';
     public $timestamps = false;
 
+    protected $fillable = [
+        'applicant_email',
+        'password',
+        'status',
+        'registration_year',
+        'registration_term'
+    ];
+
     protected $hidden = [
         'password',
         'check_path',
