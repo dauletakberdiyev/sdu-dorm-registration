@@ -37,7 +37,7 @@
                                         <td>{{assistant.speciality}}</td>
                                         <td>{{assistant.self_number}}</td>
                                         <td>
-                                            <select class="utf-with-border" v-model="assistant.room" @change="changeRoom" :data-applicant="assistant.applicant_id" :data-oldRoom="assistant.room.old_room_id">
+                                            <select class="utf-with-border" v-model="assistant.room" @change="changeRoom" :data-applicant="assistant.applicant_id" :data-oldRoom="assistant.room">
                                                 <option v-for="room in loadData.assistantRooms" :value="room.room_id" :title="room.free_place" :disabled="room.free_place == 0">
                                                     {{room.room_id}}
                                                 </option>
@@ -269,6 +269,7 @@
             changeRoom(e){
                 if(e.target.dataset.applicant in this.values.studentRoomAssistant){
                     this.values.studentRoomAssistant[e.target.dataset.applicant].room_id = e.target.value;
+                    console.log(this.values.studentRoomAssistant)
                 }
                 else {
                     this.values.studentRoomAssistant[e.target.dataset.applicant] = {
@@ -276,6 +277,7 @@
                         'room_id': e.target.value,
                         'old_room_id': e.target.dataset.oldroom
                     }
+                    console.log(this.values.studentRoomAssistant)
                 }
             },
 

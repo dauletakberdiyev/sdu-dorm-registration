@@ -80,11 +80,11 @@
                     let access_token=response.data.data.access_token;
                     localStorage.setItem('access_token',access_token);
                     this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.data.access_token;
-                    if(response.data.data.user_role === 'admin'){
+                    // if(response.data.data.user_role === 'admin'){
                         this.$router.push({name: 'adminPage'});
-                    }else {
-                        this.$router.push({name: 'dashboard'});
-                    }
+                    // }else {
+                    //     this.$router.push({name: 'dashboard'});
+                    // }
 
                 })
             }

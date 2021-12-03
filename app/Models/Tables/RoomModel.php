@@ -13,6 +13,7 @@ class RoomModel extends Model
     protected $table = 'rooms';
 
     protected $primaryKey = 'id';
+    public $timestamps = false;
 
     //return rooms by building_id and roomType
     public function getRooms($params){

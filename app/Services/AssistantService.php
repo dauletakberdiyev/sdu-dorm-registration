@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\Tables\ResindentModel;
+use App\Models\Tables\RoomModel;
 use Illuminate\Support\Facades\DB;
 
 class AssistantService
@@ -52,6 +54,23 @@ class AssistantService
                ));
 
            return DB::select('select @uRes as uRes');
+        });
+    }
+
+    public static function updateAssistantRoomNew($params){
+        return DB::transaction(function () use($params){
+            ResindentModel::findOrFail($params['applicant_id'])
+                ->update([
+                    'room_id' => $params['room_id']
+                ]);
+
+            RoomModel::findOrFail($params['old_room_id'])
+                ->increment('free_place');
+
+            RoomModel::findOrFail($params['room_id'])
+                ->decrement('free_place');
+
+            return 1;
         });
     }
 }

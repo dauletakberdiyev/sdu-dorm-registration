@@ -28,6 +28,7 @@ class UpdateRoomRequest extends FormRequest
         return [
             'applicant_id' => 'required',
             'room_id' => 'required',
+            'old_room_id' => 'required',
         ];
     }
 

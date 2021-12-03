@@ -10,13 +10,13 @@ class UpdateRoomRepository
 {
     public function manage($request)
     {
-        $params['applicant_id'] = $request['applicant_id'];
-        $params['room_id'] = $request['room_id'];
-        $params['old_room_id'] = $request['old_room_id'];
+//        $params['applicant_id'] = $request['applicant_id'];
+//        $params['room_id'] = $request['room_id'];
+//        $params['old_room_id'] = $request['old_room_id'];
 
-        $uRes = AssistantService::updateAssistantRoom($params);
+        $uRes = AssistantService::updateAssistantRoomNew($request);
 
-        if($uRes[0]->uRes == 1) {
+        if($uRes === 1) {
             return response()->json([
                 'status' => ApiOutputStatus::SUCCESS,
                 'status_code' => ApiOutputStatusCode::SUCCESS,
